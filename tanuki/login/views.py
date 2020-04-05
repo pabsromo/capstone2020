@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -48,3 +49,15 @@ def signup(request):
         return redirect('/')
     else:
         return render(request, 'signup.html')
+=======
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
+
+def signup(request):
+    return render(request, 'signup.html')
+>>>>>>> origin/Tanuki_Backend
