@@ -1,9 +1,10 @@
-from django.urls import path 
-from . import views 
+from django.urls import path
+from . import views
 
-app_name = 'login' 
+app_name = 'login'
 
 urlpatterns = [
-    path('', views.index, name = 'index'),
-    path('signup/', views.signup, name = 'signup'),
+    path('', views.index, name='index'),
+    path('signup/', views.signup, name='signup'),
+    path('home/', views.home, name='home'),
 ]
