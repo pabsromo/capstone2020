@@ -54,7 +54,7 @@ ROOT_URLCONF = 'tanuki.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +118,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'tanuki', 'static', 'static_root')
+STATICFILES_DIRS = [
+    os.path.join("C:/Users/pabsr/Documents/School/CurrentCourses/ECEN403/capstone2020/tanuki/login/static/static_dirs")
+]
+
+'''
+Useful links for later
+
+    Understanding the difference between STATIC_ROOT and STATICFILES_DIRS and their deployment:
+        https://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root#answer-40330875
+        https://stackoverflow.com/questions/7574759/django-cant-get-static-css-files-to-load#answer-39346814
+        https://stackoverflow.com/questions/24199029/django-cannot-find-static-files-need-a-second-pair-of-eyes-im-going-crazy#answer-24200094
+        https://docs.djangoproject.com/en/3.0/intro/tutorial06/
+'''
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -1,0 +1,79 @@
+body {
+    background-color: #f3f3f3;
+    margin: 0;
+}
+
+
+/* Style the navbar 
+#navbar {
+    overflow: hidden;
+    background-color:#fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    padding: 0;
+}
+*/
+
+/* Navbar links 
+#navbar a{
+    display:flexbox;
+    float: right;
+    color: #4e4e4e;
+    text-align: center;
+    font-family: Gadugi;
+    padding: 14px;
+    text-decoration: none;
+}
+
+#navbar a:hover {
+    color: #97aed4;
+}
+
+#selected {
+    box-shadow: 0 2px 0 #4e4e4e;
+}
+*/
+
+.nav-wrapper {
+    overflow: hidden;
+    background-color:#fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    padding: 0;
+}
+
+#nav-desktop {
+    display: flex;
+    float: right;
+    list-style-type: none;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+#nav-desktop li{
+    float: right;
+    color: #4e4e4e;
+    text-align: center;
+    text-decoration: none;
+}
+
+#nav-desktop a{
+    color: #4e4e4e;
+    text-align: center;
+    font-family: Gadugi;
+    padding: 14px;
+    text-decoration: none;
+}
+
+
+/* Page content */
+.content {
+    padding: 50px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+

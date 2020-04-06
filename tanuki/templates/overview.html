@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview</title>
+    <link href='https://fonts.googleapis.com/css?family=Karla' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/overview.css' %}">
+</head>
+<body>
+    <!--
+    <div id="navbar" class="sticky">
+        <a href="habits">Habits</a>
+        <a href="history">History</a>
+        <a href="budget">Budget</a>
+        <a href="overview" id="selected">Overview</a>
+    </div>
+-->
+    <nav>
+        <div class="nav-wrapper sticky">
+            <a href="#" class="logo">Logo</a>
+            <ul id="nav-desktop">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#budget">Budget</a></li>
+                <li><a href="history">History</a></li>
+                <li><a href="#habits">Habits</a></li>
+                <li><i class="material-icons">person_outline</i></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        {% for wk in curr_week %}
+        {% if wk.date = %}
+            <h1>Week of {}</h1>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
