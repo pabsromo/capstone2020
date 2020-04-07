@@ -162,13 +162,14 @@
 
         <div class="welcome">Welcome Back!</div>
         <div class="userinfo">
-            <form action="index.html" method="post">
-                <input type="text" placeholder="Username..." name="name" maxlength="10" size="12" required />
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" placeholder="Username..." name="username" maxlength="10" size="12" required />
                 <div class="or">or</div>
-                <input type="email" placeholder="Email..." name="usermail"> <br />
+                <input type="email" placeholder="Email..." name="email"> <br />
                 <input type="password" placeholder="Password..." name="password">
+                <button type="submit" class="login" name="login">Log In</button> <br />
             </form>
         </div>
-        <button type="submit" class="login" name="login">Log In</button> <br />
         <div class="account">Don't have an account? <a href="{% url 'login:signup' %}" class="signup">Sign Up</a></div>
     </div>

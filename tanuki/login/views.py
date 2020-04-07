@@ -8,19 +8,23 @@ from django.contrib.auth.models import User, auth
 def index(request):
     if request.method == 'POST':
         username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password1']
+        password = request.POST['password']
 
         user = auth.authenticate(username=username, password=password)
+        print(username)
+        print(password)
 
         if user is not None:
+            print('user exists')
             auth.login(request, user)
             return redirect('login:home')
         else:
+            print ('user doesnt exist')
             messages.info(request, 'Invalid credentials')
-            return redirect('login:signup')
+            return redirect('/')
 
     else:
+        print('called a GET here')
         return render(request, 'index.html')
 
 
