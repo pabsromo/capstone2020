@@ -8,7 +8,9 @@
 </head>
 
 <body bgcolor="pink">
-    <h1>"Hello World!"</h1>
+    <h1>Hello World!</h1>
+    <li> Hello, {{user.first_name}}</li>
+    <li><a href="{% url 'login:logout' %}">logout</a></li>
 </body>
 
 </html>

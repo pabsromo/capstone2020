@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
 
 def index(request):
     if request.method == 'POST':
@@ -20,7 +20,7 @@ def index(request):
             return redirect('login:home')
         else:
             print ('user doesnt exist')
-            messages.info(request, 'Invalid credentials')
+            messages.info(request, 'Invalid credentials, please try again.')
             return redirect('/')
 
     else:
@@ -58,5 +58,13 @@ def signup(request):
         return render(request, 'signup.html')
 
 
+@login_required(login_url='login:index')
+def logout(request):
+    auth.logout(request)
+    return redirect('login:index') 
+
+
+@login_required(login_url = 'login:index')
 def home(request):
     return render(request, 'home.html')
+ 

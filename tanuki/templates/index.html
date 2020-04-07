@@ -168,7 +168,17 @@
                {% comment %} <div class="or">or</div>
                 <input type="email" placeholder="Email..." name="email"> <br /> {% endcomment %}
                 <input type="password" placeholder="Password..." name="password"> <br />
-                <div><p style="color: #eeece1; margin:0;">or</p></div>
+                <div>
+                    {% if messages  %}
+                        {% for message in messages %}
+                            <div><p style="color: #eeece1; margin:0;">or</p></div>
+                            <div class="account"> {{message}} </div>
+                            <div><p style="color: #eeece1; margin:0;">or</p></div>
+                        {% endfor %}
+                    {% else %}
+                        <div><p style="color: #eeece1; margin:0;">or</p></div>
+                    {% endif %}
+                </div>
                 <button type="submit" class="login" name="login">Log In</button>
             </form>
         </div>
