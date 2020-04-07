@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+'''
 class Day(models.Model):
     name = models.CharField()
     date = models.IntegerField()
@@ -13,3 +14,4 @@ class Week(models.Model):
 
     budget_total = models.IntegerField()
     budget_limit = models.IntegerField()
+'''

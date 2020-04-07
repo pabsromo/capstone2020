@@ -1,6 +1,7 @@
 body {
     background-color: #f3f3f3;
     margin: 0;
+    padding-top: 40px;
 }
 
 
@@ -67,6 +68,68 @@ body {
 
 
 /* Page content */
+
+h1 {
+    font-family: Karla;
+    color:#4e4e4e;
+}
+
+.content-wrapper {
+    display: grid;
+    width: 100%;
+    grid-template-areas: "wkt wkt wkt wkt wkt wkt wkt"
+                         "cat cat cat cat cat cat cat"
+                         "ess ess ess ess ess ess ess"
+                         "lei lei lei lei lei lei lei"
+                         "opt opt opt opt opt opt opt"
+                         "unx unx unx unx unx unx unx"
+                         "ftr ftr ftr ftr ftr ftr ftr";
+    grid-template-rows: 50px 50px auto auto auto auto 40px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+#week {
+    grid-area: wkt;
+    background-color: #8ca0ff;
+}
+
+#total {
+    grid-area: wkt;
+    background-color: #ffa08c;
+}
+
+#cat-totals {
+    grid-area: cat;
+    background-color: aqua;
+}
+
+#essential {
+    grid-area: ess;
+    background-color: aquamarine;
+}
+
+#leisure {
+    grid-area: lei;
+    background-color: beige;
+}
+
+#optional {
+    grid-area: opt;
+    background-color: blueviolet;
+}
+
+#unexpected {
+    grid-area: unx;
+    background-color: burlywood;
+}
+
+#footer {
+    grid-area: ftr;
+    background-color: cadetblue;
+}
+
 .content {
     padding: 50px;
 }

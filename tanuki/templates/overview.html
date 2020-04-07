@@ -32,12 +32,38 @@
         </div>
     </nav>
 
+    <div class="content-wrapper">
+        <div id="week"></div>
+        <div id="total"></div>
+        <div id="cat-totals">
+
+        </div>
+        <div id="essential">
+
+        </div>
+        <div id="leisure">
+
+        </div>
+        <div id="optional">
+
+        </div>
+        <div id="unexpected">
+
+        </div>
+        <div id="footer">
+
+        </div>
+    </div>
+
+    {% comment %}
     <div>
         {% for wk in curr_week %}
         {% if wk.date = %}
-            <h1>Week of {}</h1>
+            <h1>Week of </h1>
+
         {% endfor %}
     </div>
+    {% endcomment %}
 
 </body>
 </html>
