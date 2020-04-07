@@ -92,7 +92,7 @@
             font-size: 22px;
             padding: 5px;
             color: #CECECE;
-            grid-area: 4/5/4/8;
+            width: 100%;
         }
 
         button:active {
@@ -165,10 +165,11 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <input type="text" placeholder="Username..." name="username" maxlength="10" size="12" required />
-                <div class="or">or</div>
-                <input type="email" placeholder="Email..." name="email"> <br />
-                <input type="password" placeholder="Password..." name="password">
-                <button type="submit" class="login" name="login">Log In</button> <br />
+               {% comment %} <div class="or">or</div>
+                <input type="email" placeholder="Email..." name="email"> <br /> {% endcomment %}
+                <input type="password" placeholder="Password..." name="password"> <br />
+                <div><p style="color: #eeece1; margin:0;">or</p></div>
+                <button type="submit" class="login" name="login">Log In</button>
             </form>
         </div>
         <div class="account">Don't have an account? <a href="{% url 'login:signup' %}" class="signup">Sign Up</a></div>
