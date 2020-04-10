@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html>
+    <body>
+        <h2>Register</h2>
+        {% block content %}
+        <form action="" method="POST">
+            {% csrf_token %}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Registration</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
+            {% for field in registerForm %}
+                <p>
+                    {{ field.label_tag }}
+                    {{ field }}
 
-<body>
-    <form action='' method='post'>
-        {% csrf_token %}
+                    {% if field.help_text %}
+                        <small>{{field.help_text}}</small>
+                    {% endif %}
+                    
+                    {% for error in field.errors %}
+                        <p>{{error}}</p>
+                    {% endfor %}
+                </p>
 
-        <input type='text' name='first_name' placeholder='First Name'><br>
-        <input type='text' name='last_name' placeholder='Last Name'><br>
-        <input type='text' name='username' placeholder='Username'><br>
-        <input type='text' name='email' placeholder='Email'><br>
-        <input type='text' name='password1' placeholder='Password'><br>
-        <input type='text' name='password2' placeholder='Confirm Password'><br>
-        <input type='submit'><br>
-    </form>
+             {% endfor %}
+            
+            <div>{{ form.first_name.label_tag }}
+            {{ form.first_name }}
+            {{ form.first_name.errors }}</div>
 
-    <div>
-        {% for message in messages %}
-        <h3> {{message}} </h3>
-        {% endfor %}
-    </div>
-</body>
+            <div>{{ form.last_name.label_tag }}
+            {{ form.last_name }}
+            {{ form.last_name.errors }}</div>
 
-</html>
+            <div>{{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}</div>
+
+            <div>{{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}<div>
+
+            <div>{{ form.password1.label_tag }}
+            {{ form.password1 }}
+            {{form.password1.}}
+            {{ form.password1.errors }}</div>
+
+            <div>{{ form.password2.label_tag }}
+            {{ form.password2 }}
+            {{ form.password2.errors }}</div>
+
+            <input type="submit" name = "Submit"/>
+        </form>
+
+        {% endblock %}
+    </body>
+</html> 

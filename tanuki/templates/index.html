@@ -164,9 +164,7 @@
         <div class="userinfo">
             <form action="" method="post">
                 {% csrf_token %}
-                <input type="text" placeholder="Username..." name="username" maxlength="10" size="12" required />
-               {% comment %} <div class="or">or</div>
-                <input type="email" placeholder="Email..." name="email"> <br /> {% endcomment %}
+                <input type="text" placeholder="Username or Email..." name="username" maxlength="62" size="12" required />
                 <input type="password" placeholder="Password..." name="password"> <br />
                 <div>
                     {% if messages  %}
