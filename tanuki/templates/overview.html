@@ -11,47 +11,350 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/overview.css' %}">
 </head>
 <body>
-    <!--
-    <div id="navbar" class="sticky">
-        <a href="habits">Habits</a>
-        <a href="history">History</a>
-        <a href="budget">Budget</a>
-        <a href="overview" id="selected">Overview</a>
-    </div>
--->
     <nav>
         <div class="nav-wrapper sticky">
-            <a href="#" class="logo">Logo</a>
+            <div class="logo">
+                <svg width="69" height="105" viewBox="0 0 69 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="34.2774" cy="71.0841" rx="31.6065" ry="33.9159" fill="#C4C4C4"/>
+                    <path d="M10.2194 17.0331C13.4573 8.36581 25.7169 8.36581 28.9548 17.0331L31.5069 23.8648C33.9485 30.4004 29.116 37.3643 22.1392 37.3643H17.0349C10.0582 37.3643 5.22573 30.4004 7.66727 23.8648L10.2194 17.0331Z" fill="#C4C4C4"/>
+                    <path d="M12.3013 18.2665C14.8702 11.2817 24.7491 11.2817 27.318 18.2665L29.1524 23.2544C31.0729 28.4765 27.2082 34.0158 21.6441 34.0158H17.9753C12.4112 34.0158 8.54638 28.4765 10.4669 23.2544L12.3013 18.2665Z" fill="#4E4E4E"/>
+                    <path d="M40.0452 17.0331C43.2831 8.3658 55.5427 8.3658 58.7806 17.0331L61.3327 23.8648C63.7743 30.4004 58.9418 37.3643 51.9651 37.3643H46.8608C39.884 37.3643 35.0515 30.4004 37.4931 23.8648L40.0452 17.0331Z" fill="#C4C4C4"/>
+                    <path d="M42.1271 18.2665C44.696 11.2817 54.5749 11.2817 57.1438 18.2665L58.9782 23.2544C60.8987 28.4765 57.034 34.0158 51.4699 34.0158H47.8011C42.237 34.0158 38.3722 28.4765 40.2927 23.2544L42.1271 18.2665Z" fill="#4E4E4E"/>
+                    <rect x="1.33545" y="18.5841" width="65.8839" height="37.1681" rx="18.5841" fill="#C4C4C4"/>
+                    <rect x="38.7291" y="23.6947" width="19.5871" height="16.2611" rx="8.13053" fill="#4E4E4E"/>
+                    <ellipse cx="46.0742" cy="29.0376" rx="2.44839" ry="2.55531" fill="#C4C4C4"/>
+                    <rect width="19.5871" height="16.2611" rx="8.13053" transform="matrix(-1 0 0 1 29.8258 23.6947)" fill="#4E4E4E"/>
+                    <ellipse rx="2.44839" ry="2.55531" transform="matrix(-1 0 0 1 22.4806 29.0376)" fill="#C4C4C4"/>
+                    <rect x="29.8258" y="39.9557" width="9.34839" height="5.57522" rx="2.78761" fill="#4E4E4E"/>
+                    <ellipse cx="34.5" cy="75.9624" rx="25.1516" ry="23.4624" fill="#4E4E4E"/>
+                  </svg>
+                  <a href="#">Tanuki</a>
+            </div>
             <ul id="nav-desktop">
-                <li><a href="#overview">Overview</a></li>
+                <li id="selected"><a href="#overview">Overview</a></li>
                 <li><a href="#budget">Budget</a></li>
-                <li><a href="history">History</a></li>
+                <li><a href="#history">History</a></li>
                 <li><a href="#habits">Habits</a></li>
-                <li><i class="material-icons">person_outline</i></li>
+                <li><a href="#user"><i class="material-icons">person_outline</i></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="content-wrapper">
-        <div id="week"></div>
-        <div id="total"></div>
-        <div id="cat-totals">
-
+        <div class="week_total">
+                <div id="week"><h1>Week of April 6 - April 12</h1></div>
+                <div id="total">
+                    <h1>Totals: $0/10
+                    <div id="prog_out_tot">
+                        <div id="prog_in_tot">a</div>
+                    </div>
+                </div>
         </div>
-        <div id="essential">
-
+        
+        <div id="cat_totals">
+            <div id="ess_total">
+                <h1 style="margin-left: 10px;">Essential $5/12
+                <div id="ess_out_tot">
+                    <div id="ess_in_tot">a</div>
+                </div>
+            </div>
+            <div id="lei_total">
+                <h1>Leisure $5/12
+                <div id="lei_out_tot">
+                    <div id="lei_in_tot">a</div>
+                </div>
+            </div>
+            <div id="opt_total">
+                <h1>Optional $5/12
+                <div id="opt_out_tot">
+                    <div id="opt_in_tot">a</div>
+                </div>
+            </div>
+            <div id="unx_total">
+                <h1>Unexpected $5/12
+                <div id="unx_out_tot">
+                    <div id="unx_in_tot">a</div>
+                </div>
+            </div>
         </div>
-        <div id="leisure">
 
+        <div id="monday">
+            <h1>Monday</h1>
+            <h4>6</h4>
         </div>
-        <div id="optional">
+        <div id="tuesday">
+            <h1>Tuesday</h1>
+            <h4>7</h4>
+        </div>
+        <div id="wednesday">
+            <h1>Wednesday</h1>
+            <h4>8</h4>
+        </div>
+        <div id="thursday">
+            <h1>Thursday</h1>
+            <h4>9</h4>
+        </div>
+        <div id="friday">
+            <h1>Friday</h1>
+            <h4>10</h4>
+        </div>
+        <div id="saturday">
+            <h1>Saturday</h1>
+            <h4>11</h4>
+        </div>
+        <div id="sunday">
+            <h1>Sunday</h1>
+            <h4>12</h4>
+        </div>
 
-        </div>
-        <div id="unexpected">
+        <hr style="grid-area: hr0; background-color: #f3f3f3">
 
+        <h1 style="padding-left: 10px; grid-area: Essential;">Essential</h1>
+
+        <div id="ess1">
+            <div class="item">
+                <p>Lorem Ipsum $5</p>
+                <button type="button" onclick="showPopup('ess1_item_1')"><i class="material-icons">subject</i></button>
+                    <div class="popup" id="ess1_item_1">
+                        <div class="innerpopup">
+                            this is the popup
+                            <button type="button" onclick="hidePopup('ess1_item_1')"><i class="tiny material-icons">clear</i></button>
+                        </div> 
+                    </div>
+            </div>
+            <div class="item">
+                <p>Lorem Ipsum $5</p>
+                <button type="button" onclick="showPopup('ess1_item_2')"><i class="material-icons">subject</i></button>
+                    <div class="popup" id="ess1_item_2">
+                        <div class="innerpopup">
+                            this is the popup
+                            <button type="button" onclick="hidePopup('ess1_item_2')"><i class="tiny material-icons">clear</i></button>
+                        </div> 
+                    </div>
+            </div>
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
         </div>
+        <div id="ess2">
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="ess3">
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="ess4">
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="ess5">
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="ess6">
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="ess7">
+            <div class="add_item">
+                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+
+        <div style="grid-area: hr1;">
+            <div class="add_item_form" id="essential_form">
+                <form action="">
+                    <h1>Add Item</h1>
+
+                    <label for="item_name">Item Name</label>
+                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
+
+                    <label for="item_price">Item Price</label>
+                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
+
+                    <button type="submit">Add</button>
+                    <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
+                </form>
+            </div>
+            <hr>
+        </div>
+
+        <h1 style="padding-left: 10px; grid-area: Leisure">Leisure</h1>
+
+        <div id="lei1">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="lei2">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="lei3">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="lei4">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="lei5">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="lei6">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="lei7">
+            <div class="add_item">
+                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+
+        <div style="grid-area: hr2;">
+            <div class="add_item_form" id="leisure_form">
+                <form action="">
+                    <h1>Add Item</h1>
+
+                    <label for="item_name">Item Name</label>
+                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
+
+                    <label for="item_price">Item Price</label>
+                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
+
+                    <button type="submit">Add</button>
+                    <button type="submit" onclick="hideAdd('leisure_form')">Cancel</button>
+                </form>
+            </div>
+            <hr>
+        </div>
+
+        <h1 style="padding-left: 10px; grid-area: Optional">Optional</h1>
+
+        <div id="opt1">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="opt2">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="opt3">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="opt4">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="opt5">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="opt6">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="opt7">
+            <div class="add_item">
+                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+
+        <div style="grid-area: hr3;">
+            <div class="add_item_form" id="optional_form">
+                <form action="">
+                    <h1>Add Item</h1>
+
+                    <label for="item_name">Item Name</label>
+                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
+
+                    <label for="item_price">Item Price</label>
+                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
+
+                    <button type="submit">Add</button>
+                    <button type="submit" onclick="hideAdd('optional_form')">Cancel</button>
+                </form>
+            </div>
+            <hr>
+        </div>
+
+        <h1 style="padding-left: 10px; grid-area: Unexpected">Unexpected</h1>
+
+        <div id="unx1">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="unx2">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="unx3">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="unx4">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="unx5">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="unx6">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div id="unx7">
+            <div class="add_item">
+                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
+            </div>
+        </div>
+
+        <div style="grid-area: hr4;">
+            <div class="add_item_form" id="unexpected_form">
+                <form action="">
+                    <h1>Add Item</h1>
+
+                    <label for="item_name">Item Name</label>
+                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
+
+                    <label for="item_price">Item Price</label>
+                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
+
+                    <button type="submit">Add</button>
+                    <button type="submit" onclick="hideAdd('unexpected_form')">Cancel</button>
+                </form>
+            </div>
+            <hr>
+        </div>
+
         <div id="footer">
-
+            <h3>Tanuki</h3>
         </div>
     </div>
 
@@ -65,5 +368,22 @@
     </div>
     {% endcomment %}
 
+    <script>
+        function showPopup(e) {
+            document.getElementById(e).style.display = "flex";
+        }
+
+        function hidePopup(e) {
+            document.getElementById(e).style.display = "none";
+        }
+
+        function showAdd(e) {
+            document.getElementById(e).style.display = "flex";
+        }
+
+        function hideAdd(e) {
+            document.getElementById(e).style.display = "none";
+        }
+    </script>
 </body>
 </html>
