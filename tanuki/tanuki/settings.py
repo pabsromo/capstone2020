@@ -110,6 +110,7 @@ AUTHENTICATION_BACKENDS = [
     'login.backends.EmailAuthentication',
 ]
 
+AUTH_USER_MODEL = 'login.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
