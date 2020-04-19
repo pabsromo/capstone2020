@@ -9,7 +9,7 @@
     <title>Overview</title>
     <link href='https://fonts.googleapis.com/css?family=Karla' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="{% static 'login/overview.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'overview/overview.css' %}">
 </head>
 
 <body>
@@ -46,6 +46,7 @@
                 <li><a href="#budget">Budget</a></li>
                 <li><a href="#history">History</a></li>
                 <li><a href="#habits">Habits</a></li>
+                <li><a href="{% url 'login:logout' %}">Logout</a></li>
                 <li><a href="#user"><i class="material-icons">person_outline</i></a></li>
             </ul>
         </div>
@@ -184,7 +185,7 @@
 
         <div style="grid-area: hr1;">
             <div class="add_item_form" id="essential_form">
-                <form action="">
+                <!--<form action="">
                     <h1>Add Item</h1>
 
                     <label for="item_name">Item Name</label>
@@ -193,6 +194,12 @@
                     <label for="item_price">Item Price</label>
                     <input type="text" placeholder="Enter Item Price" name="item_price" required>
 
+                    <button type="submit">Add</button>
+                    <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
+                </form>-->
+                <form method = "post">
+                    {% csrf_token %}
+                    {{ form }}
                     <button type="submit">Add</button>
                     <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
                 </form>

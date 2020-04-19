@@ -11,14 +11,12 @@ def index(request):
         password = request.POST['password']
         print(username)
         user = auth.authenticate(username = username, password=password)
-
         if user is not None:
             auth.login(request, user)
-            return redirect('login:home')
+            return redirect('overview:home')
         else:
             messages.info(request, 'Invalid credentials, please try again.')
-            return redirect('/')
-
+            return redirect('/')   
     else:
         return render(request, 'index.html')
 
@@ -34,15 +32,12 @@ def signup(request):
             password = form.cleaned_data.get('password1')
             user = auth.authenticate(username = username, password = password)
             auth.login(request, user)
-            print('user created')
             return redirect('login:home')
         else: 
-            print('user not created')
             context['registerForm'] = form
     else:
         form = RegisterForm()
         context['registerForm'] = form
-        print('GET!')
     return render(request, 'signup.html', context)
 
 
@@ -53,8 +48,3 @@ def logout(request):
     return redirect('login:index') 
 
 
-
-@login_required(login_url = 'login:index')
-def home(request):
-    return render(request, 'home.html')
- 
