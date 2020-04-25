@@ -16,11 +16,11 @@
 
 
 
-<!--<div>
+<div>
     {% for item in items %}
         <h1>{{ item.itemName }}</h1>
     {% endfor %}
-</div>-->
+</div>
 
 <body>
     <nav>
@@ -395,23 +395,8 @@
     </div>
     {% endcomment %}
 
-    <script>
-        function showPopup(e) {
-            document.getElementById(e).style.display = "flex";
-        }
+    <script src="{% static 'overview/overview.js' %}"></script>
 
-        function hidePopup(e) {
-            document.getElementById(e).style.display = "none";
-        }
-
-        function showAdd(e) {
-            document.getElementById(e).style.display = "flex";
-        }
-
-        function hideAdd(e) {
-            document.getElementById(e).style.display = "none";
-        }
-    </script>
 </body>
 
 </html>
