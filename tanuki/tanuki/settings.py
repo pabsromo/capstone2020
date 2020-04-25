@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'login',
+    'overview'
 ]
 
 MIDDLEWARE = [
@@ -63,9 +65,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'tanuki.wsgi.application'
 
@@ -102,6 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Authentication Backend
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'login.backends.EmailAuthentication',
+]
+
+AUTH_USER_MODEL = 'login.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -121,3 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+LOGIN_URL = 'login:index'
