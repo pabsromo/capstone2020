@@ -1,4 +1,4 @@
-# capstone2020
+# ECEN Capstone 2020
 The repository for the ECEN 403-404 Senior Design Project at Texas A&amp;M University.
 
 Tanuki is a budgeting website built in Python using the Django framework with a PostgreSQL database. There are currently three different branches on this repository: master, Tanuki_Backend, and Pablos_Temp_Playgroud. Tanuki_Backend is a temporary branch for Addison Maupin to upload the dynamically working backend while Pablos_Temp_Playground is a temporary branch for Pablo Romo to upload static files. The branch master contains the most up-to-date version of the project.
