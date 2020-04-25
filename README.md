@@ -6,3 +6,4 @@ Tanuki is a budgeting website built in Python using the Django framework with a 
 This project consists of two apps: the login app and the overview app. The login app is responsible for authenticating users, registering new users, and logging users out. The overview app displays the home page which shows the current week and all budgeting information. While login, signup, and logout are all fully functional, the overview page is not yet fully dynamic. Currently, data can be posted to the database but there is no way to tell where the data should be displayed on the page yet. This will be added as soon as possible. 
 
 This project can only be run locally at the moment.
+

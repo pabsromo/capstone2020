@@ -1,58 +1,49 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User, auth
-
-# Create your views here.
+from django.contrib.auth.models import auth
+from django.contrib.auth.decorators import login_required
+from login.forms import RegisterForm
 
 
 def index(request):
     if request.method == 'POST':
         username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password1']
-
-        user = auth.authenticate(username=username, password=password)
-
+        password = request.POST['password']
+        user = auth.authenticate(username = username, password=password)  #authenticates using default then custom backend
         if user is not None:
             auth.login(request, user)
-            return redirect('login:home')
+            return redirect('overview:home')    
         else:
-            messages.info(request, 'Invalid credentials')
-            return redirect('login:signup')
-
+            messages.info(request, 'Invalid credentials, please try again.')
+            return redirect('/')   
     else:
         return render(request, 'index.html')
 
 
+
 def signup(request):
+    context = {}
     if request.method == 'POST':
-        firstName = request.POST['first_name']
-        lastName = request.POST['last_name']
-        username = request.POST['username']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-
-        if password1 == password2:
-            if User.objects.filter(username=username).exists():
-                messages.info(request, 'Username not available.')
-                return redirect('login:signup')
-            elif User.objects.filter(email=email).exists():
-                messages.info(request, 'Email already registered.')
-                return redirect('login:signup')
-            else:
-                user = User.objects.create_user(
-                    username=username, password=password1, email=email, first_name=firstName, last_name=lastName)
-                user.save()
-
-        else:
-            messages.info(request, 'Passwords do not match.')
-            return redirect('login:signup')
-
-        return redirect('/')
+        form = RegisterForm(request.POST)    #render form
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = auth.authenticate(username = username, password = password)
+            auth.login(request, user)    #log user in automatically after registration
+            return redirect('overview:home')  
+        else: 
+            context['registerForm'] = form
     else:
-        return render(request, 'signup.html')
+        form = RegisterForm()
+        context['registerForm'] = form
+    return render(request, 'signup.html', context)
 
 
-def home(request):
-    return render(request, 'home.html')
+
+@login_required(login_url='login:index')
+def logout(request):
+    auth.logout(request)
+    return redirect('login:index') 
+
+
