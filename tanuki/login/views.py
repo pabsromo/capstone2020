@@ -9,10 +9,10 @@ def index(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username = username, password=password)
+        user = auth.authenticate(username = username, password=password)  #authenticates using default then custom backend
         if user is not None:
             auth.login(request, user)
-            return redirect('overview:home')
+            return redirect('overview:home')    
         else:
             messages.info(request, 'Invalid credentials, please try again.')
             return redirect('/')   
@@ -24,14 +24,14 @@ def index(request):
 def signup(request):
     context = {}
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST)    #render form
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = auth.authenticate(username = username, password = password)
-            auth.login(request, user)
-            return redirect('login:home')
+            auth.login(request, user)    #log user in automatically after registration
+            return redirect('overview:home')  
         else: 
             context['registerForm'] = form
     else:

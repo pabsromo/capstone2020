@@ -17,7 +17,7 @@ class AddItemForm(forms.ModelForm):
     
     itemType = forms.CharField(
                             label='Item Type',
-                            max_length = 50,
+                            max_length = 50
                             )
 
     class Meta:

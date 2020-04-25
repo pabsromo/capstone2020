@@ -1,4 +1,6 @@
 {% load static %}
+{% load custom_tags %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +13,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="{% static 'overview/overview.css' %}">
 </head>
+
+
+
+<!--<div>
+    {% for item in items %}
+        <h1>{{ item.itemName }}</h1>
+    {% endfor %}
+</div>-->
 
 <body>
     <nav>
@@ -55,7 +65,7 @@
     <div class="content-wrapper">
         <div class="week_total">
             <div id="week">
-                <h1>Week of April 6 - April 12</h1>
+                <h1>Week of {% findWeek %}</h1>
             </div>
             <div id="total">
                 <h1>Totals: $0/10
@@ -94,31 +104,31 @@
 
         <div id="monday">
             <h1>Monday</h1>
-            <h4>6</h4>
+            <h4>{% returnDay 0 %}</h4>
         </div>
         <div id="tuesday">
             <h1>Tuesday</h1>
-            <h4>7</h4>
+            <h4>{% returnDay 1 %}</h4>
         </div>
         <div id="wednesday">
             <h1>Wednesday</h1>
-            <h4>8</h4>
+            <h4>{% returnDay 2 %}</h4>
         </div>
         <div id="thursday">
             <h1>Thursday</h1>
-            <h4>9</h4>
+            <h4>{% returnDay 3 %}</h4>
         </div>
         <div id="friday">
             <h1>Friday</h1>
-            <h4>10</h4>
+            <h4>{% returnDay 4 %}</h4>
         </div>
         <div id="saturday">
             <h1>Saturday</h1>
-            <h4>11</h4>
+            <h4>{% returnDay 5 %}</h4>
         </div>
         <div id="sunday">
             <h1>Sunday</h1>
-            <h4>12</h4>
+            <h4>{% returnDay 6 %}</h4>
         </div>
 
         <hr style="grid-area: hr0; background-color: #f3f3f3">
@@ -152,6 +162,7 @@
                 <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
             </div>
         </div>
+
         <div id="ess2">
             <div class="add_item">
                 <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>

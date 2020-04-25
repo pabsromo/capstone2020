@@ -5,14 +5,19 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required = True)
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Email'}), error_messages={'unique': 'A user with this email already exists.'})
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}), error_messages={'unique': 'A user with this username already exists.'})
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
 
     class Meta:
         model = User
         fields = ( 
-            'username',
             'first_name', 
             'last_name', 
+            'username',
             'email', 
             'password1', 
             'password2'
