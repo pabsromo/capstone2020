@@ -24,6 +24,95 @@ var days = {
     'sunday': 7,
 }
 
+function colorOn() {
+    document.getElementById("footer").style.backgroundColor = "cadetblue";
+    document.getElementById("sunday").style.backgroundColor = "#ff8cf5";
+    document.getElementById("saturday").style.backgroundColor = "burlywood";
+    document.getElementById("friday").style.backgroundColor = "darkseagreen";
+    document.getElementById("thursday").style.backgroundColor = "firebrick";
+    document.getElementById("wednesday").style.backgroundColor = "gray";
+    document.getElementById("tuesday").style.backgroundColor = "greenyellow";
+    document.getElementById("monday").style.backgroundColor = "chocolate";
+    //document.getElementById("weekday").style.backgroundColor = "chartreuse";
+    document.getElementById("unx7").style.backgroundColor = "burlywood";
+    document.getElementById("unx6").style.backgroundColor = "burlywood";
+    document.getElementById("unx5").style.backgroundColor = "burlywood";
+    document.getElementById("unx4").style.backgroundColor = "burlywood";
+    document.getElementById("unx3").style.backgroundColor = "burlywood";
+    document.getElementById("unx2").style.backgroundColor = "burlywood";
+    document.getElementById("unx1").style.backgroundColor = "burlywood";
+    document.getElementById("opt7").style.backgroundColor = "blueviolet";
+    document.getElementById("opt6").style.backgroundColor = "blueviolet";
+    document.getElementById("opt5").style.backgroundColor = "blueviolet";
+    document.getElementById("opt4").style.backgroundColor = "blueviolet";
+    document.getElementById("opt3").style.backgroundColor = "blueviolet";
+    document.getElementById("opt2").style.backgroundColor = "blueviolet";
+    document.getElementById("opt1").style.backgroundColor = "blueviolet";
+    document.getElementById("lei7").style.backgroundColor = "beige";
+    document.getElementById("lei6").style.backgroundColor = "beige";
+    document.getElementById("lei5").style.backgroundColor = "beige";
+    document.getElementById("lei4").style.backgroundColor = "beige";
+    document.getElementById("lei3").style.backgroundColor = "beige";
+    document.getElementById("lei2").style.backgroundColor = "beige";
+    document.getElementById("lei1").style.backgroundColor = "beige";
+    document.getElementById("ess7").style.backgroundColor = "aquamarine";
+    document.getElementById("ess6").style.backgroundColor = "aquamarine";
+    document.getElementById("ess5").style.backgroundColor = "aquamarine";
+    document.getElementById("ess4").style.backgroundColor = "aquamarine";
+    document.getElementById("ess3").style.backgroundColor = "aquamarine";
+    document.getElementById("ess2").style.backgroundColor = "aquamarine";
+    document.getElementById("ess1").style.backgroundColor = "aquamarine";
+    document.getElementById("total").style.backgroundColor = "#ff8cf5";
+    document.getElementById("week").style.backgroundColor = "#eeff8c";
+    document.getElementsByClassName("week_total")[0].style.backgroundColor = "#8ca0ff";
+    document.getElementById("cat_totals").style.backgroundColor = "aqua";
+
+}
+
+function colorOff() {
+    document.getElementById("footer").style.backgroundColor = "transparent";
+    document.getElementById("sunday").style.backgroundColor = "transparent";
+    document.getElementById("saturday").style.backgroundColor = "transparent";
+    document.getElementById("friday").style.backgroundColor = "transparent";
+    document.getElementById("thursday").style.backgroundColor = "transparent";
+    document.getElementById("wednesday").style.backgroundColor = "transparent";
+    document.getElementById("tuesday").style.backgroundColor = "transparent";
+    document.getElementById("monday").style.backgroundColor = "transparent";
+    //document.getElementById("weekday").style.backgroundColor = "transparent";
+    document.getElementById("unx7").style.backgroundColor = "transparent";
+    document.getElementById("unx6").style.backgroundColor = "transparent";
+    document.getElementById("unx5").style.backgroundColor = "transparent";
+    document.getElementById("unx4").style.backgroundColor = "transparent";
+    document.getElementById("unx3").style.backgroundColor = "transparent";
+    document.getElementById("unx2").style.backgroundColor = "transparent";
+    document.getElementById("unx1").style.backgroundColor = "transparent";
+    document.getElementById("opt7").style.backgroundColor = "transparent";
+    document.getElementById("opt6").style.backgroundColor = "transparent";
+    document.getElementById("opt5").style.backgroundColor = "transparent";
+    document.getElementById("opt4").style.backgroundColor = "transparent";
+    document.getElementById("opt3").style.backgroundColor = "transparent";
+    document.getElementById("opt2").style.backgroundColor = "transparent";
+    document.getElementById("opt1").style.backgroundColor = "transparent";
+    document.getElementById("lei7").style.backgroundColor = "transparent";
+    document.getElementById("lei6").style.backgroundColor = "transparent";
+    document.getElementById("lei5").style.backgroundColor = "transparent";
+    document.getElementById("lei4").style.backgroundColor = "transparent";
+    document.getElementById("lei3").style.backgroundColor = "transparent";
+    document.getElementById("lei2").style.backgroundColor = "transparent";
+    document.getElementById("lei1").style.backgroundColor = "transparent";
+    document.getElementById("ess7").style.backgroundColor = "transparent";
+    document.getElementById("ess6").style.backgroundColor = "transparent";
+    document.getElementById("ess5").style.backgroundColor = "transparent";
+    document.getElementById("ess4").style.backgroundColor = "transparent";
+    document.getElementById("ess3").style.backgroundColor = "transparent";
+    document.getElementById("ess2").style.backgroundColor = "transparent";
+    document.getElementById("ess1").style.backgroundColor = "transparent";
+    document.getElementById("total").style.backgroundColor = "transparent";
+    document.getElementById("week").style.backgroundColor = "transparent";
+    document.getElementsByClassName("week_total")[0].style.backgroundColor = "transparent";
+    document.getElementById("cat_totals").style.backgroundColor = "transparent";
+}
+
 function handleForm(event) {
     event.preventDefault();
 }
@@ -125,5 +214,5 @@ function addnewItem(e) {
     // Erase the form
     forms.elements["item_name"].value = null;
     forms.elements["item_price"].value = null;
-    forums.elements["item_day"].value = null;
+    forms.elements["item_day"].value = null;
 }
