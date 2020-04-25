@@ -133,43 +133,43 @@
                     </div>
             </div>
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
         <div id="ess2">
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
         <div id="ess3">
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
         <div id="ess4">
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
         <div id="ess5">
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
         <div id="ess6">
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
         <div id="ess7">
             <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
+                <button onclick="showAdd('essential_div')"><i class="material-icons">add</i></button>
             </div>
         </div>
 
         <div style="grid-area: hr1;">
-            <div class="add_item_form" id="essential_form">
-                <form action="">
+            <div class="add_item_form" id="essential_div">
+                <form action="" id="essential_form">
                     <h1>Add Item</h1>
 
                     <label for="item_name">Item Name</label>
@@ -178,8 +178,17 @@
                     <label for="item_price">Item Price</label>
                     <input type="text" placeholder="Enter Item Price" name="item_price" required>
 
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
+                    <label for="item_day">Item Day</label>
+                    <input type="radio" name="item_day" value="monday"> Monday
+                    <input type="radio" name="item_day" value="tuesday"> Tuesday
+                    <input type="radio" name="item_day" value="wednesday"> Wednesday
+                    <input type="radio" name="item_day" value="thursday"> Thursday
+                    <input type="radio" name="item_day" value="friday"> Friday
+                    <input type="radio" name="item_day" value="saturday"> Saturday
+                    <input type="radio" name="item_day" value="sunday"> Sunday
+
+                    <button type="submit" onclick="addnewItem('essential')">Add</button>
+                    <button type="submit" onclick="hideAdd('essential')">Cancel</button>
                 </form>
             </div>
             <hr>
@@ -290,8 +299,8 @@
                     <label for="item_price">Item Price</label>
                     <input type="text" placeholder="Enter Item Price" name="item_price" required>
 
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('optional_form')">Cancel</button>
+                    <button type="button">Add</button>
+                    <button type="button" onclick="hideAdd('optional_form')">Cancel</button>
                 </form>
             </div>
             <hr>
@@ -368,7 +377,22 @@
     </div>
     {% endcomment %}
 
+    {% comment %}
     <script>
+        var days = {
+            'monday': 1,
+            'tuesday': 2,
+            'wednesday': 3,
+            'thursday': 4,
+            'friday': 5,
+            'saturday': 6,
+            'sunday': 7,
+        }
+
+        function handleForm(event) {
+            event.preventDefault();
+        }
+
         function showPopup(e) {
             document.getElementById(e).style.display = "flex";
         }
@@ -382,8 +406,61 @@
         }
 
         function hideAdd(e) {
-            document.getElementById(e).style.display = "none";
+            document.getElementById(e + "_div").style.display = "none";
+        }
+
+        function addnewItem(e) {
+            var forms = document.getElementById(e + "_form");
+            var divs = document.getElementById(e + "_div");
+
+            forms.addEventListener('submit', handleForm);
+
+            var item_name = forms.elements["item_name"].value;
+            var item_price = forms.elements["item_price"].value;
+            var item_day = forms.elements["item_day"].value;
+
+            switch(e) {
+                case "essential":
+                    var short_e = "ess";
+                    break;
+                case "leisure":
+                    var short_e = "lei";
+                    break;
+                case "optional":
+                    var short_e = "opt";
+                    break;
+                case "unexpected":
+                    var short_e = "unx";
+                    break;
+                default:
+                    break;
+            }
+
+            var col = document.getElementById(short_e + days[item_day]);
+            var row_id = short_e + "_item_" + days[item_day];
+
+            var n = e + "_form";
+
+            var html_add_item = `
+                <div class="add_item">,
+                    <button onclick="showAdd(' + '"' + n + '"' +')"><i class="material-icons">add</i></button>,
+                </div>`;
+
+            var t = document.createElement("")
+
+            console.log('got to before insertion');
+
+            // Find the second to last spot in the div and insert the new item
+            col.removeChild(col.lastElementChild);
+            col.insertAdjacentHTML("beforeend", "<div class='item'> <p>Lorem Ipsum $5</p> <button type='button' onclick='showPopup(" + row_id + "')'><i class='material-icons'>subject</i></button> <div class='popup' id=" + row_id + "> <div class='innerpopup'> this is the popup <button type='button' onclick='hidePopup(" + row_id + ")'><i class='tiny material-icons'>clear</i></button> </div> </div> </div>");
+            col.insertAdjacentHTML("beforeend", html_add_item);
+            //col.insertAdjacentHTML("beforeend", "<div class='add_item'> <button onclick='showAdd('".concat(e, "_form')'><i class='material-icons'>add</i></button> </div>"));
+            
+            //forms.submit();
+            divs.style.display = "none";
         }
     </script>
+    {% endcomment %}
+    <script src="{% static 'js/overview.js' %}"></script>
 </body>
 </html>

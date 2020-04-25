@@ -1,5 +1,12 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
     background-image: url('https://images.unsplash.com/photo-1490100667990-4fced8021649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80');
+    padding: 0 10px;
   }
  .wrapper {
     position: absolute;
@@ -9,8 +16,10 @@ body {
     background: #EEECE1;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
-    width: 60%;
-    height: 52%;
+    width: 95%;
+    max-width: 750px;
+    height: 70%;
+    max-height: 655px;
     display: grid;
     padding-top: 2%;
     padding-left: 2%;
@@ -43,7 +52,7 @@ body {
     font-size: 44px;
     line-height: 64px;
     color: #4E4E4E;
-    grid-area: 1/5/1/8;
+    grid-area: 1/5/1/9;
   }
   input {
     width: 100%;
