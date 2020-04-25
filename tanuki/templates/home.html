@@ -185,21 +185,15 @@
 
         <div style="grid-area: hr1;">
             <div class="add_item_form" id="essential_form">
-                <!--<form action="">
-                    <h1>Add Item</h1>
-
-                    <label for="item_name">Item Name</label>
-                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
-
-                    <label for="item_price">Item Price</label>
-                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
-
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
-                </form>-->
                 <form method = "post">
                     {% csrf_token %}
-                    {{ form }}
+                    {{form.itemName.label_tag}}
+                    {{ form.itemName }}
+
+                    {{form.itemPrice.label_tag}}
+                    {{ form.itemPrice }}
+                    
+                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="essential" max_length="10" hidden>
                     <button type="submit">Add</button>
                     <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
                 </form>
@@ -247,15 +241,15 @@
 
         <div style="grid-area: hr2;">
             <div class="add_item_form" id="leisure_form">
-                <form action="">
-                    <h1>Add Item</h1>
-
-                    <label for="item_name">Item Name</label>
-                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
-
-                    <label for="item_price">Item Price</label>
-                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
-
+                <form method="post">
+                    {% csrf_token %}
+                    {{form.itemName.label_tag}}
+                    {{ form.itemName }}
+                    
+                    {{form.itemPrice.label_tag}}
+                    {{ form.itemPrice }}
+                    
+                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="leisure" max_length="10" hidden>
                     <button type="submit">Add</button>
                     <button type="submit" onclick="hideAdd('leisure_form')">Cancel</button>
                 </form>
@@ -303,15 +297,15 @@
 
         <div style="grid-area: hr3;">
             <div class="add_item_form" id="optional_form">
-                <form action="">
-                    <h1>Add Item</h1>
-
-                    <label for="item_name">Item Name</label>
-                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
-
-                    <label for="item_price">Item Price</label>
-                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
-
+                <form method="post">
+                    {% csrf_token %}
+                    {{form.itemName.label_tag}}
+                    {{ form.itemName }}
+                    
+                    {{form.itemPrice.label_tag}}
+                    {{ form.itemPrice }}
+                    
+                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="optional" max_length="10" hidden>
                     <button type="submit">Add</button>
                     <button type="submit" onclick="hideAdd('optional_form')">Cancel</button>
                 </form>
@@ -359,15 +353,15 @@
 
         <div style="grid-area: hr4;">
             <div class="add_item_form" id="unexpected_form">
-                <form action="">
-                    <h1>Add Item</h1>
-
-                    <label for="item_name">Item Name</label>
-                    <input type="text" placeholder="Enter Item Name" name="item_name" required>
-
-                    <label for="item_price">Item Price</label>
-                    <input type="text" placeholder="Enter Item Price" name="item_price" required>
-
+                <form method="post">
+                    {% csrf_token %}
+                    {{form.itemName.label_tag}}
+                    {{ form.itemName }}
+                    
+                    {{form.itemPrice.label_tag}}
+                    {{ form.itemPrice }}
+                    
+                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="unexpected" max_length="10" hidden>
                     <button type="submit">Add</button>
                     <button type="submit" onclick="hideAdd('unexpected_form')">Cancel</button>
                 </form>
