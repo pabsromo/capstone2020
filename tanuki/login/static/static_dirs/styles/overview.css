@@ -132,7 +132,7 @@ p {
 
 .week_total {
     grid-area: wkt;
-    background-color: #8ca0ff;
+    background-color: transparent;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -142,13 +142,13 @@ p {
 }
 
 #week {
-    background-color: #eeff8c;
+    background-color: transparent;
     text-decoration: underline;
     text-decoration-color: #4e4e4e;
 }
 
 #total {
-    background-color: #ff8cf5;
+    background-color: transparent;
 }
 
 #prog_out_tot {
@@ -168,7 +168,7 @@ p {
 
 #cat_totals {
     grid-area: cat;
-    background-color: aqua;
+    background-color: transparent;
     display: flex;
     flex-direction: row;
     margin-bottom: 5px;
@@ -239,7 +239,7 @@ p {
 
 #ess1 {
     grid-area: ess1;
-    background-color: aquamarine;
+    background-color: transparent;
     display: grid;
     margin-left: 10px;
 }
@@ -248,194 +248,194 @@ p {
     grid-area: ess2;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    background-color: transparent;
 }
 
 #ess3 {
     grid-area: ess3;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    background-color: transparent;
 }
 
 #ess4 {
     grid-area: ess4;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    background-color: transparent;
 }
 
 #ess5 {
     grid-area: ess5;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    background-color: transparent;
 }
 
 #ess6 {
     grid-area: ess6;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    background-color: transparent;
 }
 
 #ess7 {
     grid-area: ess7;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    background-color: transparent;
 }
 
 #lei1 {
     grid-area: lei1;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #lei2 {
     grid-area: lei2;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #lei3 {
     grid-area: lei3;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #lei4 {
     grid-area: lei4;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #lei5 {
     grid-area: lei5;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #lei6 {
     grid-area: lei6;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #lei7 {
     grid-area: lei7;
     display: flex;
     flex-direction: column;
-    background-color: beige;
+    background-color: transparent;
 }
 
 #opt1 {
     grid-area: opt1;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #opt2 {
     grid-area: opt2;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #opt3 {
     grid-area: opt3;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #opt4 {
     grid-area: opt4;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #opt5 {
     grid-area: opt5;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #opt6 {
     grid-area: opt6;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #opt7 {
     grid-area: opt7;
     display: flex;
     flex-direction: column;
-    background-color: blueviolet;
+    background-color: transparent;
 }
 
 #unx1 {
     grid-area: unx1;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #unx2 {
     grid-area: unx2;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #unx3 {
     grid-area: unx3;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #unx4 {
     grid-area: unx4;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #unx5 {
     grid-area: unx5;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #unx6 {
     grid-area: unx6;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #unx7 {
     grid-area: unx7;
     display: flex;
     flex-direction: column;
-    background-color: burlywood;
+    background-color: transparent;
 }
 
 #weekday {
     grid-area: mon / sun;
-    background-color: chartreuse;
+    background-color: transparent;
     display: flex;
     flex-direction: row;
 }
@@ -445,7 +445,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: chocolate;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     margin-left: 10px;
     padding-right: 5px;
@@ -457,7 +457,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: greenyellow;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     padding-right: 5px;
     padding-left: 5px;
@@ -468,7 +468,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: gray;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     padding-right: 5px;
     padding-left: 5px;
@@ -479,7 +479,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: firebrick;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     padding-right: 5px;
     padding-left: 5px;
@@ -490,7 +490,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: darkseagreen;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     padding-right: 5px;
     padding-left: 5px;
@@ -501,7 +501,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: burlywood;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     padding-right: 5px;
     padding-left: 5px;
@@ -512,7 +512,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #ff8cf5;
+    background-color: transparent;
     box-shadow: 0 2px 0 #4e4e4e;
     margin-right: 10px;
     padding-right: 5px;
@@ -521,7 +521,7 @@ p {
 
 #footer {
     grid-area: ftr;
-    background-color: cadetblue;
+    background-color: transparent;
     font-family: MV Boli; 
     color: #4e4e4e;
     display: flex;

@@ -33,7 +33,6 @@ function colorOn() {
     document.getElementById("wednesday").style.backgroundColor = "gray";
     document.getElementById("tuesday").style.backgroundColor = "greenyellow";
     document.getElementById("monday").style.backgroundColor = "chocolate";
-    //document.getElementById("weekday").style.backgroundColor = "chartreuse";
     document.getElementById("unx7").style.backgroundColor = "burlywood";
     document.getElementById("unx6").style.backgroundColor = "burlywood";
     document.getElementById("unx5").style.backgroundColor = "burlywood";
@@ -78,7 +77,6 @@ function colorOff() {
     document.getElementById("wednesday").style.backgroundColor = "transparent";
     document.getElementById("tuesday").style.backgroundColor = "transparent";
     document.getElementById("monday").style.backgroundColor = "transparent";
-    //document.getElementById("weekday").style.backgroundColor = "transparent";
     document.getElementById("unx7").style.backgroundColor = "transparent";
     document.getElementById("unx6").style.backgroundColor = "transparent";
     document.getElementById("unx5").style.backgroundColor = "transparent";
