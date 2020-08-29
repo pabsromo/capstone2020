@@ -25,7 +25,7 @@ SECRET_KEY = '--j8t+_%uuh9wq)g)03wktyf529a1doax+0gaea7xmv77&ok^3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com']
 
 
 # Application definition
@@ -78,15 +78,36 @@ WSGI_APPLICATION = 'tanuki.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'tanuki',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'codersdontwearsafetyglasses',
+    #     'HOST': 'localhost',
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tanuki',
+        'HOST': '/cloudsql/tanuki-58:us-central1:tanuki',
         'USER': 'postgres',
         'PASSWORD': 'codersdontwearsafetyglasses',
-        'HOST': 'localhost',
+        'NAME': 'tanuki',
     }
 }
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'tanuki',
+            'USER': 'postgres',
+            'PASSWORD': 'codersdontwearsafetyglasses',
+        }
+    }
 
 
 # Password validation
