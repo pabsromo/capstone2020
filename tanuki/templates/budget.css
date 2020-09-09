@@ -3,29 +3,6 @@ body {
     margin: 0;
     padding-top: 60px;
 }
-
-table{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 1px solid black;
-}
-
-tbody{
-  width: 100%;
-  float: left;
-}
-
-th{
-}
-
-tr{
-}
-
-td{
-}
-
-
 /* Style the navbar */
 
 .nav-wrapper {
@@ -95,7 +72,7 @@ td{
 h1 {
     font-family: Karla;
     color:#4e4e4e;
-    font-size: large;
+    font-size: 1.5em;
     margin: 0;
 }
 
@@ -129,12 +106,13 @@ p {
     display: grid;
     width: 100%;
     grid-auto-rows: minmax(min-content, max-content);
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas: "mon mon mon mon"
-                         "inc fix sav inv"
-                         "ftr ftr ftr ftr";
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "mon mon mon mon mon mon mon mon mon"
+                         "inc inc inc inc sum sum sum sum sum"
+                         "fix fix fix sav sav sav inv inv inv"
+                         "ftr ftr ftr ftr ftr ftr ftr ftr ftr";
+    grid-column-gap: 2em;
+    grid-row-gap: 2em;
 }
 
 .month-wrapper {
@@ -143,16 +121,17 @@ p {
   flex-direction: row;
   grid-row-start: 1;
   grid-row-end: 1;
-  grid-column-start: 2;
-  grid-column-end: 4;
+  grid-column-start: 4;
+  grid-column-end: 7;
 }
 
 .month {
   background-size: contain;
-  background-image: url("leaves.jpg");
+  background-color: #5d6d7e;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.15);
   margin-top: 5px;
   text-align-last: center;
-  height: 4em;
+  height: 3.25em;
   width: 30em;
   border-bottom-left-radius: 10em;
   border-bottom-right-radius: 10em;
@@ -161,65 +140,276 @@ p {
 
 #month-title {
   font-size: 2.5em;
+  color: #d7dbdd;
 }
 
 .income {
   display: flex;
   grid-area: inc;
-  margin-left: 10px;
+  margin-left: 2em;
   flex-direction: column;
-  background-color: lightblue;
+  background-color: #d0ece7;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.15);
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "date item amt";
+  grid-column-gap: 2em;
+  grid-template-areas: "title title title"
+                       "date item amt"
+                       "datedata itemdata amtdata";
 }
 
-.income-table {
-  display: flex;
+.income-table-column {
+  width: 33%;
   flex-direction: column;
 }
 
-.table-titles {
+.summary{
+  display: flex;
+  grid-area: sum;
+  flex-direction: column;
+  margin-right: 2em;
+  background-color: #d4e6f1;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+}
+
+.summary-title {
+  display: flex;
+  justify-content: left;
+  margin: 1em;
+}
+
+.summary-amount {
   display: flex;
   flex-direction: row;
+  margin-left: 1em;
+  margin-right: 1em;
+  border-bottom: 0.05em solid gray;
+}
+
+.summary-column {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  font-size: 1.25em;
+  font-family: Karla;
+  color: #4e4e4e;
+  margin-bottom: 0.25em;
+  padding-right: 0.25em;
+  height: 2.6em;
+}
+
+.summary-cash {
+  display: flex;
+  margin-left: 1em;
+  margin-right: 1em;
+  justify-content: space-between;
+}
+
+.summary-categories {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5em;
+}
+
+.summary-cash-category {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  font-family: Karla;
+  color: #4e4e4e;
+  margin: 0.5em;
+  padding-right: 0.25em;
+  background-color: #a9cce3;
+  border-radius: 1em;
+  justify-content: center;
+}
+
+.inside-cash-category {
+  display: flex;
+  margin: 0.5em;
+  justify-content: center;
+}
+
+.summary-cash-total {
+  margin: 0.5em;
+  font-size: 0.9em;
+  font-family: Karla;
+  color: #4e4e4e;
+  background-color: #a9cce3;
+  border-radius: 1em;
+  font-weight:bold;
+}
+
+.minus {
+  display: flex;
+  flex-direction: column;
+  color: #4e4e4e;
+  font-size: 1em;
+  font-family: Karla;
+  justify-content: center;
 }
 
 .fixed-expenses {
   display: flex;
   grid-area: fix;
   flex-direction: column;
-  background-color: lightblue;
+  margin-left: 2em;
+  background-color:  #fadbd8;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 2em;
+  grid-template-areas: "title title title"
+                       "date item amt"
+                       "datedata itemdata amtdata";
+}
+
+.fixed-expenses-table-column {
+  width: 33%;
+  flex-direction: column;
 }
 
 .savings {
   display: flex;
   grid-area: sav;
   flex-direction: column;
-  background-color: lightblue;
+  background-color: #fcf3cf;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-column-gap: 2em;
+  grid-template-areas: "title title title"
+                       "item amt progress"
+                       "itemdata amtdata progressdata";
+}
+
+.savings-table-column {
+  width: 33%;
+  flex-direction: column;
 }
 
 .investing {
   display: flex;
   grid-area: inv;
   flex-direction: column;
-  background-color: lightblue;
+  margin-right: 2em;
+  background-color: #e8daef;
+  box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2em;
+  grid-template-areas: "title title"
+                       "account amount"
+                       "accountdata amtdata";
 }
 
-.table{
-  display: flex;
+.investing-table-column {
+  width: 49%;
   flex-direction: column;
 }
 
-.row{
+.section{
+  border-radius: 25px;
+}
+
+.section-title {
   display: flex;
-  justify-content: space-around;
-  flex-direction: column;
+  justify-content: left;
+  margin: 1em;
+}
+
+.table-titles {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.25em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+
+.table-data {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0em;
+  margin-top: 0.25em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
 }
 
 .elem{
   display: flex;
-  background-color: white;
+  font-family: Karla;
+  color: #4e4e4e;
+  border-bottom: 0.1em solid gray;
+  padding-bottom: 0.25em;
+  padding-top: 0.25em;
+}
+
+.elem.altincome {
+  background-color: #a2d9ce;
+}
+
+.elem.altsummary {
+  background-color: #aed6f1;
+}
+
+.elem.altfixed {
+  background-color: #f5b7b1;
+}
+
+.elem.altsavings {
+  background-color: #f9e79f;
+}
+
+.elem.altinvest {
+  background-color: #d2b4de;
+}
+
+.head-elem {
+  display: flex;
+  font-family: Karla;
+  font-size: 1.25em;
+  color: #4e4e4e;
+  border-bottom: 0.15em solid gray;
+}
+
+.new-row {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  padding-top: 0.25em;
+}
+
+.flex-outer {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
+}
+
+.flex-outer li {
+  width: 33%;
+}
+
+form ul {
+  display: flex;
+  width: 100%;
+}
+
+input {
+  background-color: inherit;
+  border: 0 solid gray;
+  color: #4e4e4e;
+  font-family: Karla;
+  font-size: 1em;
+  width: 100%;
+  padding: 0;
 }
 
 #footer {
