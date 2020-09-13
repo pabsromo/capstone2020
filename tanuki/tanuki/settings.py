@@ -9,7 +9,15 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 
+<<<<<<< HEAD
 For Addison: cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+=======
+Command to start cloud sql proxy:
+cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+
+For Pablo:
+C:\Users\pabsr\Documents\CodingProjects\capstone2020**watchout/watchout***tanuki\cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+>>>>>>> a0c0648315fb14a53d0c84eed74f71db0a11f12e
 
 """
 
@@ -80,6 +88,7 @@ WSGI_APPLICATION = 'tanuki.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306 to start cloud proxy
 
 if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
