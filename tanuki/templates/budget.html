@@ -1,3 +1,6 @@
+{% load static %}
+{% load custom_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +10,7 @@
     <title>Budget</title>
     <link href='https://fonts.googleapis.com/css?family=Karla' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="budget.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'budget/budget.css' %}">
 </head>
 
 <body>
@@ -394,7 +397,7 @@
       </div>
     </div>
 
-    <script src="budget.js"></script>
+    <script src="{% static 'budget/budget.js' %}"></script>
 
 </body>
 
