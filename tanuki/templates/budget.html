@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+    <link href='https://fonts.googleapis.com/css?family=Karla' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="budget.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper sticky">
+            <div class="logo">
+                <svg width="69" height="105" viewBox="0 0 69 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="34.2774" cy="71.0841" rx="31.6065" ry="33.9159" fill="#C4C4C4" />
+                    <path
+                        d="M10.2194 17.0331C13.4573 8.36581 25.7169 8.36581 28.9548 17.0331L31.5069 23.8648C33.9485 30.4004 29.116 37.3643 22.1392 37.3643H17.0349C10.0582 37.3643 5.22573 30.4004 7.66727 23.8648L10.2194 17.0331Z"
+                        fill="#C4C4C4" />
+                    <path
+                        d="M12.3013 18.2665C14.8702 11.2817 24.7491 11.2817 27.318 18.2665L29.1524 23.2544C31.0729 28.4765 27.2082 34.0158 21.6441 34.0158H17.9753C12.4112 34.0158 8.54638 28.4765 10.4669 23.2544L12.3013 18.2665Z"
+                        fill="#4E4E4E" />
+                    <path
+                        d="M40.0452 17.0331C43.2831 8.3658 55.5427 8.3658 58.7806 17.0331L61.3327 23.8648C63.7743 30.4004 58.9418 37.3643 51.9651 37.3643H46.8608C39.884 37.3643 35.0515 30.4004 37.4931 23.8648L40.0452 17.0331Z"
+                        fill="#C4C4C4" />
+                    <path
+                        d="M42.1271 18.2665C44.696 11.2817 54.5749 11.2817 57.1438 18.2665L58.9782 23.2544C60.8987 28.4765 57.034 34.0158 51.4699 34.0158H47.8011C42.237 34.0158 38.3722 28.4765 40.2927 23.2544L42.1271 18.2665Z"
+                        fill="#4E4E4E" />
+                    <rect x="1.33545" y="18.5841" width="65.8839" height="37.1681" rx="18.5841" fill="#C4C4C4" />
+                    <rect x="38.7291" y="23.6947" width="19.5871" height="16.2611" rx="8.13053" fill="#4E4E4E" />
+                    <ellipse cx="46.0742" cy="29.0376" rx="2.44839" ry="2.55531" fill="#C4C4C4" />
+                    <rect width="19.5871" height="16.2611" rx="8.13053" transform="matrix(-1 0 0 1 29.8258 23.6947)"
+                        fill="#4E4E4E" />
+                    <ellipse rx="2.44839" ry="2.55531" transform="matrix(-1 0 0 1 22.4806 29.0376)" fill="#C4C4C4" />
+                    <rect x="29.8258" y="39.9557" width="9.34839" height="5.57522" rx="2.78761" fill="#4E4E4E" />
+                    <ellipse cx="34.5" cy="75.9624" rx="25.1516" ry="23.4624" fill="#4E4E4E" />
+                </svg>
+                <a href="#">Tanuki</a>
+            </div>
+            <ul id="nav-desktop">
+                <li><a href="#overview">Overview</a></li>
+                <li id="selected"><a href="#budget">Budget</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#user"><i class="material-icons">person_outline</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+
+      <div class="month-wrapper">
+        <div class="month">
+          <h1 id="month-title">September</h1>
+        </div>
+      </div>
+<!--                                     INCOME                              -->
+      <div class="income section">
+        <div class="section-title" style="width: fit-content" id="selected">
+          <h1>Income</h1>
+        </div>
+<!--                                  income titles                          -->
+        <div class="table-titles">
+          <div class="income-table-column">
+            <div class="head-elem">
+              date
+            </div>
+          </div>
+          <div class="income-table-column">
+            <div class="head-elem">
+              item
+            </div>
+          </div>
+          <div class="income-table-column">
+            <div class="head-elem">
+              amount
+            </div>
+          </div>
+        </div>
+<!--                                 income data                             -->
+        <div class="table-data">
+          <div class="income-table-column">
+            <div class="elem altincome">
+              date data
+            </div>
+            <div class="elem">
+              date data
+            </div>
+          </div>
+          <div class="income-table-column">
+            <div class="elem altincome">
+              item data
+            </div>
+            <div class="elem">
+              item data
+            </div>
+          </div>
+          <div class="income-table-column">
+            <div class="elem altincome">
+              amount data
+            </div>
+            <div class="elem">
+              amount data
+            </div>
+          </div>
+        </div>
+
+        <div class="new-row new-income">
+          <form class="" action="index.html" method="post">
+            <ul class="flex-outer">
+              <li>
+                <input type="text" name="" value="" placeholder="new date">
+              </li>
+              <li>
+                <input type="text" name="" value="" placeholder="new item">
+              </li>
+              <li>
+                <input type="text" name="" value="" placeholder="new amount">
+              </li>
+            </ul>
+          </form>
+        </div>
+
+      </div>
+<!--                                     SUMMARY                             -->
+      <div class="summary section">
+        <div class="section-title" style="width: fit-content" id="selected">
+          <h1>Summary</h1>
+        </div>
+<!--                                 summary amount                          -->
+        <div class="summary-amount">
+          <div class="summary-column" style="width: 45%;">
+            How much are you saving?
+          </div>
+          <div class="summary-column" style="width: 20%">
+            <div class="">
+              Savings
+            </div>
+            <div class="">
+              <input type="text" name="" value="" placeholder="Enter amount" style="font-size: 0.8em;">
+            </div>
+          </div>
+          <div class="summary-column" style="width: 35%">
+            <div class="">
+              Additional Savings
+            </div>
+            <div class="" style="font-size: 0.8em;">
+              Amount
+            </div>
+          </div>
+        </div>
+<!--                                  summary cash                           -->
+        <div class="summary-cash">
+          <div class="summary-categories">
+            <div class="summary-cash-category">
+              <div class="inside-cash-category">
+                Income
+              </div>
+              <div class="inside-cash-category" style="margin-top: 0;">
+                $0
+              </div>
+            </div>
+
+            <div class="minus">
+              —
+            </div>
+
+            <div class="summary-cash-category">
+              <div class="inside-cash-category">
+                Fixed Expenses
+              </div>
+              <div class="inside-cash-category" style="margin-top: 0;">
+                $0
+              </div>
+            </div>
+
+            <div class="minus">
+              —
+            </div>
+
+            <div class="summary-cash-category">
+              <div class="inside-cash-category">
+                Savings
+              </div>
+              <div class="inside-cash-category" style="margin-top: 0;">
+                $0
+              </div>
+            </div>
+
+            <div class="minus">
+              —
+            </div>
+
+            <div class="summary-cash-category">
+              <div class="inside-cash-category">
+                Investing
+              </div>
+              <div class="inside-cash-category" style="margin-top: 0;">
+                $0
+              </div>
+            </div>
+
+            <div class="minus" style="font-size: 1.5em;">
+              =
+            </div>
+
+            <div class="summary-cash-total">
+              <div class="inside-cash-category" style="font-size:1em;">
+                Available Cash
+              </div>
+              <div class="inside-cash-category">
+                $0
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--                                  FIXED EXPENSES                         -->
+      <div class="fixed-expenses section">
+        <div class="section-title" style="width: fit-content" id="selected">
+          <h1>Fixed Expenses</h1>
+        </div>
+<!--                              fixed expenses titles                      -->
+        <div class="table-titles">
+          <div class="fixed-expenses-table-column">
+            <div class="head-elem">
+              date
+            </div>
+          </div>
+          <div class="fixed-expenses-table-column">
+            <div class="head-elem">
+              item
+            </div>
+          </div>
+          <div class="fixed-expenses-table-column">
+            <div class="head-elem">
+              amounts
+            </div>
+          </div>
+        </div>
+<!--                               fixed expenses data                       -->
+        <div class="table-data">
+          <div class="fixed-expenses-table-column">
+            <div class="elem altfixed">
+              first date
+            </div>
+            <div class="elem">
+              second date
+            </div>
+          </div>
+          <div class="fixed-expenses-table-column">
+            <div class="elem altfixed">
+              first fixed
+            </div>
+            <div class="elem">
+              second fixed
+            </div>
+          </div>
+          <div class="fixed-expenses-table-column">
+            <div class="elem altfixed">
+              first amount
+            </div>
+            <div class="elem">
+              second amount
+            </div>
+          </div>
+        </div>
+
+        <div class="new-row new-fixed-expenses">
+          <form class="" action="index.html" method="post">
+            <ul class="flex-outer">
+              <li>
+                <input type="text" name="" value="" placeholder="new date">
+              </li>
+              <li>
+                <input type="text" name="" value="" placeholder="new item">
+              </li>
+              <li>
+                <input type="text" name="" value="" placeholder="new amount">
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+<!--                                     SAVINGS                             -->
+      <div class="savings section">
+        <div class="section-title" style="width: fit-content" id="selected">
+          <h1>Savings</h1>
+        </div>
+<!--                                 savings titles                          -->
+        <div class="table-titles">
+          <div class="savings-table-column">
+            <div class="head-elem">
+              item
+            </div>
+          </div>
+          <div class="savings-table-column" style="width: 26%;">
+            <div class="head-elem">
+              amount
+            </div>
+          </div>
+          <div class="savings-table-column" style="width: 40%;">
+            <div class="head-elem">
+              progress
+            </div>
+          </div>
+        </div>
+<!--                                  savings data                           -->
+        <div class="table-data">
+          <div class="savings-table-column">
+            <div class="elem altsavings">
+              first element
+            </div>
+          </div>
+          <div class="savings-table-column" style="width: 26%;">
+            <div class="elem altsavings">
+              first amount
+            </div>
+          </div>
+          <div class="savings-table-column" style="width: 40%;">
+            <div class="elem altsavings">
+              first progress :D
+            </div>
+          </div>
+        </div>
+
+        <div class="new-row new-savings">
+          <form class="" action="index.html" method="post">
+            <ul class="flex-outer">
+              <li>
+                <input type="text" name="" value="" placeholder="new item">
+              </li>
+              <li style="width:26%">
+                <input type="text" name="" value="" placeholder="new amount">
+              </li>
+              <li style="width: 40%">
+                <input type="text" name="" value="" placeholder="new progress">
+              </li>
+            </ul>
+          </form>
+        </div>
+
+      </div>
+<!--                                   INVESTING                             -->
+      <div class="investing section">
+        <div class="section-title" style="width: fit-content" id="selected">
+          <h1>Investing</h1>
+        </div>
+<!--                               investing titles                          -->
+        <div class="table-titles">
+          <div class="investing-table-column">
+            <div class="head-elem">
+              account
+            </div>
+          </div>
+          <div class="investing-table-column">
+            <div class="head-elem">
+              amount
+            </div>
+          </div>
+        </div>
+<!--                               investing data                            -->
+        <div class="table-data">
+          <div class="investing-table-column">
+            <div class="elem altinvest">
+              first account
+            </div>
+          </div>
+          <div class="investing-table-column">
+            <div class="elem altinvest">
+              first amount
+            </div>
+          </div>
+        </div>
+
+        <div class="new-row new-investing">
+          <form class="" action="index.html" method="post">
+            <ul class="flex-outer">
+              <li style="width: 49%">
+                <input type="text" name="" value="" placeholder="new account">
+              </li>
+              <li style="width: 49%">
+                <input type="text" name="" value="" placeholder="new amount">
+              </li>
+            </ul>
+          </form>
+        </div>
+
+      </div>
+
+      <div id="footer">
+          <h3>Tanuki</h3>
+      </div>
+    </div>
+
+    <script src="budget.js"></script>
+
+</body>
+
+</html>

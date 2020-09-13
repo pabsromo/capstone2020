@@ -125,7 +125,7 @@ p {
                          "unx1 unx2 unx3 unx4 unx5 unx6 unx7"
                          "hr4 hr4 hr4 hr4 hr4 hr4 hr4"
                          "ftr ftr ftr ftr ftr ftr ftr";
-    
+
     grid-column-gap: 10px;
     grid-row-gap: 2px;
 }
@@ -522,7 +522,7 @@ p {
 #footer {
     grid-area: ftr;
     background-color: transparent;
-    font-family: MV Boli; 
+    font-family: MV Boli;
     color: #4e4e4e;
     display: flex;
     flex-direction: row;
