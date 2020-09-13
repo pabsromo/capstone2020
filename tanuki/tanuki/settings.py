@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
+
+For Addison: cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+
 """
 
 import os
@@ -25,7 +28,7 @@ SECRET_KEY = '--j8t+_%uuh9wq)g)03wktyf529a1doax+0gaea7xmv77&ok^3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com']
+ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com', '127.0.0.1']
 
 
 # Application definition
