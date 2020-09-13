@@ -8,6 +8,13 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
+
+Command to start cloud sql proxy:
+cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+
+For Pablo:
+C:\Users\pabsr\Documents\CodingProjects\capstone2020**watchout/watchout***tanuki\cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+
 """
 
 import os
@@ -25,7 +32,7 @@ SECRET_KEY = '--j8t+_%uuh9wq)g)03wktyf529a1doax+0gaea7xmv77&ok^3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com']
+ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com', '127.0.0.1']
 
 
 # Application definition
@@ -77,6 +84,7 @@ WSGI_APPLICATION = 'tanuki.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306 to start cloud proxy
 
 if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
