@@ -43,9 +43,9 @@
                 <a href="#">Tanuki</a>
             </div>
             <ul id="nav-desktop">
-                <li><a href="#overview">Overview</a></li>
-                <li id="selected"><a href="#budget">Budget</a></li>
-                <li><a href="#history">History</a></li>
+                <li><a href="{% url 'overview:home' %}">Overview</a></li>
+                <li id="selected"><a href="{% url 'budget:budget' %}">Budget</a></li>
+                <li><a href="{% url 'history:history' %}">History</a></li>
                 <li><a href="#user"><i class="material-icons">person_outline</i></a></li>
             </ul>
         </div>

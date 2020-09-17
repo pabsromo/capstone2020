@@ -31,7 +31,7 @@ SECRET_KEY = '--j8t+_%uuh9wq)g)03wktyf529a1doax+0gaea7xmv77&ok^3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com', '127.0.0.1']
+ALLOWED_HOSTS = ['tanuki-58.uc.r.appspot.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'overview',
-    'budget'
+    'budget',
+    'history'
 ]
 
 MIDDLEWARE = [
