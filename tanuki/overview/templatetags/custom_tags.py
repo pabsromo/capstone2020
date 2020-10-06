@@ -1,7 +1,6 @@
 from django import template
 import datetime
 
-
 register = template.Library()
 
 @register.simple_tag
@@ -27,3 +26,7 @@ def returnDay(dayOfWeek):
     day = monday + datetime.timedelta(dayOfWeek)
     return day.strftime("%#d")
 
+
+@register.simple_tag
+def returnDayDisplayed(date):
+    return date.strftime("%#d")
