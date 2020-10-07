@@ -1,5 +1,4 @@
 from django import forms
-from .models import AddItem
 
 
 class AddItemForm(forms.ModelForm):
