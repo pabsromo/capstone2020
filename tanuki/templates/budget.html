@@ -133,9 +133,15 @@
                 <input type="text" name="" value="" placeholder="new amount">
               </li>
             </ul> -->
-            <li> {{incomeForm.itemDate.label_tag}} </li>
-            <li> {{incomeForm.itemName.label_tag}} {{incomeForm.itemName}}</li>
-            <li> {{incomeForm.itemAmount.label_tag}} {{incomeForm.itemAmount}} </li>
+            <form method="post">
+              {% csrf_token %}
+              {{incomeForm.itemDate.label_tag}}
+              
+              {{incomeForm.itemName.label_tag}}
+              {{incomeForm.itemName}}
+
+              {{incomeForm.itemAmount.label_tag}}
+              {{incomeForm.itemAmount}}
           </form>
         </div>
 
