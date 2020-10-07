@@ -10,29 +10,50 @@ from .models import Summary, Income, FixedExpenses, Investing
 def budget(request): 
     if request.method == 'POST':
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
+        fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
         if incomeForm.is_valid():
             income = incomeForm.save(commit=False)
             income.user = request.user
             income.save()    #save form after the user and itemType have been determined
             itemName = incomeForm.cleaned_data['itemName']
             itemAmount = incomeForm.cleaned_data['itemAmount']
+            # itemDate = incomeForm.cleaned_data['itemDate']
+            
+        if fexpensesForm.is_valid():
+            fixed = fexpensesForm.save(commit=False)
+            fixed.user = request.user
+            fixed.save()
+            itemName = fexpensesForm.cleaned_data['itemName']
+            itemAmount = fexpensesForm.cleaned_data['itemAmount']
+            # itemDate = fexpensesForm.cleaned_data['itemDate']
             return redirect('budget:budget')
         else:
-            context = {'form': incomeForm}
+            # need to filter for user info only
+            incomeItems = Income.objects.filter(user=request.user)
+            fexpensesItems = FixedExpenses.objects.filter(user=request.user)
+
+            context = {
+                'incomeForm': incomeForm,
+                'incomeItems': incomeItems,
+                'fexpensesForm': fexpensesForm,
+                'fexpensesItems': fexpensesItems,
+                }
     else: # pulling data
         # summaryForm = SummaryForm(label_suffix=' ')
         incomeForm = IncomeForm(label_suffix=' ')
-        # fixedexpensesForm = FixedExpensesForm(label_suffix=' ')
+        fexpensesForm = FixedExpensesForm(label_suffix=' ')
         # investingForm = InvestingForm(label_suffix=' ')
 
-        incomeItems = Income.objects.filter(user=request.user)
         # need to filter for user info only
-
+        incomeItems = Income.objects.filter(user=request.user)
+        fexpensesItems = FixedExpenses.objects.filter(user=request.user)
+        
         context = {
             # 'summaryForm': summaryForm,
             'incomeForm': incomeForm, 
             'incomeItems': incomeItems,
-            # 'fixedexpensesForm': fixedexpensesForm,
+            'fexpensesForm': fexpensesForm,
+            'fexpensesItems': fexpensesItems,
             # 'investingForm': investingForm,
         }
     return render(request, 'budget.html', context)
