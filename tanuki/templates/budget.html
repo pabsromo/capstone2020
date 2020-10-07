@@ -95,12 +95,17 @@
 <!--                                 income data                             -->
         <div class="table-data">
           <div class="income-table-column">
-            <div class="elem altincome">
-              date data
-            </div>
-            <div class="elem">
-              date data
-            </div>
+            {% for item in incomeItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemName }}
+              </div>
+              {% else %}
+              <div class="elem altincome">
+                {{ item.itemName }}
+              </div>
+              {% endif %}
+            {% endfor %}
           </div>
           <div class="income-table-column">
             <div class="elem altincome">
@@ -121,27 +126,24 @@
         </div>
 
         <div class="new-row new-income">
-          <form class="" action="index.html" method="post">
-            <!-- <ul class="flex-outer">
+          <form class="" action="." method="POST"> {% csrf_token %}
+            <ul class="flex-outer">
               <li>
-                <input type="text" name="" value="" placeholder="new date">
+                <!-- <input type="text" name="" value="" placeholder="new date"> -->
+                <!-- {{ incomeForm.itemDate }} -->
               </li>
               <li>
-                <input type="text" name="" value="" placeholder="new item">
+                <!-- <input type="text" name="" value="" placeholder="new item"> -->
+                {{ incomeForm.itemName }}
               </li>
               <li>
-                <input type="text" name="" value="" placeholder="new amount">
+                <!-- <input type="text" name="" value="" placeholder="new amount"> -->
+                {{ incomeForm.itemAmount }}
               </li>
-            </ul> -->
-            <form method="post">
-              {% csrf_token %}
-              {{incomeForm.itemDate.label_tag}}
-              
-              {{incomeForm.itemName.label_tag}}
-              {{incomeForm.itemName}}
-
-              {{incomeForm.itemAmount.label_tag}}
-              {{incomeForm.itemAmount}}
+              <li>
+                <button type="submit">Submit</button>
+              </li>
+            </ul>
           </form>
         </div>
 

@@ -1,29 +1,35 @@
 from django import forms
 
+from .models import Summary, Income, FixedExpenses, Investing
 
-class SummaryForm(forms.ModelForm)
+
+class SummaryForm(forms.ModelForm):
     monthlySavings = forms.DecimalField(
-        label = "Monthly Savings",
+        # label = "Monthly Savings",
         max_digits = 7,
         decimal_places= 2,
         widget=forms.TextInput(attrs={'placeholder': 'New Amount'})
     )
 
-class IncomeForm(forms.ModelForm)
+class IncomeForm(forms.ModelForm):
     itemName = forms.CharField(
-        label='Item Name',
+        # label='Item Name',
         max_length=100,
-        widget=forms.TextInput(attrs={'placeholder': 'New Fixed Expense'})
+        widget=forms.TextInput(attrs={'placeholder': 'New Item'})
     )
 
     itemAmount = forms.DecimalField(
-        label='Item Amount',
+        # label='Item Amount',
         max_digits=7,
         decimal_places=2,
         widget=forms.TextInput(attrs={'placeholder': 'New Amount'})
     )
 
-    itemDate = forms.DateField()
+    # itemDate = forms.DateField()
+
+    class Meta:
+        model = Income
+        fields = ('itemName', 'itemAmount')
 
 
 class FixedExpensesForm(forms.ModelForm):
