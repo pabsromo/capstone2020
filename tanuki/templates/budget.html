@@ -42,12 +42,23 @@
                 </svg>
                 <a href="#">Tanuki</a>
             </div>
-            <ul id="nav-desktop">
-                <li><a href="{% url 'overview:home' %}">Overview</a></li>
-                <li id="selected"><a href="{% url 'budget:budget' %}">Budget</a></li>
-                <li><a href="{% url 'history:history' %}">History</a></li>
-                <li><a href="#user"><i class="material-icons">person_outline</i></a></li>
-            </ul>
+            <div class="nav-desktop">
+              <ul>
+                  <li><a href="{% url 'overview:home' %}">Overview</a></li>
+                  <li id="selected"><a href="{% url 'budget:budget' %}">Budget</a></li>
+                  <li><a href="{% url 'history:history' %}">History</a></li>
+                  <li>
+                      <div class="dropdown">
+                          <a href="#user"><i class="material-icons">person_outline</i></a>
+                          <div class="dropdown-content">
+                              <ul>
+                                  <li><a href="{% url 'login:logout' %}">Logout</a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
         </div>
     </nav>
 
