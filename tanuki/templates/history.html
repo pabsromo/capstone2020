@@ -103,11 +103,11 @@
             {% for item in items %}
               {% if forloop.counter|modulo:2 == 0 %}
                 <div class="elem">
-                  {{ item.itemPrice }}
+                  ${{ item.itemPrice }}
                 </div>
               {% else %}
                 <div class="elem altmain">
-                  {{ item.itemPrice }}
+                  ${{ item.itemPrice }}
                 </div>
               {% endif %}
             {% endfor %}
