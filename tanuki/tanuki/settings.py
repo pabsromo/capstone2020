@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 For Addison: cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
 
-For Pablo: C:/Users/pabsr/Documents/CodingProjects/capstone2020/tanuki/cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
+For Pablo: cloud_sql_proxy.exe -instances="tanuki-58:us-central1:tanuki"=tcp:3306
 
 """
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'login',
     'overview',
     'budget',
-    'history'
+    'history',
 ]
 
 MIDDLEWARE = [
