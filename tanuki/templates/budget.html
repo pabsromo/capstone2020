@@ -122,7 +122,7 @@
 
         <div class="new-row new-income">
           <form class="" action="index.html" method="post">
-            <ul class="flex-outer">
+            <!-- <ul class="flex-outer">
               <li>
                 <input type="text" name="" value="" placeholder="new date">
               </li>
@@ -132,7 +132,10 @@
               <li>
                 <input type="text" name="" value="" placeholder="new amount">
               </li>
-            </ul>
+            </ul> -->
+            <li> {{incomeForm.itemDate.label_tag}} </li>
+            <li> {{incomeForm.itemName.label_tag}} {{incomeForm.itemName}}</li>
+            <li> {{incomeForm.itemAmount.label_tag}} {{incomeForm.itemAmount}} </li>
           </form>
         </div>
 
