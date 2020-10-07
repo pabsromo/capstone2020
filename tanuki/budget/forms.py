@@ -14,7 +14,7 @@ class IncomeForm(forms.ModelForm):
     itemName = forms.CharField(
         # label='Item Name',
         max_length=100,
-        widget=forms.TextInput(attrs={'placeholder': 'new item'})
+        widget=forms.TextInput(attrs={'placeholder': 'new item', 'name':'income-item-name',})
     )
 
     itemAmount = forms.DecimalField(
@@ -37,13 +37,13 @@ class IncomeForm(forms.ModelForm):
 
 class FixedExpensesForm(forms.ModelForm):
     itemName = forms.CharField(
-        label='Item Name',
+        # label='Item Name',
         max_length=100,
         widget=forms.TextInput(attrs={'placeholder': 'new item'})
     )
 
     itemAmount = forms.DecimalField(
-        label='Item Amount',
+        # label='Item Amount',
         max_digits=7,
         decimal_places=2,
         widget=forms.TextInput(attrs={'placeholder': 'new amount'})

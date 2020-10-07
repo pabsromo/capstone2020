@@ -129,10 +129,14 @@
               {% if forloop.counter|modulo:2 == 0 %}
               <div class="elem">
                 {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button type="submit" name="delete" value="{{ item.id }}" >delete</button>
+                </form>
               </div>
               {% else %}
               <div class="elem altincome">
                 {{ item.itemAmount }}
+                <button>Delete</button>
               </div>
               {% endif %}
             {% endfor %}
@@ -152,7 +156,7 @@
                 {{ incomeForm.itemAmount }}
               </li>
               <li style="visibility: hidden; width:0px;">
-                <button type="submit">Submit</button>
+                <button type="submit" name="income">Submit</button>
               </li>
             </ul>
           </form>
@@ -331,23 +335,10 @@
                 {{ fexpensesForm.itemAmount }}
               </li>
               <li style="visibility: hidden; width:0px;">
-                <button type="submit">Submit</button>
+                <button type="submit" name='fixed'>Submit</button>
               </li>
             </ul>
           </form>
-          <!-- <form class="" action="index.html" method="post">
-            <ul class="flex-outer">
-              <li>
-                <input type="text" name="" value="" placeholder="new date">
-              </li>
-              <li>
-                <input type="text" name="" value="" placeholder="new item">
-              </li>
-              <li>
-                <input type="text" name="" value="" placeholder="new amount">
-              </li>
-            </ul>
-          </form> -->
         </div>
       </div>
 <!--                                     SAVINGS                             -->
