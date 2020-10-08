@@ -9,7 +9,7 @@ from .models import Summary, Income, FixedExpenses, Investing
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
 def budget(request):
     print('this is the request:', request.POST.values)
-    if request.method == 'POST' and 'delete' not in request.POST:
+    if request.method == 'POST' and (('deleteincome' or 'deletefixed') not in request.POST):
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
         fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
 
@@ -40,8 +40,11 @@ def budget(request):
                 'fexpensesForm': fexpensesForm,
                 'fexpensesItems': fexpensesItems,
                 }
-    elif request.method == 'POST' and 'delete' in request.POST:
-        entry = Income.objects.get(id=request.POST['delete'])
+    elif request.method == 'POST' and (('deleteincome' or 'deletefixed') in request.POST):
+        if 'deleteincome' in request.POST:
+            entry = Income.objects.get(id=request.POST['deleteincome'])
+        elif 'deletefixed' in request.POST:
+            entry = FixedExpenses.objects.get(id=request.POST['deletefixed'])
         entry.delete()
         return redirect('budget:budget')
     else: # pulling data
