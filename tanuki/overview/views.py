@@ -23,7 +23,8 @@ def home(request):
             context = {'form': form}  
     else:
         items = AddItem.objects.filter(user=request.user)    #only show objects for authenticated user
+        essSum = AddItem.objects.filter(itemType="essential")
         form = AddItemForm(label_suffix=' ')
 
-        context = {'form': form, 'items': items}
+        context = {'form': form, 'items': items, 'essSum': essSum}
     return render(request, 'home.html', context)

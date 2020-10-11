@@ -71,35 +71,40 @@
             </div>
             <div id="total">
                 <h1>Totals: $0/10
-                    <div id="prog_out_tot">
-                        <div id="prog_in_tot">a</div>
+                    <div>
+                        <progress id="prog_out_tot" value="50" max="100"> 32% </progress>
                     </div>
+                    
             </div>
         </div>
 
         <div id="cat_totals">
             <div id="ess_total">
+                    {% for sum in essSum %}
+                        <p> {{ sum.itemPrice }}</p>
+                    {% endfor %}
                 <h1 style="margin-left: 10px;">Essential $5/12
-                    <div id="ess_out_tot">
-                        <div id="ess_in_tot">a</div>
+                    <div>
+                        <progress id="ess_out_tot" value="50" max="100"> </progress>
                     </div>
             </div>
+            
             <div id="lei_total">
                 <h1>Leisure $5/12
-                    <div id="lei_out_tot">
-                        <div id="lei_in_tot">a</div>
+                    <div>
+                        <progress id="lei_out_tot" value="50" max="100"> </progress>
                     </div>
             </div>
             <div id="opt_total">
                 <h1>Optional $5/12
-                    <div id="opt_out_tot">
-                        <div id="opt_in_tot">a</div>
+                    <div>
+                        <progress id="opt_out_tot" value="50" max="100"> </progress>
                     </div>
             </div>
             <div id="unx_total">
                 <h1>Unexpected $5/12
-                    <div id="unx_out_tot">
-                        <div id="unx_in_tot">a</div>
+                    <div>
+                        <progress id="unx_out_tot" value="50" max="100"> </progress>
                     </div>
             </div>
         </div>
