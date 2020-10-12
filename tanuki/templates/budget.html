@@ -11,6 +11,10 @@
     <link href='https://fonts.googleapis.com/css?family=Karla' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="{% static 'budget/budget.css' %}">
+
+    <!-- Fengyuan Chen's Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -98,6 +102,19 @@
             {% for item in incomeItems %}
               {% if forloop.counter|modulo:2 == 0 %}
               <div class="elem">
+                {{ item.itemDate|date }}
+              </div>
+              {% else %}
+              <div class="elem altincome">
+                {{ item.itemDate|date }}
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="income-table-column">
+            {% for item in incomeItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
                 {{ item.itemName }}
               </div>
               {% else %}
@@ -108,20 +125,23 @@
             {% endfor %}
           </div>
           <div class="income-table-column">
-            <div class="elem altincome">
-              item data
-            </div>
-            <div class="elem">
-              item data
-            </div>
-          </div>
-          <div class="income-table-column">
-            <div class="elem altincome">
-              amount data
-            </div>
-            <div class="elem">
-              amount data
-            </div>
+            {% for item in incomeItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button type="submit" name="deleteincome" value="{{ item.id }}" >delete</button>
+                </form>
+              </div>
+              {% else %}
+              <div class="elem altincome">
+                {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button type="submit" name="deleteincome" value="{{ item.id }}" >delete</button>
+                </form>
+              </div>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
 
@@ -129,19 +149,16 @@
           <form class="" action="." method="POST"> {% csrf_token %}
             <ul class="flex-outer">
               <li>
-                <!-- <input type="text" name="" value="" placeholder="new date"> -->
-                <!-- {{ incomeForm.itemDate }} -->
+                {{ incomeForm.itemDate }}
               </li>
               <li>
-                <!-- <input type="text" name="" value="" placeholder="new item"> -->
                 {{ incomeForm.itemName }}
               </li>
               <li>
-                <!-- <input type="text" name="" value="" placeholder="new amount"> -->
                 {{ incomeForm.itemAmount }}
               </li>
-              <li>
-                <button type="submit">Submit</button>
+              <li style="visibility: hidden; width:0px;">
+                <button type="submit" name="income">Submit</button>
               </li>
             </ul>
           </form>
@@ -267,42 +284,66 @@
 <!--                               fixed expenses data                       -->
         <div class="table-data">
           <div class="fixed-expenses-table-column">
-            <div class="elem altfixed">
-              first date
-            </div>
-            <div class="elem">
-              second date
-            </div>
+            {% for item in fexpensesItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemDate|date }}
+              </div>
+              {% else %}
+              <div class="elem altfixed">
+                {{ item.itemDate|date }}
+              </div>
+              {% endif %}
+            {% endfor %}
           </div>
           <div class="fixed-expenses-table-column">
-            <div class="elem altfixed">
-              first fixed
-            </div>
-            <div class="elem">
-              second fixed
-            </div>
+            {% for item in fexpensesItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemName }}
+              </div>
+              {% else %}
+              <div class="elem altfixed">
+                {{ item.itemName }}
+              </div>
+              {% endif %}
+            {% endfor %}
           </div>
           <div class="fixed-expenses-table-column">
-            <div class="elem altfixed">
-              first amount
-            </div>
-            <div class="elem">
-              second amount
-            </div>
+            {% for item in fexpensesItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button type="submit" name="deletefixed" value="{{ item.id }}" >delete</button>
+                </form>
+              </div>
+              {% else %}
+              <div class="elem altfixed">
+                {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button type="submit" name="deletefixed" value="{{ item.id }}" >delete</button>
+                </form>
+              </div>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
 
         <div class="new-row new-fixed-expenses">
-          <form class="" action="index.html" method="post">
+          <form class="" action="." method="POST"> {% csrf_token %}
             <ul class="flex-outer">
               <li>
-                <input type="text" name="" value="" placeholder="new date">
+                {{ fexpensesForm.itemDate }}
               </li>
               <li>
-                <input type="text" name="" value="" placeholder="new item">
+                {{ fexpensesForm.itemName }}
               </li>
               <li>
-                <input type="text" name="" value="" placeholder="new amount">
+                {{ fexpensesForm.itemAmount }}
+              </li>
+              <li style="visibility: hidden; width:0px;">
+                <button type="submit" name='fixed'>Submit</button>
               </li>
             </ul>
           </form>
@@ -419,6 +460,11 @@
       </div>
     </div>
 
+    <script>
+      $(function () {
+        $("#datepicker").datepicker();
+      });
+    </script>
     <script src="{% static 'budget/budget.js' %}"></script>
 
 </body>

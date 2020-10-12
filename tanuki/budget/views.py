@@ -7,32 +7,72 @@ from .models import Summary, Income, FixedExpenses, Investing
 # Create your views here.
 
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
-def budget(request): 
-    if request.method == 'POST':
+def budget(request):
+    print('this is the request:', request.POST.values)
+    if request.method == 'POST' and (('deleteincome' or 'deletefixed') not in request.POST):
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
-        if incomeForm.is_valid():
+        fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
+
+        if incomeForm.is_valid() and 'income' in request.POST:
             income = incomeForm.save(commit=False)
             income.user = request.user
             income.save()    #save form after the user and itemType have been determined
             itemName = incomeForm.cleaned_data['itemName']
             itemAmount = incomeForm.cleaned_data['itemAmount']
+            # itemDate = incomeForm.cleaned_data['itemDate']
+            return redirect('budget:budget')
+        if fexpensesForm.is_valid() and 'fixed' in request.POST:
+            fixed = fexpensesForm.save(commit=False)
+            fixed.user = request.user
+            fixed.save()
+            itemName = fexpensesForm.cleaned_data['itemName']
+            itemAmount = fexpensesForm.cleaned_data['itemAmount']
+            # itemDate = fexpensesForm.cleaned_data['itemDate']
             return redirect('budget:budget')
         else:
-            context = {'form': incomeForm}
+            # need to filter for user info only
+            incomeItems = Income.objects.filter(user=request.user)
+            fexpensesItems = FixedExpenses.objects.filter(user=request.user)
+
+            context = {
+                'incomeForm': incomeForm,
+                'incomeItems': incomeItems,
+                'fexpensesForm': fexpensesForm,
+                'fexpensesItems': fexpensesItems,
+                }
+    elif request.method == 'POST' and (('deleteincome' or 'deletefixed') in request.POST):
+        if 'deleteincome' in request.POST:
+            entry = Income.objects.get(id=request.POST['deleteincome'])
+        elif 'deletefixed' in request.POST:
+            entry = FixedExpenses.objects.get(id=request.POST['deletefixed'])
+        entry.delete()
+        return redirect('budget:budget')
     else: # pulling data
         # summaryForm = SummaryForm(label_suffix=' ')
         incomeForm = IncomeForm(label_suffix=' ')
-        # fixedexpensesForm = FixedExpensesForm(label_suffix=' ')
+        fexpensesForm = FixedExpensesForm(label_suffix=' ')
         # investingForm = InvestingForm(label_suffix=' ')
 
-        incomeItems = Income.objects.filter(user=request.user)
         # need to filter for user info only
-
+        incomeItems = Income.objects.filter(user=request.user)
+        fexpensesItems = FixedExpenses.objects.filter(user=request.user)
+        
         context = {
             # 'summaryForm': summaryForm,
             'incomeForm': incomeForm, 
             'incomeItems': incomeItems,
-            # 'fixedexpensesForm': fixedexpensesForm,
+            'fexpensesForm': fexpensesForm,
+            'fexpensesItems': fexpensesItems,
             # 'investingForm': investingForm,
         }
     return render(request, 'budget.html', context)
+
+# @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
+# def deletebudget(request):
+#     print("deleting!")
+#     return render(request, 'budget.html', {})
+
+# @login_required(login_url='login:index')
+# def fixed(request):
+#     print(request)
+#     return render(request, 'budget.html')
