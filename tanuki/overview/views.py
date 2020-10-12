@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models.functions import Coalesce
+from django.db.models import Sum
+import datetime
 
 from .forms import AddItemForm
 from .models import AddItem
@@ -22,9 +25,26 @@ def home(request):
         else:
             context = {'form': form}  
     else:
+        daterange = getCurrentWeek()
+        startdate = daterange[0]
+        enddate = daterange[1]
         items = AddItem.objects.filter(user=request.user)    #only show objects for authenticated user
-        essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-12", "2020-10-18"])
+        essSum = AddItem.objects.filter(user=request.user, itemType="essential", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+        leiSum = AddItem.objects.filter(user=request.user, itemType="leisure", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+        optSum = AddItem.objects.filter(user=request.user, itemType="optional", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+        unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+        totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         form = AddItemForm(label_suffix=' ')
 
-        context = {'form': form, 'items': items, 'essSum': essSum}
+        context = {'form': form, 'items': items, 'essSum': essSum, 'leiSum': leiSum, 'optSum': optSum, 'unxSum': unxSum, 'totalSum': totalSum}
     return render(request, 'home.html', context)
+
+
+
+def getCurrentWeek():
+    today = datetime.date.today()
+    monday = today - datetime.timedelta(days=today.weekday())
+    daysTillSunday = (6-today.weekday()) % 7
+    sunday = today + datetime.timedelta(days=daysTillSunday)
+    range = [monday, sunday]
+    return range

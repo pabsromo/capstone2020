@@ -1,5 +1,6 @@
 {% load static %}
 {% load custom_home_tags %}
+{% load mathfilters %}
 
 
 <!DOCTYPE html>
@@ -70,9 +71,9 @@
                 <h1>Week of {% findWeek %}</h1>
             </div>
             <div id="total">
-                <h1>Totals: $0/10
+                <h1>Totals: ${{totalSum}}/100
                     <div>
-                        <progress id="prog_out_tot" value="50" max="100"> 32% </progress>
+                        <progress id="prog_out_tot" value={{totalSum|div:100|mul:100}} max="100"> 32% </progress>
                     </div>
                     
             </div>
@@ -80,31 +81,28 @@
 
         <div id="cat_totals">
             <div id="ess_total">
-                    {% for sum in essSum %}
-                        <p> {{ sum.itemPrice }}</p>
-                    {% endfor %}
-                <h1 style="margin-left: 10px;">Essential $5/12
+                <h1 style="margin-left: 10px;">Essential ${{essSum}}/100
                     <div>
-                        <progress id="ess_out_tot" value="50" max="100"> </progress>
+                        <progress id="ess_out_tot" value={{essSum|div:100|mul:100}} max="100"> </progress>
                     </div>
             </div>
             
             <div id="lei_total">
-                <h1>Leisure $5/12
+                <h1>Leisure ${{leiSum}}/100
                     <div>
-                        <progress id="lei_out_tot" value="50" max="100"> </progress>
+                        <progress id="lei_out_tot" value={{leiSum|div:100|mul:100}} max="100"> </progress>
                     </div>
             </div>
             <div id="opt_total">
-                <h1>Optional $5/12
+                <h1>Optional ${{optSum}}/100
                     <div>
-                        <progress id="opt_out_tot" value="50" max="100"> </progress>
+                        <progress id="opt_out_tot" value={{optSum|div:100|mul:100}} max="100"> </progress>
                     </div>
             </div>
             <div id="unx_total">
-                <h1>Unexpected $5/12
+                <h1>Unexpected ${{unxSum}}/100
                     <div>
-                        <progress id="unx_out_tot" value="50" max="100"> </progress>
+                        <progress id="unx_out_tot" value={{unxSum|div:100|mul:100}} max="100"> </progress>
                     </div>
             </div>
         </div>
