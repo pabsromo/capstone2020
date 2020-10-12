@@ -1,5 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 from .models import AddItem
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class AddItemForm(forms.ModelForm):
     itemName = forms.CharField(
@@ -22,4 +26,7 @@ class AddItemForm(forms.ModelForm):
 
     class Meta:
         model = AddItem
-        fields = ('itemName', 'itemPrice', 'itemType')
+        fields = ('itemName', 'itemPrice', 'itemType', 'dateDisplayed')
+        widgets = {
+            'dateDisplayed': DateInput()
+        }

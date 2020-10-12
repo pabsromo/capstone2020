@@ -23,7 +23,7 @@ def home(request):
             context = {'form': form}  
     else:
         items = AddItem.objects.filter(user=request.user)    #only show objects for authenticated user
-        essSum = AddItem.objects.filter(itemType="essential")
+        essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-12", "2020-10-18"])
         form = AddItemForm(label_suffix=' ')
 
         context = {'form': form, 'items': items, 'essSum': essSum}
