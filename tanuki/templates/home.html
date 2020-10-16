@@ -167,17 +167,6 @@
                     </div>
                 </div> -->
             </div>
-            <div class="item">
-                <p>Lorem Ipsum $5</p>
-                <button type="button" onclick="showPopup('ess1_item_2')"><i class="material-icons">subject</i></button>
-                <div class="popup" id="ess1_item_2">
-                    <div class="innerpopup">
-                        this is the popup
-                        <button type="button" onclick="hidePopup('ess1_item_2')"><i
-                                class="tiny material-icons">clear</i></button>
-                    </div>
-                </div>
-            </div>
             <div class="add_item">
                 <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
             </div>
@@ -633,7 +622,7 @@
                 {% for item in items %}
                     {% with item.dateDisplayed as dateDisplayed %}
                         {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day7 and item.itemType == "unexpected" %}
+                        {% if temp1 == day6 and item.itemType == "unexpected" %}
                             <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
                         {% endif %}
                     {%endwith%}
