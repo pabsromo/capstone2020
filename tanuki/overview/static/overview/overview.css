@@ -11,12 +11,19 @@ nav {
     z-index: 99999;
 }
 
+/* I don't like this -dearest Pablo */
+i {
+    width: 24px;
+}
+
 button {
     background-color: transparent;
     border: none;
     cursor: pointer;
     overflow: hidden;
     color: #b3b6b7;
+    width: fit-content;
+    align-self: center;
 }
 
 button:hover {
@@ -275,6 +282,39 @@ progress {
     border-radius: 1.5625rem;
 }
 
+.leisure {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #d6eaf8;
+    border-radius: 1.5625rem;
+}
+
+.optional {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #ebdef0;
+    border-radius: 1.5625rem;
+}
+
+.unexpected {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #f2d7d5;
+    border-radius: 1.5625rem;
+}
+
 .section {
     border-radius: 1.5625rem;
 }
@@ -311,7 +351,6 @@ progress {
     flex-direction: row;
     font-family: Karla;
     color: #4e4e4e;
-    background-color: #a2d9ce;
     /* border: 0.1em solid gray; */
     padding: 0.45em;
     border-radius: 0.5rem;
@@ -319,6 +358,22 @@ progress {
     justify-content: space-between;
     /* padding-bottom: 0.25em;
     padding-top: 0.25em; */
+}
+
+.color-essential {
+    background-color: #a2d9ce;
+}
+
+.color-leisure {
+    background-color: #aed6f1;
+}
+
+.color-optional {
+    background-color: #d7bde2;
+}
+
+.color-unexpected {
+    background-color: #e6b0aa;
 }
 
 .head-elem {
@@ -364,6 +419,7 @@ progress {
 .inside-elem {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .edit-div {
@@ -382,6 +438,44 @@ progress {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 5px;
+}
+
+.edit-form input {
+    color: black;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal div, button {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.inside-modal {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
 }
 
 #week {

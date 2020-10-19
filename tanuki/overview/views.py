@@ -20,8 +20,8 @@ def home(request):
             data.itemPrice = request.POST.get('itemPrice')
             data.itemType = request.POST.get('itemType')
             data.dateDisplayed = request.POST.get('dateDisplayed')
-            data.save()
-            return redirect('overview:home')         
+            data.save()    
+            return redirect('overview:home')  
         elif form.is_valid() and request.POST.get('action')=='new':
             addItem = form.save(commit=False)
             addItem.itemType = form.cleaned_data['itemType']
@@ -31,22 +31,55 @@ def home(request):
             itemPrice = form.cleaned_data['itemPrice']
             return redirect('overview:home')
         else:
-            context = {'form': form}  
+            # only show objects for authenticated user
+            essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+            leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+            optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+            unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+            
+            # sums  
+            essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-19", "2020-10-25"])
+
+            # Forms
+            essForms = {}
+            leiForms = []
+            optForms = []
+            unxForms = []
+
+            # Make all the individual forms for the items
+                # Make a list of form objects to be used with the correct id later.
+                # Maybe include the id of the object or just make it a prefix
+                # Remember, a prefix can make it unique
+            for i in essential_items:
+                essForms[i.id] = AddItemForm()
+            for i in leisure_items:
+                leiForms = AddItemForm(prefix=i.id)
+
+            context = {
+                'essForms': essForms,
+                'essSum': essSum,
+                'essential_items': essential_items,
+                'leisure_items': leisure_items,
+                'optional_items': optional_items,
+                'unexpected_items': unexpected_items,
+                }
     else:
         # only show objects for authenticated user
-        essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=["2020-10-12", "2020-10-18"])
-        leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=["2020-10-12", "2020-10-18"])
-        optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=["2020-10-12", "2020-10-18"])
-        unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=["2020-10-12", "2020-10-18"])
+        essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+        leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+        optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+        unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=["2020-10-19", "2020-10-25"])
 
         # sums  
-        essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-12", "2020-10-18"])
+        essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-19", "2020-10-25"])
 
         # Forms
         essForms = {}
-        leiForms = []
-        optForms = []
-        unxForms = []
+        leiForms = {}
+        optForms = {}
+        unxForms = {}
+
+        print(essential_items)
 
         # Make all the individual forms for the items
             # Make a list of form objects to be used with the correct id later.
@@ -55,10 +88,20 @@ def home(request):
         for i in essential_items:
             essForms[i.id] = AddItemForm()
         for i in leisure_items:
-            leiForms = AddItemForm(prefix=i.id)
-        print(essForms)
+            leiForms[i.id] = AddItemForm()
+        for i in optional_items:
+            optForms[i.id] = AddItemForm()
+        for i in unexpected_items:
+            unxForms[i.id] = AddItemForm()
+        
+        newForm = AddItemForm()
+
         context = {
             'essForms': essForms,
+            'leiForms': leiForms,
+            'optForms': optForms,
+            'unxForms': unxForms,
+            'newForm': newForm,
             'essSum': essSum,
             'essential_items': essential_items,
             'leisure_items': leisure_items,
