@@ -131,6 +131,36 @@ function hideAdd(e) {
     document.getElementById(e + "_div").style.display = "none";
 }
 
+function startEdit(e) {
+    document.getElementById(e + '-p').style.display = 'none';
+    document.getElementById(e + '-editable-form').style.display = 'flex';
+    document.getElementById(e + '-btn').style.display = 'none';
+}
+
+function cancelEdit(e) {
+    e = e.toString();
+    if(e.includes('modal')) {
+        document.getElementById(e + '-form').style.display = 'none';
+        document.querySelector('.modal').style.display = 'none';
+        document.getElementById(e.split('-')[0] + '-inside-modal').style.display = 'none';
+    }
+    else {
+        document.getElementById(e + '-p').style.display = 'flex';
+        document.getElementById(e + '-editable-form').style.display = 'none';
+        document.getElementById(e + '-btn').style.display = 'flex';
+    }
+}
+
+function showmodal(e) {
+    document.querySelector('.modal').style.display = 'block';
+    document.getElementById(e + '-modal-form').style.display = 'flex';
+    document.getElementById(e + '-inside-modal').style.display = 'block';
+}
+
+function submitform(e) {
+    document.getElementById(e+'-form').submit();
+}
+
 function addnewItem(e) {
     var forms = document.getElementById(e + "_form");
     var divs = document.getElementById(e + "_div");

@@ -2,6 +2,14 @@
 {% load custom_home_tags %}
 {% load mathfilters %}
 
+{% returnDay 0 as day0 %}
+{% returnDay 1 as day1 %}
+{% returnDay 2 as day2 %}
+{% returnDay 3 as day3 %}
+{% returnDay 4 as day4 %}
+{% returnDay 5 as day5 %}
+{% returnDay 6 as day6 %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +73,8 @@
         </div>
     </nav>
 
+    {% comment %}
+    <!-- Need to use this functionality in updated overview design -->
     <div class="content-wrapper">
         <div class="week_total">
             <div id="week">
@@ -77,8 +87,17 @@
                     </div>
                     
             </div>
+    {% endcomment %}
+    <!--                                         TOTALS                              -->
+    <div class="totals section">
+        <div class="section-title" style="width: fit-content" id="selected">
+            <h1>Totals</h1>
         </div>
-
+        <!--                                  totals titles                          -->
+        <div class="table-titles">
+        
+            {% comment %}
+            <!-- Need to use the totals for the sums in the redesigned page -->
         <div id="cat_totals">
             <div id="ess_total">
                 <h1 style="margin-left: 10px;">Essential ${{essSum}}/100
@@ -171,517 +190,1130 @@
                 <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
             </div>
         </div>
+        {% endcomment %}
 
-        <div id="ess2">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day2 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
         </div>
-        <div id="ess3">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day3 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
+        <!--                                  totals data                            -->
+        <div class="table-data">
+            <div id="cat_totals">
+                <div id="ess_total">
+                    <h3 style="margin-left: 10px;">Essential
+                        <div>
+                            <progress id="ess_out_tot" value="50" max="100"> </progress>
+                        </div>
+                    </h3>
+                </div>
+                <div id="lei_total">
+                    <h3>Leisure
+                        <div>
+                            <progress id="lei_out_tot" value="50" max="100"> </progress>
+                        </div>
+                </div>
+                <div id="opt_total">
+                    <h3>Optional
+                        <div>
+                            <progress id="opt_out_tot" value="50" max="100"> </progress>
+                        </div>
+                </div>
+                <div id="unx_total">
+                    <h3>Unexpected
+                        <div>
+                            <progress id="unx_out_tot" value="50" max="100"> </progress>
+                        </div>
+                </div>
+                <div id="total">
+                    <h3>Totals:
+                        <div>
+                            <progress id="prog_out_tot" value="50" max="100"> 32% </progress>
+                        </div>
+                    </h3>
+                </div>
             </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="ess4">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day4 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="ess5">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day5 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="ess6">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day6 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="ess7">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day7 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
+
         </div>
 
+        <div class="end-of-table">
 
-        <div style="grid-area: hr1;">
-            <div class="add_item_form" id="essential_form">
-                <form method = "post">
-                    {% csrf_token %}
-                    {{form.itemName.label_tag}}
-                    {{ form.itemName }}
+        </div>
 
-                    {{form.itemPrice.label_tag}}
-                    {{ form.itemPrice }}
+    </div>
 
-                    {{form.dateDisplayed}}
+    <!--                                         WEEK                              -->
+    <div class="week section">
+        <div class="section-title" style="width: fit-content" id="selected">
+            <h1>Week of {% findWeek %}</h1>
+        </div>
+        <!--                                   ESSENTIAL                           -->
+        <div class="essential category">
+            <div style="display:flex; flex-direction:row">
+                <h2>Essential</h2>
+                <button onclick="showmodal('essential')"><i class="material-icons">note_add</i></button>
+            </div>
+            <div class="table-titles">
+                <div class="table-column">
+                    <div class="head-elem">
+                        Monday {% returnDay 0 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Tuesday {% returnDay 1 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Wednesday {% returnDay 2 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Thursday {% returnDay 3 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Friday {% returnDay 4 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Saturday {% returnDay 5 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Sunday {% returnDay 6 %}
+                    </div>
+                </div>
+            </div>
+            <div class="table-data">
+                <!-- Monday -->
+                <div class="table-column"> 
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day0 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Tuesday -->
+                <div class="table-column">
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day1 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Wednesday -->
+                <div class="table-column">
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day2 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Thursday -->
+                <div class="table-column">
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day3 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Friday -->
+                <div class="table-column">
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day4 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Saturday -->
+                <div class="table-column">
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day5 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Sunday -->
+                <div class="table-column">
+                    {% for item in essential_items %} 
+                    {% if item.dateDisplayed|date:'d' == day6 %}
+                    <div class="elem color-essential">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=essForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="essential">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
 
-                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="essential" max_length="10" hidden>
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('essential_form')">Cancel</button>
+        <!--                                   LEISURE                             -->
+
+        <div class="leisure category">
+            <div style="display:flex; flex-direction:row">
+                <h2>Leisure</h2>
+                <button onclick="showmodal('leisure')"><i class="material-icons">note_add</i></button>
+            </div>
+            <div class="table-titles">
+                <div class="table-column">
+                    <div class="head-elem">
+                        Monday {% returnDay 0 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Tuesday {% returnDay 1 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Wednesday {% returnDay 2 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Thursday {% returnDay 3 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Friday {% returnDay 4 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Saturday {% returnDay 5 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Sunday {% returnDay 6 %}
+                    </div>
+                </div>
+            </div>
+            <div class="table-data">
+                <!-- Monday -->
+                <div class="table-column"> 
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day0 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Tuesday -->
+                <div class="table-column">
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day1 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Wednesday -->
+                <div class="table-column">
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day2 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Thursday -->
+                <div class="table-column">
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day3 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Friday -->
+                <div class="table-column">
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day4 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Saturday -->
+                <div class="table-column">
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day5 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Sunday -->
+                <div class="table-column">
+                    {% for item in leisure_items %} 
+                    {% if item.dateDisplayed|date:'d' == day6 %}
+                    <div class="elem color-leisure">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=leiForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="leisure">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!--                                   OPTIONAL                            -->
+
+        <div class="optional category">
+            <div style="display:flex; flex-direction:row">
+                <h2>Optional</h2>
+                <button onclick="showmodal('optional')"><i class="material-icons">note_add</i></button>
+            </div>
+            <div class="table-titles">
+                <div class="table-column">
+                    <div class="head-elem">
+                        Monday {% returnDay 0 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Tuesday {% returnDay 1 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Wednesday {% returnDay 2 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Thursday {% returnDay 3 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Friday {% returnDay 4 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Saturday {% returnDay 5 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Sunday {% returnDay 6 %}
+                    </div>
+                </div>
+            </div>
+            <div class="table-data">
+                <!-- Monday -->
+                <div class="table-column"> 
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day0 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Tuesday -->
+                <div class="table-column">
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day1 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Wednesday -->
+                <div class="table-column">
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day2 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Thursday -->
+                <div class="table-column">
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day3 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Friday -->
+                <div class="table-column">
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day4 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Saturday -->
+                <div class="table-column">
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day5 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Sunday -->
+                <div class="table-column">
+                    {% for item in optional_items %} 
+                    {% if item.dateDisplayed|date:'d' == day6 %}
+                    <div class="elem color-optional">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=optForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="optional">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!--                                   UNEXPECTED                          -->
+
+        <div class="unexpected category">
+            <div style="display:flex; flex-direction:row">
+                <h2>Unexpected</h2>
+                <button onclick="showmodal('unexpected')"><i class="material-icons">note_add</i></button>
+            </div>
+            <div class="table-titles">
+                <div class="table-column">
+                    <div class="head-elem">
+                        Monday {% returnDay 0 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Tuesday {% returnDay 1 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Wednesday {% returnDay 2 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Thursday {% returnDay 3 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Friday {% returnDay 4 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Saturday {% returnDay 5 %}
+                    </div>
+                </div>
+                <div class="table-column">
+                    <div class="head-elem">
+                        Sunday {% returnDay 6 %}
+                    </div>
+                </div>
+            </div>
+            <div class="table-data">
+                <!-- Monday -->
+                <div class="table-column"> 
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day0 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Tuesday -->
+                <div class="table-column">
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day1 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Wednesday -->
+                <div class="table-column">
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day2 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Thursday -->
+                <div class="table-column">
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day3 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Friday -->
+                <div class="table-column">
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day4 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Saturday -->
+                <div class="table-column">
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day5 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+                <!-- Sunday -->
+                <div class="table-column">
+                    {% for item in unexpected_items %} 
+                    {% if item.dateDisplayed|date:'d' == day6 %}
+                    <div class="elem color-unexpected">
+                        <div class='inside-elem' id='{{item.id}}-p'>
+                            <p>{{ item.itemName }}</p>
+                            <p>${{ item.itemPrice }}</p>
+                        </div>
+                        <div class='inside-elem' id='{{item.id}}-editable-form' style='display:none; flex-direction:row'>
+                            <form id='{{item.id}}-form' action='.' method="post"> {% csrf_token %}
+                                {% with form=unxForms|get_value_from_dict:item.id %}
+                                {{ form.itemName }}
+                                {{ form.itemPrice }}
+                                {{ form.dateDisplayed }}
+                                {% endwith %}
+                                <input style='display:none;' type="text" name='action' value="edit">
+                                <input style='display:none;' type="text" name='item_id' value="{{item.id}}">
+                                <input style='display:none;' type="text" name='itemType' value="unexpected">
+                            </form>
+                            <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
+                            <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
+                        </div>
+                        <div class='edit-div'>
+                            <button id='{{item.id}}-btn' onclick="startEdit({{item.id}})"><i class="material-icons">edit</i></button>
+                        </div>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal">
+        <div class='modal-content'>
+            <div id='essential-inside-modal' style='display: none;'>
+                <h1>New Essential Item</h1>
+                <form id='essential-modal-form' action='.' method="post"> {% csrf_token %}
+                    {{ newForm.itemName }}
+                    {{ newForm.itemPrice }}
+                    {{ newForm.dateDisplayed }}
+                    <input style='display:none;' type="text" name='action' value="new">
+                    <input style='display:none;' type="text" name='itemType' value="essential">
                 </form>
+                <div>
+                    <button onclick="cancelEdit('essential-modal')"><i class="material-icons">cancel</i></button>
+                    <button type="submit" onclick="submitform('essential-modal')"><i class="material-icons">checkmark</i></button>
+                </div>
             </div>
-            <hr>
-        </div>
-
-        <h1 style="padding-left: 10px; grid-area: Leisure">Leisure</h1>
-
-        <div id="lei1">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day1 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="lei2">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day2 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="lei3">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day3 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="lei4">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day4 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="lei5">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day5 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="lei6">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day6 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="lei7">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day7 and item.itemType == "leisure" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('leisure_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-
-        <div style="grid-area: hr2;">
-            <div class="add_item_form" id="leisure_form">
-                <form method="post">
-                    {% csrf_token %}
-                    {{form.itemName.label_tag}}
-                    {{ form.itemName }}
-
-                    {{form.itemPrice.label_tag}}
-                    {{ form.itemPrice }}
-
-                    {{form.dateDisplayed}}
-
-                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="leisure" max_length="10" hidden>
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('leisure_form')">Cancel</button>
+            <div id='leisure-inside-modal' style='display: none;'>
+                <h1>New Leisure Item</h1>
+                <form id='leisure-modal-form' action='.' method="post"> {% csrf_token %}
+                    {{ newForm.itemName }}
+                    {{ newForm.itemPrice }}
+                    {{ newForm.dateDisplayed }}
+                    <input style='display:none;' type="text" name='action' value="new">
+                    <input style='display:none;' type="text" name='itemType' value="leisure">
                 </form>
+                <div>
+                    <button onclick="cancelEdit('leisure-modal')"><i class="material-icons">cancel</i></button>
+                    <button type="submit" onclick="submitform('leisure-modal')"><i class="material-icons">checkmark</i></button>
+                </div>
             </div>
-            <hr>
-        </div>
-
-        <h1 style="padding-left: 10px; grid-area: Optional">Optional</h1>
-
-        <div id="opt1">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day1 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="opt2">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day2 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="opt3">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day3 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="opt4">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day4 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="opt5">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day5 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="opt6">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day6 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="opt7">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day7 and item.itemType == "optional" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('optional_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-
-        <div style="grid-area: hr3;">
-            <div class="add_item_form" id="optional_form">
-                <form method="post">
-                    {% csrf_token %}
-                    {{form.itemName.label_tag}}
-                    {{ form.itemName }}
-
-                    {{form.itemPrice.label_tag}}
-                    {{ form.itemPrice }}
-
-                    {{form.dateDisplayed}}
-
-                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="optional" max_length="10" hidden>
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('optional_form')">Cancel</button>
+            <div id='optional-inside-modal' style='display: none;'>
+                <h1>New Optional Item</h1>
+                <form id='optional-modal-form' action='.' method="post"> {% csrf_token %}
+                    {{ newForm.itemName }}
+                    {{ newForm.itemPrice }}
+                    {{ newForm.dateDisplayed }}
+                    <input style='display:none;' type="text" name='action' value="new">
+                    <input style='display:none;' type="text" name='itemType' value="optional">
                 </form>
+                <div>
+                    <button onclick="cancelEdit('optional-modal')"><i class="material-icons">cancel</i></button>
+                    <button type="submit" onclick="submitform('optional-modal')"><i class="material-icons">checkmark</i></button>
+                </div>
             </div>
-            <hr>
-        </div>
-
-        <h1 style="padding-left: 10px; grid-area: Unexpected">Unexpected</h1>
-
-        <div id="unx1">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day1 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="unx2">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day2 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="unx3">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day3 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="unx4">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day4 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="unx5">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day5 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="unx6">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day6 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        <div id="unx7">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day7 and item.itemType == "unexpected" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('unexpected_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-
-        <div style="grid-area: hr4;">
-            <div class="add_item_form" id="unexpected_form">
-                <form method="post">
-                    {% csrf_token %}
-                    {{form.itemName.label_tag}}
-                    {{ form.itemName }}
-
-                    {{form.itemPrice.label_tag}}
-                    {{ form.itemPrice }}
-
-                    {{form.dateDisplayed}}
-
-                    <input type="text" name="{{form.itemType.name}}" id="id_itemType" value="unexpected" max_length="10" hidden>
-                    <button type="submit">Add</button>
-                    <button type="submit" onclick="hideAdd('unexpected_form')">Cancel</button>
+            <div id='unexpected-inside-modal' style='display: none;'>
+                <h1>New Unexptected Item</h1>
+                <form id='unexpected-modal-form' action='.' method="post"> {% csrf_token %}
+                    {{ newForm.itemName }}
+                    {{ newForm.itemPrice }}
+                    {{ newForm.dateDisplayed }}
+                    <input style='display:none;' type="text" name='action' value="new">
+                    <input style='display:none;' type="text" name='itemType' value="unexpected">
                 </form>
+                <div>
+                    <button onclick="cancelEdit('unexpected-modal')"><i class="material-icons">cancel</i></button>
+                    <button type="submit" onclick="submitform('unexpected-modal')"><i class="material-icons">checkmark</i></button>
+                </div>
             </div>
-            <hr>
-        </div>
-
-        <div id="footer">
-            <h3>Tanuki</h3>
         </div>
     </div>
 
-    {% comment %}
-    <div>
-        {% for wk in curr_week %}
-        {% if wk.date = %}
-        <h1>Week of </h1>
-
-        {% endfor %}
+    <!-- Need to change this -->
+    <div id="footer">
+        <h3>Tanuki</h3>
     </div>
-    {% endcomment %}
+    </div>
 
     <script src="{% static 'overview/overview.js' %}"></script>
 
