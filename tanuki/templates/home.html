@@ -87,16 +87,20 @@
                     </div>
                     
             </div>
+            </div>
+        </div>
     {% endcomment %}
     <!--                                         TOTALS                              -->
     <div class="totals section">
         <div class="section-title" style="width: fit-content" id="selected">
             <h1>Totals</h1>
         </div>
+
+        {% comment %}
+        <!-- No longer need the total titles section -->
         <!--                                  totals titles                          -->
         <div class="table-titles">
         
-            {% comment %}
             <!-- Need to use the totals for the sums in the redesigned page -->
         <div id="cat_totals">
             <div id="ess_total">
@@ -190,41 +194,42 @@
                 <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
             </div>
         </div>
-        {% endcomment %}
+        
 
         </div>
+        {% endcomment %}
         <!--                                  totals data                            -->
         <div class="table-data">
             <div id="cat_totals">
                 <div id="ess_total">
-                    <h3 style="margin-left: 10px;">Essential
+                    <h3 style="margin-left: 10px;">Essential ${{essSum}}/100
                         <div>
-                            <progress id="ess_out_tot" value="50" max="100"> </progress>
+                            <progress id="ess_out_tot" value="{{essSum|div:100|mul:100}}" max="100"> </progress>
                         </div>
                     </h3>
                 </div>
                 <div id="lei_total">
-                    <h3>Leisure
+                    <h3>Leisure ${{leiSum}}/100
                         <div>
-                            <progress id="lei_out_tot" value="50" max="100"> </progress>
+                            <progress id="lei_out_tot" value="{{leiSum|div:100|mul:100}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="opt_total">
-                    <h3>Optional
+                    <h3>Optional ${{optSum}}/100
                         <div>
-                            <progress id="opt_out_tot" value="50" max="100"> </progress>
+                            <progress id="opt_out_tot" value="{{optSum|div:100|mul:100}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="unx_total">
-                    <h3>Unexpected
+                    <h3>Unexpected ${{unxSum}}/100
                         <div>
-                            <progress id="unx_out_tot" value="50" max="100"> </progress>
+                            <progress id="unx_out_tot" value="{{unxSum|div:100|mul:100}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="total">
-                    <h3>Totals:
+                    <h3>Totals: ${{totalSum}}/100
                         <div>
-                            <progress id="prog_out_tot" value="50" max="100"> 32% </progress>
+                            <progress id="prog_out_tot" value="{{totalSum|div:100|mul:100}}" max="100"> 32% </progress>
                         </div>
                     </h3>
                 </div>
