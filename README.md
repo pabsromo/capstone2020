@@ -7,3 +7,5 @@ This project consists of two apps: the login app and the overview app. The login
 
 This project can only be run locally at the moment.
 
+[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+
