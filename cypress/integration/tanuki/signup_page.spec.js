@@ -1,7 +1,12 @@
 /// <reference types="cypress" />
+
 Cypress.Cookies.defaults({
     preserve: "csrftoken"
 })
+
+// it('', () => {
+        
+// })
 
 context('Login Page', () => {
     
@@ -9,7 +14,9 @@ context('Login Page', () => {
         cy.visit('http://127.0.0.1:8000/')
     })
 
-    // Test CRSF token form security
+    it('', () => {
+
+    })
 
     it('login with test user', () => {
         cy.get('#username')
