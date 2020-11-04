@@ -1,3 +1,9 @@
+/// <reference types="cypress" />
+
+Cypress.Cookies.defaults({
+    preserve: "csrftoken"
+})
+
 // Data for logged in user is only displayed
 // Data can be sorted
 // maybe later let them edit the items

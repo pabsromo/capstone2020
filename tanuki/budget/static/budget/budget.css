@@ -133,6 +133,14 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    font-family: Karla;
+    color:#4e4e4e;
+    font-size: 1.25rem;
+    font-weight: normal;
+    margin: 0;
+}
+
 h4 {
     font-family: Karla;
     color: #4e4e4e;
@@ -335,13 +343,13 @@ p {
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr 2fr;
   grid-column-gap: 2em;
-  grid-template-areas: "title title title"
-                       "item amt progress"
-                       "itemdata amtdata progressdata";
+  grid-template-areas: "title title"
+                       "item amt"
+                       "itemdata amtdata";
 }
 
 .savings-table-column {
-  width: 33%;
+  width: 50%;
   flex-direction: column;
 }
 
@@ -453,7 +461,7 @@ p {
 }
 
 .flex-outer li {
-  width: 33%;
+  width: 75%;
 }
 
 form ul {

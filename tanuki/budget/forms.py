@@ -7,8 +7,11 @@ class SummaryForm(forms.ModelForm):
         # label = "Monthly Savings",
         max_digits = 7,
         decimal_places= 2,
-        widget=forms.TextInput(attrs={'placeholder': 'new amount'})
+        widget=forms.TextInput(attrs={'placeholder': 'enter amount',})
     )
+    class Meta:
+        model = Summary
+        fields = ('monthlySavings',)
 
 class IncomeForm(forms.ModelForm):
     itemName = forms.CharField(
