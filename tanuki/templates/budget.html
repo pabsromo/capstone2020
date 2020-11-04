@@ -48,15 +48,15 @@
             </div>
             <div class="nav-desktop">
               <ul>
-                  <li><a href="{% url 'overview:home' %}">Overview</a></li>
-                  <li id="selected"><a href="{% url 'budget:budget' %}">Budget</a></li>
-                  <li><a href="{% url 'history:history' %}">History</a></li>
+                  <li><a href="{% url 'overview:home' %}" id = 'home1'>Overview</a></li>
+                  <li id="selected"><a href="{% url 'budget:budget' %}" id = 'budget1'>Budget</a></li>
+                  <li><a href="{% url 'history:history' %}" id = 'history1'>History</a></li>
                   <li>
                       <div class="dropdown">
                           <a href="#user"><i class="material-icons">person_outline</i></a>
                           <div class="dropdown-content">
                               <ul>
-                                  <li><a href="{% url 'login:logout' %}">Logout</a></li>
+                                  <li><a href="{% url 'login:logout' %}" id = 'logout1'>Logout</a></li>
                               </ul>
                           </div>
                       </div>
