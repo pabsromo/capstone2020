@@ -13,10 +13,11 @@ from .models import AddItem
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
 def home(request): 
     if request.method == 'POST':
-        request.POST.keys()
         form = AddItemForm(request.POST, label_suffix =' ')
-        # if form.is_valid():
-        #     print(request.POST.keys())
+
+        if request.POST.get('action')=='delete':
+            AddItem.objects.get(id=request.POST.get('item_id')).delete()
+            return redirect('overview:home')
         if form.is_valid() and request.POST.get('action')=='edit':
             data = AddItem.objects.get(id=request.POST.get('item_id'))
             data.itemName = request.POST.get('itemName')
@@ -92,13 +93,12 @@ def home(request):
         daterange = getCurrentWeek()
         startdate = daterange[0]
         enddate = daterange[1]
-        items = AddItem.objects.filter(user=request.user)    #only show objects for authenticated user
         essSum = AddItem.objects.filter(user=request.user, itemType="essential", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         leiSum = AddItem.objects.filter(user=request.user, itemType="leisure", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         optSum = AddItem.objects.filter(user=request.user, itemType="optional", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
-        form = AddItemForm(label_suffix=' ')
+        # form = AddItemForm(label_suffix=' ')
         
         # only show objects for authenticated user
         essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=[startdate, enddate])
@@ -134,6 +134,7 @@ def home(request):
             'unxForms': unxForms,
             'newForm': newForm,
             'essSum': essSum,
+            'leiSum': leiSum,
             'essential_items': essential_items,
             'leisure_items': leisure_items,
             'optional_items': optional_items,

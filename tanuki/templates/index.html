@@ -164,8 +164,8 @@
         <div class="userinfo">
             <form action="" method="post">
                 {% csrf_token %}
-                <input type="text" placeholder="Username or Email..." name="username" maxlength="62" size="12" required />
-                <input type="password" placeholder="Password..." name="password"> <br />
+                <input id="username" type="text" placeholder="Username or Email..." name="username" maxlength="62" size="12" required />
+                <input id="password" type="password" placeholder="Password..." name="password"> <br />
                 <div>
                     {% if messages  %}
                         {% for message in messages %}
