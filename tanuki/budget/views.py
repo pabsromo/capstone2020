@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 
 from .forms import SummaryForm, IncomeForm, FixedExpensesForm, InvestingForm
 from .models import Summary, Income, FixedExpenses, Investing
@@ -8,11 +9,10 @@ from .models import Summary, Income, FixedExpenses, Investing
 
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
 def budget(request):
-    print('this is the request:', request.POST.values)
-    if request.method == 'POST' and (('deleteincome' or 'deletefixed') not in request.POST):
+    # print('this is the request:', request.POST.values)
+    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' not in request.POST:
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
         fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
-
         if incomeForm.is_valid() and 'income' in request.POST:
             income = incomeForm.save(commit=False)
             income.user = request.user
@@ -40,7 +40,7 @@ def budget(request):
                 'fexpensesForm': fexpensesForm,
                 'fexpensesItems': fexpensesItems,
                 }
-    elif request.method == 'POST' and (('deleteincome' or 'deletefixed') in request.POST):
+    elif request.method == 'POST' and ('deleteincome' in request.POST or 'deletefixed' in request.POST):
         if 'deleteincome' in request.POST:
             entry = Income.objects.get(id=request.POST['deleteincome'])
         elif 'deletefixed' in request.POST:
@@ -56,6 +56,15 @@ def budget(request):
         # need to filter for user info only
         incomeItems = Income.objects.filter(user=request.user)
         fexpensesItems = FixedExpenses.objects.filter(user=request.user)
+        investingItems = Investing.objects.filter(user=request.user)
+
+        # Get sums
+        incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+        fixedSum = fexpensesItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+        investingSum = investingItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+
+        # Available Cash
+        availableCash = incomeSum - fixedSum - investingSum
         
         context = {
             # 'summaryForm': summaryForm,
@@ -63,6 +72,10 @@ def budget(request):
             'incomeItems': incomeItems,
             'fexpensesForm': fexpensesForm,
             'fexpensesItems': fexpensesItems,
+            'incomeSum': incomeSum,
+            'fixedSum': fixedSum,
+            'investingSum': investingSum,
+            'availableCash': availableCash,
             # 'investingForm': investingForm,
         }
     return render(request, 'budget.html', context)

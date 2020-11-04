@@ -200,7 +200,7 @@
                 Income
               </div>
               <div class="inside-cash-category" style="margin-top: 0;">
-                $0
+                ${{ incomeSum }}
               </div>
             </div>
 
@@ -213,7 +213,7 @@
                 Fixed Expenses
               </div>
               <div class="inside-cash-category" style="margin-top: 0;">
-                $0
+                ${{ fixedSum }}
               </div>
             </div>
 
@@ -239,7 +239,7 @@
                 Investing
               </div>
               <div class="inside-cash-category" style="margin-top: 0;">
-                $0
+                ${{ investingSum }}
               </div>
             </div>
 
@@ -252,7 +252,7 @@
                 Available Cash
               </div>
               <div class="inside-cash-category">
-                $0
+                ${{ availableCash }}
               </div>
             </div>
           </div>
@@ -277,7 +277,7 @@
           </div>
           <div class="fixed-expenses-table-column">
             <div class="head-elem">
-              amounts
+              amount
             </div>
           </div>
         </div>
@@ -352,25 +352,20 @@
 <!--                                     SAVINGS                             -->
       <div class="savings section">
         <div class="section-title" style="width: fit-content" id="selected">
-          <h1>Saving Goals</h1>
+          <h1>How much are you Saving?</h1>
         </div>
 <!--                                 savings titles                          -->
         <div class="table-titles">
           <div class="savings-table-column">
             <div class="head-elem">
-              Goals
+              Available
             </div>
           </div>
-          <div class="savings-table-column" style="width: 26%;">
+          <div class="savings-table-column">
             <div class="head-elem">
-              amount
+              I want to save...
             </div>
           </div>
-          <!-- <div class="savings-table-column" style="width: 40%;">
-            <div class="head-elem">
-              progress
-            </div>
-          </div> -->
         </div>
 <!--                                  savings data                           -->
         <div class="table-data">
@@ -384,11 +379,6 @@
               first amount
             </div>
           </div>
-          <!-- <div class="savings-table-column" style="width: 40%;">
-            <div class="elem altsavings">
-              first progress :D
-            </div>
-          </div> -->
         </div>
 
         <div class="new-row new-savings">
@@ -400,9 +390,6 @@
               <li style="width:26%">
                 <input type="text" name="" value="" placeholder="new amount">
               </li>
-              <!-- <li style="width: 40%">
-                <input type="text" name="" value="" placeholder="new progress">
-              </li> -->
             </ul>
           </form>
         </div>

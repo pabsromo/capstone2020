@@ -1,3 +1,9 @@
+/// <reference types="cypress" />
+
+Cypress.Cookies.defaults({
+    preserve: "csrftoken"
+})
+
 // users can add items to income
 // users can add items to fixed expenses
 // users can adjust where their additional spending goes
