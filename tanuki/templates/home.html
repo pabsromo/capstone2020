@@ -55,15 +55,15 @@
             </div>
             <div class="nav-desktop">
                 <ul>
-                    <li id="selected"><a href="{% url 'overview:home' %}">Overview</a></li>
-                    <li><a href="{% url 'budget:budget' %}">Budget</a></li>
-                    <li><a href="{% url 'history:history' %}">History</a></li>
+                    <li id="selected"><a href="{% url 'overview:home' %}" id="home1">Overview</a></li>
+                    <li><a href="{% url 'budget:budget' %}" id="budget1">Budget</a></li>
+                    <li><a href="{% url 'history:history' %}" id="history1">History</a></li>
                     <li>
                         <div class="dropdown">
                             <a href="#user"><i class="material-icons">person_outline</i></a>
                             <div class="dropdown-content">
                                 <ul>
-                                    <li><a href="{% url 'login:logout' %}">Logout</a></li>
+                                    <li><a href="{% url 'login:logout' %}" id="logout1">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
     <div class="content-wrapper">
         <div class="week_total">
             <div id="week">
-                <h1>Week of {% findWeek %}</h1>
+                <h1 id="weekunique">Week of {% findWeek %}</h1>
             </div>
             <div id="total">
                 <h1>Totals: ${{totalSum}}/100
@@ -246,7 +246,7 @@
     <!--                                         WEEK                              -->
     <div class="week section">
         <div class="section-title" style="width: fit-content" id="selected">
-            <h1>Week of {% findWeek %}</h1>
+            <h1 id="week">Week of {% findWeek %}</h1>
         </div>
         <!--                                   ESSENTIAL                           -->
         <div class="essential category">
