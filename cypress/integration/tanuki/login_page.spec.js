@@ -9,8 +9,11 @@ context('Login Page', () => {
         cy.visit('http://127.0.0.1:8000/')
     })
 
-    // Test CRSF token form security maybe
+    // Test to make sure the user can get to signup and get back to login
 
+    // Test to make sure you can't access the webpages without logging in
+
+    // Able to login the user
     it('login with test user', () => {
         cy.get('#username')
           .type('test', { delay:100 })
@@ -24,6 +27,7 @@ context('Login Page', () => {
           .find('form').submit()
     })
 
+    // Logged in user is sent to homepage
     it('check for correct url', () => {
         cy.url().should('eq', 'http://127.0.0.1:8000/home/')
     })
