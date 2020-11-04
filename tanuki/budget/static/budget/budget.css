@@ -9,6 +9,21 @@ nav {
   z-index: 99999;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: #b3b6b7;
+  margin-right: 0.75rem;
+  font-size: small;
+  height: 1rem;
+}
+
+button:hover {
+  color: #979a9a;
+}
+
 .nav-wrapper {
     background-color:#fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -388,6 +403,8 @@ p {
   border-bottom: 0.1em solid gray;
   padding-bottom: 0.25em;
   padding-top: 0.25em;
+  justify-content: space-between;
+  height: 1rem;
 }
 
 .elem.altincome {

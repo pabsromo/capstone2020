@@ -130,14 +130,14 @@
               <div class="elem">
                 {{ item.itemAmount }}
                 <form action="." method="POST"> {% csrf_token %}
-                  <button type="submit" name="deleteincome" value="{{ item.id }}" >delete</button>
+                  <button type="submit" name="deleteincome" value="{{ item.id }}" ><i class="material-icons">delete</i></button>
                 </form>
               </div>
               {% else %}
               <div class="elem altincome">
                 {{ item.itemAmount }}
                 <form action="." method="POST"> {% csrf_token %}
-                  <button type="submit" name="deleteincome" value="{{ item.id }}" >delete</button>
+                  <button type="submit" name="deleteincome" value="{{ item.id }}" ><i class="material-icons">delete</i></button>
                 </form>
               </div>
               {% endif %}
@@ -315,14 +315,14 @@
               <div class="elem">
                 {{ item.itemAmount }}
                 <form action="." method="POST"> {% csrf_token %}
-                  <button type="submit" name="deletefixed" value="{{ item.id }}" >delete</button>
+                  <button type="submit" name="deletefixed" value="{{ item.id }}" ><i class="material-icons">delete</i></button>
                 </form>
               </div>
               {% else %}
               <div class="elem altfixed">
                 {{ item.itemAmount }}
                 <form action="." method="POST"> {% csrf_token %}
-                  <button type="submit" name="deletefixed" value="{{ item.id }}" >delete</button>
+                  <button type="submit" name="deletefixed" value="{{ item.id }}" ><i class="material-icons">delete</i></button>
                 </form>
               </div>
               {% endif %}

@@ -34,20 +34,32 @@ def home(request):
             itemPrice = form.cleaned_data['itemPrice']
             return redirect('overview:home')
         else:
-            # only show objects for authenticated user
-            essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-            leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-            optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-            unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=["2020-10-19", "2020-10-25"])
+            daterange = getCurrentWeek()
+            startdate = daterange[0]
+            enddate = daterange[1]
+            items = AddItem.objects.filter(user=request.user)    #only show objects for authenticated user
+            essSum = AddItem.objects.filter(user=request.user, itemType="essential", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            leiSum = AddItem.objects.filter(user=request.user, itemType="leisure", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            optSum = AddItem.objects.filter(user=request.user, itemType="optional", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            form = AddItemForm(label_suffix=' ')
+
+            # context = {'form': form, 'items': items, 'essSum': essSum, 'leiSum': leiSum, 'optSum': optSum, 'unxSum': unxSum, 'totalSum': totalSum}
             
-            # sums  
-            essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-19", "2020-10-25"])
+            # only show objects for authenticated user
+            essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=[startdate, enddate])
+            leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=[startdate, enddate])
+            optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
+            unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
 
             # Forms
             essForms = {}
-            leiForms = []
-            optForms = []
-            unxForms = []
+            leiForms = {}
+            optForms = {}
+            unxForms = {}
+
+            print(essential_items)
 
             # Make all the individual forms for the items
                 # Make a list of form objects to be used with the correct id later.
@@ -56,10 +68,20 @@ def home(request):
             for i in essential_items:
                 essForms[i.id] = AddItemForm()
             for i in leisure_items:
-                leiForms = AddItemForm(prefix=i.id)
+                leiForms[i.id] = AddItemForm()
+            for i in optional_items:
+                optForms[i.id] = AddItemForm()
+            for i in unexpected_items:
+                unxForms[i.id] = AddItemForm()
+            
+            newForm = AddItemForm()
 
             context = {
                 'essForms': essForms,
+                'leiForms': leiForms,
+                'optForms': optForms,
+                'unxForms': unxForms,
+                'newForm': newForm,
                 'essSum': essSum,
                 'essential_items': essential_items,
                 'leisure_items': leisure_items,
@@ -77,25 +99,18 @@ def home(request):
         unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
         form = AddItemForm(label_suffix=' ')
-
-        # context = {'form': form, 'items': items, 'essSum': essSum, 'leiSum': leiSum, 'optSum': optSum, 'unxSum': unxSum, 'totalSum': totalSum}
         
         # only show objects for authenticated user
-        essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-        leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-        optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-        unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=["2020-10-19", "2020-10-25"])
-
-        # sums  
-        # essSum = AddItem.objects.filter(dateDisplayed__range=["2020-10-19", "2020-10-25"])
+        essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=[startdate, enddate])
+        leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=[startdate, enddate])
+        optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
+        unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
 
         # Forms
         essForms = {}
         leiForms = {}
         optForms = {}
         unxForms = {}
-
-        print(essential_items)
 
         # Make all the individual forms for the items
             # Make a list of form objects to be used with the correct id later.
