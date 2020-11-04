@@ -5,7 +5,7 @@ Cypress.Cookies.defaults({
 
 context('Login Page', () => {
     
-    it('visit the page', () => {
+    it('Visit Login Page', () => {
         cy.visit('http://127.0.0.1:8000/')
     })
 
@@ -14,12 +14,29 @@ context('Login Page', () => {
       cy.get('.signup').click()
       cy.url().should('eq', 'http://127.0.0.1:8000/signup/')
 
+      cy.get('#login').click()
+      cy.url().should('eq', 'http://127.0.0.1:8000/')
+
     })
 
     // Test to make sure you can't access the webpages without logging in
+    it('Navigate to other pages (Home, Budget, History, Logout) as unauthenticated user', () => {
+      cy.visit('http://127.0.0.1:8000/home')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/home/')
+
+      cy.visit('http://127.0.0.1:8000/budget')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/budget/')
+
+      cy.visit('http://127.0.0.1:8000/history')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/history/')
+
+      cy.visit('http://127.0.0.1:8000/logout')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/logout/')
+
+    })
 
     // Test invalid username
-    it('login with incorrect username', () => {
+    it('Login with incorrect username', () => {
       cy.get('#username')
         .type('abcde', { delay: 100 })
         .should('have.value', 'abcde')
@@ -36,7 +53,7 @@ context('Login Page', () => {
     })
 
     // Test invalid password
-    it('login with incorrect password', () => {
+    it('Login with incorrect password', () => {
       cy.get('#username')
         .type('test', { delay: 100 })
         .should('have.value', 'test')
@@ -53,7 +70,7 @@ context('Login Page', () => {
     })
 
     // Able to login the user
-    it('login with test user', () => {
+    it('Login with test user', () => {
         cy.get('#username')
           .type('test', { delay:100 })
           .should('have.value', 'test')
@@ -67,7 +84,7 @@ context('Login Page', () => {
     })
 
     // Logged in user is sent to homepage
-    it('check for correct url', () => {
+    it('Check that authenticated user is sent to home page', () => {
         cy.url().should('eq', 'http://127.0.0.1:8000/home/')
     })
 
