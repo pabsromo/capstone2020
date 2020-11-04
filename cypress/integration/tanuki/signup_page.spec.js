@@ -4,10 +4,6 @@ Cypress.Cookies.defaults({
     preserve: "csrftoken"
 })
 
-// it('', () => {
-        
-// })
-
 context('Login Page', () => {
     
     it('visit the page', () => {
@@ -17,86 +13,87 @@ context('Login Page', () => {
     // Existing users cannot be signed up for various reasons
     it('Cannot signup because username exists', () => {
         cy.get('#id_first_name').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_last_name').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_username').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_email').clear()
-          .type('not_testing@rightnow.com', { delay:100 })
+          .type('not_testing@rightnow.com', { delay:50 })
           .should('have.value', 'not_testing@rightnow.com')
         
-          cy.get('#id_password1').clear()
-          .type('tanuki404', { delay:100 })
+        cy.get('#id_password1').clear()
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
-          cy.get('#id_password2').clear()
-          .type('tanuki404', { delay:100 })
+        cy.get('#id_password2').clear()
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
-          cy.get('button').click()
+        cy.get('button').click()
 
-          cy.get('.account').first().contains('A user with this username already exists.')
+        cy.get('.account').first().contains('A user with this username already exists.')
     })
 
     it('Cannot signup because email exists', () => {
         cy.get('#id_first_name').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_last_name').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_username').clear()
-          .type('testo', { delay:100 })
+          .type('testo', { delay:50 })
           .should('have.value', 'testo')
 
         cy.get('#id_email').clear()
-          .type('test@test.com', { delay:100 })
+          .type('test@test.com', { delay:50 })
           .should('have.value', 'test@test.com')
         
-          cy.get('#id_password1').clear()
-          .type('tanuki404', { delay:100 })
+        cy.get('#id_password1').clear()
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
-          cy.get('#id_password2').clear()          .type('tanuki404', { delay:100 })
+        cy.get('#id_password2').clear()          
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
-          cy.get('button').click()
+        cy.get('button').click()
 
-          cy.get('.account').first().contains('A user with this email already exists.')
+        cy.get('.account').first().contains('A user with this email already exists.')
     })
 
     it('Cannot signup because passwords do not match', () => {
         cy.get('#id_first_name').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_last_name').clear()
-          .type('test', { delay:100 })
+          .type('test', { delay:50 })
           .should('have.value', 'test')
 
         cy.get('#id_username').clear()
-          .type('testo', { delay:100 })
+          .type('testo', { delay:50 })
           .should('have.value', 'testo')
 
         cy.get('#id_email').clear()
-          .type('testi@test.com', { delay:100 })
-          .should('have.value', 'testi@test.com')
+          .type('testo@test.com', { delay:50 })
+          .should('have.value', 'testo@test.com')
         
           cy.get('#id_password1').clear()
-          .type('tanuki404', { delay:100 })
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
           cy.get('#id_password2').clear()
-          .type('tanuki405', { delay:100 })
+          .type('tanuki405', { delay:50 })
           .should('have.value', 'tanuki405')
 
           cy.get('button').click()
@@ -104,95 +101,76 @@ context('Login Page', () => {
           cy.get('.account').first().contains('The two password fields didn’t match.')
     })
 
-    // User is able to sign up
+    it('Cannot signup because of invalid username', () => {
+        var userdate = new Date
+        var user = userdate.toString()
+
+        cy.get('#id_first_name').clear()
+          .type('test', { delay:50 })
+          .should('have.value', 'test')
+
+        cy.get('#id_last_name').clear()
+          .type('test', { delay:50 })
+          .should('have.value', 'test')
+
+        cy.get('#id_username').clear()
+          .type(user, { delay:50 })
+          .should('have.value', user)
+
+        cy.get('#id_email').clear()
+          .type('testo@test.com', { delay:50 })
+          .should('have.value', 'testo@test.com')
+        
+          cy.get('#id_password1').clear()
+          .type('tanuki404', { delay:50 })
+          .should('have.value', 'tanuki404')
+
+          cy.get('#id_password2').clear()
+          .type('tanuki404', { delay:50 })
+          .should('have.value', 'tanuki404')
+
+          cy.get('button').click()
+
+          cy.get('.account').first().contains('Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.')
+    })
+
+    // User is able to sign up and login
     it('User is able to sign up', () => {
         var userdate = new Date
         var user = userdate.toString()
         cy.log(user)
 
         cy.get('#id_first_name').clear()
-          .type(user, { delay:100 })
-          .should('have.value', user)
+          .type(userdate.getTime(), { delay:10 })
+          .should('have.value', userdate.getTime())
 
         cy.get('#id_last_name').clear()
-          .type(user, { delay:100 })
-          .should('have.value', user)
+          .type(userdate.getTime(), { delay:10 })
+          .should('have.value', userdate.getTime())
 
         cy.get('#id_username').clear()
-          .type(user, { delay:100 })
-          .should('have.value', user)
+          .type(userdate.getTime(), { delay:10 })
+          .should('have.value', userdate.getTime())
 
         cy.get('#id_email').clear()
-          .type('test@test.com', { delay:100 })
-          .should('have.value', 'test@test.com')
+          .type(userdate.getTime() + '@test.com', { delay:10 })
+          .should('have.value', userdate.getTime() + '@test.com')
         
-          cy.get('#id_password1').clear()
-          .type('tanuki404', { delay:100 })
+        cy.get('#id_password1').clear()
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
-          cy.get('#id_password2').clear()
-          .type('tanuki405', { delay:100 })
-          .should('have.value', 'tanuki405')
-
-          cy.get('button').click()
-
-          cy.get('.account').first().contains('The two password fields didn’t match.')
-    })
-    
-    // After signing up, they are directed to the home page
-    it('User is able to sign up', () => {
-        var user = new Date
-        user = user.toString()
-        cy.log(user)
-
-        cy.get('#id_first_name').clear()
-          .type('test', { delay:100 })
-          .should('have.value', 'test')
-
-        cy.get('#id_last_name').clear()
-          .type('test', { delay:100 })
-          .should('have.value', 'test')
-
-        cy.get('#id_username').clear()
-          .type('testo', { delay:100 })
-          .should('have.value', 'testo')
-
-        cy.get('#id_email').clear()
-          .type('testi@test.com', { delay:100 })
-          .should('have.value', 'testi@test.com')
-        
-          cy.get('#id_password1').clear()
-          .type('tanuki404', { delay:100 })
+        cy.get('#id_password2').clear()
+          .type('tanuki404', { delay:50 })
           .should('have.value', 'tanuki404')
 
-          cy.get('#id_password2').clear()
-          .type('tanuki405', { delay:100 })
-          .should('have.value', 'tanuki405')
+        cy.get('button').click()
 
-          cy.get('button').click()
-
-          cy.get('.account').first().contains('The two password fields didn’t match.')
     })
 
-    // it('', () => {
-
-    // })
-
-    // it('login with test user', () => {
-    //     cy.get('#username')
-    //       .type('test', { delay:100 })
-    //       .should('have.value', 'test')
-
-    //     cy.get('#password')
-    //       .type('tanuki404', { delay:100 })
-    //       .should('have.value', 'tanuki404')
-
-    //     cy.get('.userinfo')
-    //       .find('form').submit()
-    // })
-
-    // it('check for correct url', () => {
-    //     cy.url().should('eq', 'http://127.0.0.1:8000/home/')
-    // })
+    // User is logged in and sent to home page
+    it('User is sent to home page', () => {
+        cy.url().should('eq', 'http://127.0.0.1:8000/home/')
+    })
 
 })
