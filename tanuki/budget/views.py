@@ -9,10 +9,12 @@ from .models import Summary, Income, FixedExpenses, Investing
 
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
 def budget(request):
-    # print('this is the request:', request.POST.values)
-    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' not in request.POST:
+    print(request.user.id)
+    print('this is the request:', request.POST.values)
+    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' not in request.POST and 'editsavings' not in request.POST:
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
         fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
+        summaryForm = SummaryForm(request.POST, label_suffix=' ')
         if incomeForm.is_valid() and 'income' in request.POST:
             income = incomeForm.save(commit=False)
             income.user = request.user
@@ -29,17 +31,62 @@ def budget(request):
             itemAmount = fexpensesForm.cleaned_data['itemAmount']
             # itemDate = fexpensesForm.cleaned_data['itemDate']
             return redirect('budget:budget')
+        if summaryForm.is_valid() and 'savings' in request.POST:
+            print('got here')
+            if Summary.objects.filter(user=request.user.id).exists():
+                data = Summary.objects.filter(user=request.user.id)[0]
+                data.monthlySavings = request.POST.get('monthlySavings')
+                data.save()
+            else:
+                summary = summaryForm.save(commit=False)
+                summary.user = request.user
+                monthlySavings = summaryForm.cleaned_data['monthlySavings']
+                summary.save()
+            return redirect('budget:budget')
         else:
+            # Getting forms
+            summaryForm = SummaryForm(label_suffix=' ')
+            incomeForm = IncomeForm(label_suffix=' ')
+            fexpensesForm = FixedExpensesForm(label_suffix=' ')
+            # investingForm = InvestingForm(label_suffix=' ')
+
             # need to filter for user info only
+            summaryItems = Summary.objects.filter(user=request.user)
             incomeItems = Income.objects.filter(user=request.user)
             fexpensesItems = FixedExpenses.objects.filter(user=request.user)
+            investingItems = Investing.objects.filter(user=request.user)
 
+            if summaryItems.first() is None:
+                summaryForm.fields['monthlySavings'].widget.attrs['value'] = 0
+                summaryForm.fields['monthlySavings'].widget.attrs['placeholder'] = 'enter amount'
+            else:
+                # print(summaryItems.first().monthlySavings)
+                summaryForm.fields['monthlySavings'].widget.attrs['value'] = summaryItems.first().monthlySavings
+
+            # Get sums
+            incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+            fixedSum = fexpensesItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+            investingSum = investingItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+
+            # Savings
+            savings = Summary.objects.filter(user=request.user.id)[0].monthlySavings
+
+            # Available Cash
+            availableCash = incomeSum - fixedSum - investingSum - savings
+            
             context = {
-                'incomeForm': incomeForm,
+                'summaryForm': summaryForm,
+                'incomeForm': incomeForm, 
                 'incomeItems': incomeItems,
                 'fexpensesForm': fexpensesForm,
                 'fexpensesItems': fexpensesItems,
-                }
+                'incomeSum': incomeSum,
+                'fixedSum': fixedSum,
+                'investingSum': investingSum,
+                'availableCash': availableCash,
+                'savings': savings,
+                # 'investingForm': investingForm,
+            }
     elif request.method == 'POST' and ('deleteincome' in request.POST or 'deletefixed' in request.POST):
         if 'deleteincome' in request.POST:
             entry = Income.objects.get(id=request.POST['deleteincome'])
@@ -47,27 +94,44 @@ def budget(request):
             entry = FixedExpenses.objects.get(id=request.POST['deletefixed'])
         entry.delete()
         return redirect('budget:budget')
+    elif request.method == 'POST' and 'editsavings' in request.POST:
+        data = Summary.objects.get(id=request.POST.get('user_id'))
+        data.monthlySavings = request.POST.get('monthlySavings')
+        data.save()    
+        return redirect('budget:budget') 
     else: # pulling data
-        # summaryForm = SummaryForm(label_suffix=' ')
+        # Getting forms
+        summaryForm = SummaryForm(label_suffix=' ')
         incomeForm = IncomeForm(label_suffix=' ')
         fexpensesForm = FixedExpensesForm(label_suffix=' ')
         # investingForm = InvestingForm(label_suffix=' ')
 
         # need to filter for user info only
+        summaryItems = Summary.objects.filter(user=request.user)
         incomeItems = Income.objects.filter(user=request.user)
         fexpensesItems = FixedExpenses.objects.filter(user=request.user)
         investingItems = Investing.objects.filter(user=request.user)
+
+        if summaryItems.first() is None:
+            summaryForm.fields['monthlySavings'].widget.attrs['value'] = 0
+            summaryForm.fields['monthlySavings'].widget.attrs['placeholder'] = 'enter amount'
+        else:
+            # print(summaryItems.first().monthlySavings)
+            summaryForm.fields['monthlySavings'].widget.attrs['value'] = summaryItems.first().monthlySavings
 
         # Get sums
         incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
         fixedSum = fexpensesItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
         investingSum = investingItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
 
+        # Savings
+        savings = Summary.objects.filter(user=request.user.id)[0].monthlySavings
+
         # Available Cash
-        availableCash = incomeSum - fixedSum - investingSum
+        availableCash = incomeSum - fixedSum - investingSum - savings
         
         context = {
-            # 'summaryForm': summaryForm,
+            'summaryForm': summaryForm,
             'incomeForm': incomeForm, 
             'incomeItems': incomeItems,
             'fexpensesForm': fexpensesForm,
@@ -76,6 +140,7 @@ def budget(request):
             'fixedSum': fixedSum,
             'investingSum': investingSum,
             'availableCash': availableCash,
+            'savings': savings,
             # 'investingForm': investingForm,
         }
     return render(request, 'budget.html', context)

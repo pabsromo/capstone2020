@@ -3,8 +3,8 @@ from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Summary(models.Model):
-    monthlySavings = models.DecimalField(max_digits=7, decimal_places=2)
-    availableCash = models.DecimalField(max_digits=7, decimal_places=2)
+    monthlySavings = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    availableCash = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     User = get_user_model()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

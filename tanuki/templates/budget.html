@@ -226,7 +226,7 @@
                 Savings
               </div>
               <div class="inside-cash-category" style="margin-top: 0;">
-                $0
+                ${{ savings }}
               </div>
             </div>
 
@@ -370,6 +370,36 @@
 <!--                                  savings data                           -->
         <div class="table-data">
           <div class="savings-table-column">
+            <div class="elem">
+              ${{ availableCash }}
+            </div>
+          </div>
+          <div class="savings-table-column">
+            <div class="elem">
+              <form class="" action="." method="POST"> {% csrf_token %}
+                <ul class="flex-outer">
+                  <!-- <li>
+                    {{ fexpensesForm.itemDate }}
+                  </li>
+                  <li>
+                    {{ fexpensesForm.itemName }}
+                  </li>
+                  <li>
+                    {{ fexpensesForm.itemAmount }}
+                  </li> -->
+                  <li>
+                    {{ summaryForm.monthlySavings }}
+                  </li>
+                  <li style="visibility: hidden; width:0px;">
+                    <button type="submit" name='savings'>Submit</button>
+                  </li>
+                </ul>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="table-data">
+          <div class="savings-table-column">
             <div class="elem altsavings">
               first element
             </div>
@@ -392,7 +422,7 @@
               </li>
             </ul>
           </form>
-        </div>
+        </div> -->
 
       </div>
 <!--                                   INVESTING                             -->
