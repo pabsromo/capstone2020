@@ -401,57 +401,67 @@
           </div>
           <div class="savings-table-column">
             <div class="elem">
-              <form class="" action="." method="POST"> {% csrf_token %}
+              <form id="ess_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
                   <li>
                     {{ summaryForm.essential }}
                   </li>
-                  <li style="display: none;">
-                    {{ summaryForm.leisure }}
-                  </li>
                   <li style="visibility: hidden; width:0px;">
-                    <button type="submit" name='savings'>Submit</button>
+                    <button onclick="categorySpending('ess')" type="submit" name='editCategories'>Submit</button>
                   </li>
                 </ul>
+                <input id="ess_in_ess" type="text" value="" style="display: none;">
+                <input id="lei_in_ess" type="text" name="leisure" value="" style="display: none;">
+                <input id="opt_in_ess" type="text" name="optional" value="" style="display: none;">
+                <input id="unx_in_ess" type="text" name="unexpected" value="" style="display: none;">
               </form>
             </div>
             <div class="elem">
-              <form class="" action="." method="POST"> {% csrf_token %}
+              <form id="lei_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
                   <li>
                     {{ summaryForm.leisure }}
                   </li>
-                  <li style="display: none;">
-                    {{ summaryForm.essential }}
-                  </li>
                   <li style="visibility: hidden; width:0px;">
-                    <button type="submit" name='savings'>Submit</button>
+                    <button onclick="categorySpending('lei')" type="submit" name='editCategories'>Submit</button>
                   </li>
                 </ul>
+                <input id="ess_in_lei" type="text" name="essential" value="" style="display: none;">
+                <input id="lei_in_lei" type="text" value="" style="display: none;">
+                <input id="opt_in_lei" type="text" name="optional" value="" style="display: none;">
+                <input id="unx_in_lei" type="text" name="unexpected" value="" style="display: none;">
               </form>
             </div>
             <div class="elem">
-              <form class="" action="." method="POST"> {% csrf_token %}
+              <form id="opt_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
                   <li>
-                    {{ summaryForm.monthlySavings }}
+                    {{ summaryForm.optional }}
                   </li>
                   <li style="visibility: hidden; width:0px;">
-                    <button type="submit" name='savings'>Submit</button>
+                    <button onclick="categorySpending('opt')" type="submit" name='editCategories'>Submit</button>
                   </li>
                 </ul>
+                <input id="ess_in_opt" type="text" name="essential" value="" style="display: none;">
+                <input id="lei_in_opt" type="text" name="leisure" value="" style="display: none;">
+                <input id="opt_in_opt" type="text" value="" style="display: none;">
+                <input id="unx_in_opt" type="text" name="unexpected" value="" style="display: none;">
               </form>
             </div>
             <div class="elem">
-              <form class="" action="." method="POST"> {% csrf_token %}
+              <form id="unx_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
                   <li>
-                    {{ summaryForm.monthlySavings }}
+                    {{ summaryForm.unexpected }}
                   </li>
                   <li style="visibility: hidden; width:0px;">
-                    <button type="submit" name='savings'>Submit</button>
+                    <button onclick="categorySpending('unx')" type="submit" name='editCategories'>Submit</button>
                   </li>
                 </ul>
+                <input id="ess_in_unx" type="text" name="essential" value="" style="display: none;">
+                <input id="lei_in_unx" type="text" name="leisure" value="" style="display: none;">
+                <input id="opt_in_unx" type="text" name="optional" value="" style="display: none;">
+                <input id="unx_in_unx" type="text" value="" style="display: none;">
               </form>
             </div>
           </div>
