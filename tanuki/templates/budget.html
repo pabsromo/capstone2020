@@ -358,35 +358,88 @@
         <div class="table-titles">
           <div class="savings-table-column">
             <div class="head-elem">
-              Available
+              Total Available
             </div>
           </div>
           <div class="savings-table-column">
             <div class="head-elem">
-              I want to save...
+              ${{ availableCash }}
             </div>
           </div>
         </div>
-<!--                                  savings data                           -->
+
+        <div class="new-row"></div>
+        
+        <div class="table-titles">
+          <div class="savings-table-column">
+            <div class="head-elem">
+              Spending
+            </div>
+          </div>
+          <div class="savings-table-column">
+            <div class="head-elem" style="color: transparent">
+              placeholder
+            </div>
+          </div>
+        </div>
+
+        <div class="new-row"></div>
+
         <div class="table-data">
           <div class="savings-table-column">
             <div class="elem">
-              ${{ availableCash }}
+              Essential
+            </div>
+            <div class="elem">
+              Leisure
+            </div>
+            <div class="elem">
+              Optional
+            </div>
+            <div class="elem">
+              Unexpected
             </div>
           </div>
           <div class="savings-table-column">
             <div class="elem">
               <form class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
-                  <!-- <li>
-                    {{ fexpensesForm.itemDate }}
-                  </li>
                   <li>
-                    {{ fexpensesForm.itemName }}
+                    {{ summaryForm.monthlySavings }}
                   </li>
+                  <li style="visibility: hidden; width:0px;">
+                    <button type="submit" name='savings'>Submit</button>
+                  </li>
+                </ul>
+              </form>
+            </div>
+            <div class="elem">
+              <form class="" action="." method="POST"> {% csrf_token %}
+                <ul class="flex-outer">
                   <li>
-                    {{ fexpensesForm.itemAmount }}
-                  </li> -->
+                    {{ summaryForm.monthlySavings }}
+                  </li>
+                  <li style="visibility: hidden; width:0px;">
+                    <button type="submit" name='savings'>Submit</button>
+                  </li>
+                </ul>
+              </form>
+            </div>
+            <div class="elem">
+              <form class="" action="." method="POST"> {% csrf_token %}
+                <ul class="flex-outer">
+                  <li>
+                    {{ summaryForm.monthlySavings }}
+                  </li>
+                  <li style="visibility: hidden; width:0px;">
+                    <button type="submit" name='savings'>Submit</button>
+                  </li>
+                </ul>
+              </form>
+            </div>
+            <div class="elem">
+              <form class="" action="." method="POST"> {% csrf_token %}
+                <ul class="flex-outer">
                   <li>
                     {{ summaryForm.monthlySavings }}
                   </li>
@@ -398,31 +451,23 @@
             </div>
           </div>
         </div>
-        <!-- <div class="table-data">
+
+        <div class="new-row"></div>
+
+        <div class="table-titles">
           <div class="savings-table-column">
-            <div class="elem altsavings">
-              first element
+            <div class="head-elem">
+              Saving
             </div>
           </div>
-          <div class="savings-table-column" style="width: 26%;">
-            <div class="elem altsavings">
-              first amount
+          <div class="savings-table-column">
+            <div class="head-elem">
+              savings...
             </div>
           </div>
         </div>
-
-        <div class="new-row new-savings">
-          <form class="" action="index.html" method="post">
-            <ul class="flex-outer">
-              <li>
-                <input type="text" name="" value="" placeholder="new item">
-              </li>
-              <li style="width:26%">
-                <input type="text" name="" value="" placeholder="new amount">
-              </li>
-            </ul>
-          </form>
-        </div> -->
+        
+        <div class="new-row"></div>
 
       </div>
 <!--                                   INVESTING                             -->

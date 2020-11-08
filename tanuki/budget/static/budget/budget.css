@@ -173,8 +173,8 @@ p {
     grid-auto-rows: minmax(min-content, max-content);
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: "mon mon mon mon mon mon mon mon mon"
-                         "inc inc inc inc sum sum sum sum sum"
-                         "fix fix fix sav sav sav inv inv inv"
+                         "sav sav sav sav sum sum sum sum sum"
+                         "fix fix fix inc inc inc inv inv inv"
                          "ftr ftr ftr ftr ftr ftr ftr ftr ftr";
     grid-column-gap: 2em;
     grid-row-gap: 2em;
@@ -211,7 +211,6 @@ p {
 .income {
   display: flex;
   grid-area: inc;
-  margin-left: 2em;
   flex-direction: column;
   background-color: #d0ece7;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
@@ -338,6 +337,7 @@ p {
   display: flex;
   grid-area: sav;
   flex-direction: column;
+  margin-left: 2em;
   background-color: #fcf3cf;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
   grid-auto-rows: minmax(min-content, max-content);

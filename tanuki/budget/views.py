@@ -115,17 +115,16 @@ def budget(request):
         if summaryItems.first() is None:
             summaryForm.fields['monthlySavings'].widget.attrs['value'] = 0
             summaryForm.fields['monthlySavings'].widget.attrs['placeholder'] = 'enter amount'
+            savings = 0
         else:
             # print(summaryItems.first().monthlySavings)
             summaryForm.fields['monthlySavings'].widget.attrs['value'] = summaryItems.first().monthlySavings
+            savings = Summary.objects.filter(user=request.user.id)[0].monthlySavings
 
         # Get sums
         incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
         fixedSum = fexpensesItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
         investingSum = investingItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
-
-        # Savings
-        savings = Summary.objects.filter(user=request.user.id)[0].monthlySavings
 
         # Available Cash
         availableCash = incomeSum - fixedSum - investingSum - savings
