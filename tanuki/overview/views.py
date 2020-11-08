@@ -12,6 +12,8 @@ from .models import AddItem
 
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
 def home(request): 
+    print(request.user.id)
+    print("LOOK HERE")
     if request.method == 'POST':
         form = AddItemForm(request.POST, label_suffix =' ')
 
@@ -44,6 +46,11 @@ def home(request):
             optSum = AddItem.objects.filter(user=request.user, itemType="optional", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
             unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
             totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            availableCash = Summary.objects.filter(user=request.user.id, )
+            avaliableEss =
+            availableLei =
+            availableOpt = 
+            availableUnx = 
             form = AddItemForm(label_suffix=' ')
 
             # context = {'form': form, 'items': items, 'essSum': essSum, 'leiSum': leiSum, 'optSum': optSum, 'unxSum': unxSum, 'totalSum': totalSum}

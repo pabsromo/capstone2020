@@ -143,6 +143,16 @@ def budget(request):
 
         # Available Cash
         availableCash = incomeSum - fixedSum - investingSum - savings
+        data = Summary.objects.filter(user=request.user.id)[0]
+        data.availableCash = availableCash 
+        data.save()
+
+        # Actual Cash 
+        actualCash = incomeSum - fixedSum
+        data = Summary.objects.filter(user=request.user.id)[0]
+        data.actualCash = actualCash
+        data.save()
+
         
         context = {
             'summaryForm': summaryForm,
@@ -154,6 +164,7 @@ def budget(request):
             'fixedSum': fixedSum,
             'investingSum': investingSum,
             'availableCash': availableCash,
+            'actualCash' : actualCash,
             'savings': savings,
             'essential': essential,
             'leisure': leisure,

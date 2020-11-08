@@ -9,6 +9,7 @@ class Summary(models.Model):
     leisure = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     optional = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     unexpected = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    actualCash = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     User = get_user_model()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
