@@ -10,6 +10,7 @@ from .models import Summary, Income, FixedExpenses, Investing
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
 def budget(request):
     print(request.user.id)
+    print('user: ', request.user)
     print('this is the request:', request.POST.values)
     if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' not in request.POST and 'editsavings' not in request.POST:
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
@@ -95,7 +96,7 @@ def budget(request):
         entry.delete()
         return redirect('budget:budget')
     elif request.method == 'POST' and 'editsavings' in request.POST:
-        data = Summary.objects.get(id=request.POST.get('user_id'))
+        data = Summary.objects.get(user_id=request.user.id)
         data.monthlySavings = request.POST.get('monthlySavings')
         data.save()    
         return redirect('budget:budget') 
@@ -115,11 +116,25 @@ def budget(request):
         if summaryItems.first() is None:
             summaryForm.fields['monthlySavings'].widget.attrs['value'] = 0
             summaryForm.fields['monthlySavings'].widget.attrs['placeholder'] = 'enter amount'
+            summaryForm.fields['essential'].widget.attrs['value'] = 0
+            summaryForm.fields['essential'].widget.attrs['placeholder'] = 'enter amount'
+            summaryForm.fields['leisure'].widget.attrs['value'] = 0
+            summaryForm.fields['leisure'].widget.attrs['placeholder'] = 'enter amount'
             savings = 0
+            essential = 0
+            leisure = 0
+            optional = 0
+            unexpected = 0
         else:
             # print(summaryItems.first().monthlySavings)
             summaryForm.fields['monthlySavings'].widget.attrs['value'] = summaryItems.first().monthlySavings
+            summaryForm.fields['essential'].widget.attrs['value'] = summaryItems.first().essential
+            summaryForm.fields['leisure'].widget.attrs['value'] = summaryItems.first().essential
             savings = Summary.objects.filter(user=request.user.id)[0].monthlySavings
+            essential = Summary.objects.filter(user=request.user.id)[0].essential
+            leisure = Summary.objects.filter(user=request.user.id)[0].leisure
+            optional = Summary.objects.filter(user=request.user.id)[0].optional
+            unexpected = Summary.objects.filter(user=request.user.id)[0].unexpected
 
         # Get sums
         incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
@@ -140,16 +155,10 @@ def budget(request):
             'investingSum': investingSum,
             'availableCash': availableCash,
             'savings': savings,
+            'essential': essential,
+            'leisure': leisure,
+            'optional': optional,
+            'unexpected': unexpected,
             # 'investingForm': investingForm,
         }
     return render(request, 'budget.html', context)
-
-# @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
-# def deletebudget(request):
-#     print("deleting!")
-#     return render(request, 'budget.html', {})
-
-# @login_required(login_url='login:index')
-# def fixed(request):
-#     print(request)
-#     return render(request, 'budget.html')

@@ -404,7 +404,10 @@
               <form class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
                   <li>
-                    {{ summaryForm.monthlySavings }}
+                    {{ summaryForm.essential }}
+                  </li>
+                  <li style="display: none;">
+                    {{ summaryForm.leisure }}
                   </li>
                   <li style="visibility: hidden; width:0px;">
                     <button type="submit" name='savings'>Submit</button>
@@ -416,7 +419,10 @@
               <form class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
                   <li>
-                    {{ summaryForm.monthlySavings }}
+                    {{ summaryForm.leisure }}
+                  </li>
+                  <li style="display: none;">
+                    {{ summaryForm.essential }}
                   </li>
                   <li style="visibility: hidden; width:0px;">
                     <button type="submit" name='savings'>Submit</button>
@@ -459,7 +465,17 @@
           </div>
           <div class="savings-table-column">
             <div class="head-elem">
-              savings...
+              <form class="" action="." method="POST"> {% csrf_token %}
+                <ul class="flex-outer">
+                  <li>
+                    {{ summaryForm.monthlySavings }}
+                  </li>
+                  <li style="visibility: hidden; width:0px;">
+                    <button type="submit" name='savings'>Submit</button>
+                  </li>
+                </ul>
+                <input type="text" name="editsavings" id="id_monthly_savings_input" style="display: none;">
+              </form>
             </div>
           </div>
         </div>

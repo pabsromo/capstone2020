@@ -4,14 +4,33 @@ from .models import Summary, Income, FixedExpenses, Investing
 
 class SummaryForm(forms.ModelForm):
     monthlySavings = forms.DecimalField(
-        # label = "Monthly Savings",
+        max_digits = 7,
+        decimal_places= 2,
+        widget=forms.TextInput(attrs={'placeholder': 'enter amount',})
+    )
+    essential = forms.DecimalField(
+        max_digits = 7,
+        decimal_places= 2,
+        widget=forms.TextInput(attrs={'placeholder': 'enter amount',})
+    )
+    leisure = forms.DecimalField(
+        max_digits = 7,
+        decimal_places= 2,
+        widget=forms.TextInput(attrs={'placeholder': 'enter amount',})
+    )
+    optional = forms.DecimalField(
+        max_digits = 7,
+        decimal_places= 2,
+        widget=forms.TextInput(attrs={'placeholder': 'enter amount',})
+    )
+    unexpected = forms.DecimalField(
         max_digits = 7,
         decimal_places= 2,
         widget=forms.TextInput(attrs={'placeholder': 'enter amount',})
     )
     class Meta:
         model = Summary
-        fields = ('monthlySavings',)
+        fields = ('monthlySavings','essential', 'leisure', 'optional', 'unexpected')
 
 class IncomeForm(forms.ModelForm):
     itemName = forms.CharField(
