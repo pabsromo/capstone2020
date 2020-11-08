@@ -8,6 +8,7 @@ import datetime
 
 from .forms import AddItemForm
 from .models import AddItem
+from budget.models import Summary
 
 
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
@@ -40,26 +41,28 @@ def home(request):
             daterange = getCurrentWeek()
             startdate = daterange[0]
             enddate = daterange[1]
-            items = AddItem.objects.filter(user=request.user)    #only show objects for authenticated user
-            essSum = AddItem.objects.filter(user=request.user, itemType="essential", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
-            leiSum = AddItem.objects.filter(user=request.user, itemType="leisure", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
-            optSum = AddItem.objects.filter(user=request.user, itemType="optional", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
-            unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
-            totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
-            availableCash = Summary.objects.filter(user=request.user.id, )
-            avaliableEss =
-            availableLei =
-            availableOpt = 
-            availableUnx = 
-            form = AddItemForm(label_suffix=' ')
+            essSum = AddItem.objects.filter(user=request.user, itemType="essential", dateDisplayed__range=[
+                                            startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            leiSum = AddItem.objects.filter(user=request.user, itemType="leisure", dateDisplayed__range=[
+                                            startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            optSum = AddItem.objects.filter(user=request.user, itemType="optional", dateDisplayed__range=[
+                                            startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[
+                                            startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[
+                                                startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+            # form = AddItemForm(label_suffix=' ')
 
-            # context = {'form': form, 'items': items, 'essSum': essSum, 'leiSum': leiSum, 'optSum': optSum, 'unxSum': unxSum, 'totalSum': totalSum}
-            
             # only show objects for authenticated user
             essential_items = AddItem.objects.filter(user=request.user, itemType='essential', dateDisplayed__range=[startdate, enddate])
             leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=[startdate, enddate])
             optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
             unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
+            actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
+            availableEss = Summary.objects.filter(user=request.user.id)[0].essential
+            availableLei = Summary.objects.filter(user=request.user.id)[0].leisure
+            availableOpt = Summary.objects.filter(user=request.user.id)[0].optional
+            availableUnx = Summary.objects.filter(user=request.user.id)[0].unexpected
 
             # Forms
             essForms = {}
@@ -67,12 +70,10 @@ def home(request):
             optForms = {}
             unxForms = {}
 
-            print(essential_items)
-
             # Make all the individual forms for the items
-                # Make a list of form objects to be used with the correct id later.
-                # Maybe include the id of the object or just make it a prefix
-                # Remember, a prefix can make it unique
+            # Make a list of form objects to be used with the correct id later.
+            # Maybe include the id of the object or just make it a prefix
+            # Remember, a prefix can make it unique
             for i in essential_items:
                 essForms[i.id] = AddItemForm()
             for i in leisure_items:
@@ -81,7 +82,7 @@ def home(request):
                 optForms[i.id] = AddItemForm()
             for i in unexpected_items:
                 unxForms[i.id] = AddItemForm()
-            
+
             newForm = AddItemForm()
 
             context = {
@@ -91,11 +92,20 @@ def home(request):
                 'unxForms': unxForms,
                 'newForm': newForm,
                 'essSum': essSum,
+                'leiSum': leiSum,
+                'optSum': optSum,
+                'unxSum': unxSum,
+                'totalSum': totalSum,
+                'actualCash': actualCash,
+                'availableEss': availableEss,
+                'availableLei': availableLei,
+                'availableOpt': availableOpt,
+                'availableUnx': availableUnx,
                 'essential_items': essential_items,
                 'leisure_items': leisure_items,
                 'optional_items': optional_items,
                 'unexpected_items': unexpected_items,
-                }
+            }
     else:
         daterange = getCurrentWeek()
         startdate = daterange[0]
@@ -112,6 +122,31 @@ def home(request):
         leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=[startdate, enddate])
         optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
         unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
+        actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
+        availableEss = Summary.objects.filter(user=request.user.id)[0].essential
+        availableLei = Summary.objects.filter(user=request.user.id)[0].leisure
+        availableOpt = Summary.objects.filter(user=request.user.id)[0].optional
+        availableUnx = Summary.objects.filter(user=request.user.id)[0].unexpected
+        try:
+            essProgress = (essSum / availableEss) * 100 
+        except:
+            essProgress = 0 
+        try:
+            leiProgress = (leiSum / availableLei) * 100
+        except: 
+            leiProgress = 0 
+        try:
+            optProgress = (optSum / availableOpt) * 100
+        except:
+            optProgress = 0 
+        try:
+            unxProgress = (unxSum / availableUnx) * 100 
+        except:
+            unxProgress = 0 
+        try:
+            totalProgress = (totalSum / actualCash) * 100 
+        except:
+            totalProgress = 0 
 
         # Forms
         essForms = {}
@@ -145,6 +180,16 @@ def home(request):
             'optSum': optSum,
             'unxSum': unxSum,
             'totalSum': totalSum,
+            'actualCash': actualCash,
+            'availableEss': availableEss,
+            'availableLei': availableLei,
+            'availableOpt': availableOpt,
+            'availableUnx': availableUnx,
+            'essProgress' : essProgress, 
+            'leiProgress': leiProgress,
+            'optProgress': optProgress,
+            'unxProgress': unxProgress, 
+            'totalProgress' : totalProgress,
             'essential_items': essential_items,
             'leisure_items': leisure_items,
             'optional_items': optional_items,

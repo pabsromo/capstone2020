@@ -73,163 +73,44 @@
         </div>
     </nav>
 
-    {% comment %}
-    <!-- Need to use this functionality in updated overview design -->
-    <div class="content-wrapper">
-        <div class="week_total">
-            <div id="week">
-                <h1 id="weekunique">Week of {% findWeek %}</h1>
-            </div>
-            <div id="total">
-                <h1>Totals: ${{totalSum}}/100
-                    <div>
-                        <progress id="prog_out_tot" value={{totalSum|div:100|mul:100}} max="100"> 32% </progress>
-                    </div>
-                    
-            </div>
-            </div>
-        </div>
-    {% endcomment %}
     <!--                                         TOTALS                              -->
     <div class="totals section">
         <div class="section-title" style="width: fit-content" id="selected">
             <h1>Totals</h1>
         </div>
 
-        {% comment %}
-        <!-- No longer need the total titles section -->
-        <!--                                  totals titles                          -->
-        <div class="table-titles">
-        
-            <!-- Need to use the totals for the sums in the redesigned page -->
-        <div id="cat_totals">
-            <div id="ess_total">
-                <h1 style="margin-left: 10px;">Essential ${{essSum}}/100
-                    <div>
-                        <progress id="ess_out_tot" value={{essSum|div:100|mul:100}} max="100"> </progress>
-                    </div>
-            </div>
-            
-            <div id="lei_total">
-                <h1>Leisure ${{leiSum}}/100
-                    <div>
-                        <progress id="lei_out_tot" value={{leiSum|div:100|mul:100}} max="100"> </progress>
-                    </div>
-            </div>
-            <div id="opt_total">
-                <h1>Optional ${{optSum}}/100
-                    <div>
-                        <progress id="opt_out_tot" value={{optSum|div:100|mul:100}} max="100"> </progress>
-                    </div>
-            </div>
-            <div id="unx_total">
-                <h1>Unexpected ${{unxSum}}/100
-                    <div>
-                        <progress id="unx_out_tot" value={{unxSum|div:100|mul:100}} max="100"> </progress>
-                    </div>
-            </div>
-        </div>
-
-        <div id="monday">
-            <h1>Monday</h1>
-            {% returnDay 0 as day1 %}
-            <h4>{{day1}}</h4>
-        </div>
-        <div id="tuesday">
-            <h1>Tuesday</h1>
-            {% returnDay 1 as day2 %}
-            <h4>{{day2}}</h4>
-        </div>
-        <div id="wednesday">
-            <h1>Wednesday</h1>
-            {% returnDay 2 as day3 %}
-            <h4>{{day3}}</h4>
-        </div>
-        <div id="thursday">
-            <h1>Thursday</h1>
-            {% returnDay 3 as day4 %}
-            <h4>{{day4}}</h4>
-        </div>
-        <div id="friday">
-            <h1>Friday</h1>
-            {% returnDay 4 as day5 %}
-            <h4>{{day5}}</h4>
-        </div>
-        <div id="saturday">
-            <h1>Saturday</h1>
-            {% returnDay 5 as day6 %}
-            <h4>{{day6}}</h4>
-        </div>
-        <div id="sunday">
-            <h1>Sunday</h1>
-            {% returnDay 6 as day7 %}
-            <h4>{{day7}}</h4>
-        </div>
-
-        <hr style="grid-area: hr0; background-color: #f3f3f3">
-
-        <h1 style="padding-left: 10px; grid-area: Essential;">Essential</h1>
-
-        
-        <div id="ess1">
-            <div class="item">
-                {% for item in items %}
-                    {% with item.dateDisplayed as dateDisplayed %}
-                        {% returnDayDisplayed dateDisplayed as temp1 %}
-                        {% if temp1 == day1 and item.itemType == "essential" %}
-                            <p>{{ item.itemName }} ${{ item.itemPrice}}</p>
-                        {% endif %}
-                    {%endwith%}
-                {% endfor %}
-                <!-- <button type="button" onclick="showPopup('ess1_item_1')"><i class="material-icons">subject</i></button>
-                <div class="popup" id="ess1_item_1">
-                    <div class="innerpopup">
-                        this is the popup
-                        <button type="button" onclick="hidePopup('ess1_item_1')"><i
-                                class="tiny material-icons">clear</i></button>
-                    </div>
-                </div> -->
-            </div>
-            <div class="add_item">
-                <button onclick="showAdd('essential_form')"><i class="material-icons">add</i></button>
-            </div>
-        </div>
-        
-
-        </div>
-        {% endcomment %}
         <!--                                  totals data                            -->
         <div class="table-data">
             <div id="cat_totals">
                 <div id="ess_total">
-                    <h3 style="margin-left: 10px;">Essential ${{essSum}}/100
+                    <h3 style="margin-left: 10px;">Essential ${{essSum}}/{{availableEss}}
                         <div>
-                            <progress id="ess_out_tot" value="{{essSum|div:100|mul:100}}" max="100"> </progress>
+                            <progress id="ess_out_tot" value= "{{ essProgress }}" max="100"> </progress>
                         </div>
                     </h3>
                 </div>
                 <div id="lei_total">
-                    <h3>Leisure ${{leiSum}}/100
+                    <h3>Leisure ${{leiSum}}/{{availableLei}}
                         <div>
-                            <progress id="lei_out_tot" value="{{leiSum|div:100|mul:100}}" max="100"> </progress>
+                            <progress id="lei_out_tot" value="{{leiProgress}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="opt_total">
-                    <h3>Optional ${{optSum}}/100
+                    <h3>Optional ${{optSum}}/{{availableOpt}}
                         <div>
-                            <progress id="opt_out_tot" value="{{optSum|div:100|mul:100}}" max="100"> </progress>
+                            <progress id="opt_out_tot" value="{{optProgress}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="unx_total">
-                    <h3>Unexpected ${{unxSum}}/100
+                    <h3>Unexpected ${{unxSum}}/{{availableUnx}}
                         <div>
-                            <progress id="unx_out_tot" value="{{unxSum|div:100|mul:100}}" max="100"> </progress>
+                            <progress id="unx_out_tot" value="{{unxProgress}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="total">
-                    <h3>Totals: ${{totalSum}}/100
+                    <h3>Totals: ${{totalSum}}/{{actualCash}}
                         <div>
-                            <progress id="prog_out_tot" value="{{totalSum|div:100|mul:100}}" max="100"> 32% </progress>
+                            <progress id="prog_out_tot" value="{{totalProgress}}" max="100"> 32% </progress>
                         </div>
                     </h3>
                 </div>

@@ -1,8 +1,10 @@
 from django import template
 import datetime
 from django.utils.safestring import mark_safe
+from budget.models import Summary 
 
 register = template.Library()
+
 
 @register.simple_tag
 def findWeek():
@@ -34,6 +36,7 @@ def returnDay(dayOfWeek):
     day = monday + datetime.timedelta(dayOfWeek)
     return day.strftime("%#d")
     return mark_safe(day.strftime("%#d") + '<sup>' + dias[day.day] + '</sup>')
+
 
 @register.simple_tag
 def returnDayDisplayed(date):
