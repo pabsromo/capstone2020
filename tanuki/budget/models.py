@@ -5,6 +5,10 @@ from django.contrib.auth import get_user_model
 class Summary(models.Model):
     monthlySavings = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     availableCash = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    essential = models.DecimalField(max_digits = 7, decimal_places=2, default=0)
+    leisure = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    optional = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    unexpected = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     User = get_user_model()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
