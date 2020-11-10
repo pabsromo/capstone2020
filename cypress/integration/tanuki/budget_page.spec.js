@@ -47,8 +47,8 @@ context('Home Page', () => {
     //     cy.url().should('eq', 'http://127.0.0.1:8000/budget/')
     // })
 
-    // users can add items to income
-    it('users can add items to income', () => {
+    // users can add and delete items to income
+    it('Users can add and delete income items', () => {
         cy.get('#id_itemDate')
           .type('11/5/2020')
           .should('have.value', '11/5/2020')
@@ -63,22 +63,32 @@ context('Home Page', () => {
 
         cy.get('#id_itemAmount')
           .type('{enter}')
+        
+        cy.get("#deleteincome").click()
     })
 
-    // users can delete items in income
-    it('users can delete items in income', () => {
-        
-    })
+    //have to change id's then should work 
+    // users can add and delete items to fixed expenses
+    // it('Users can add and delete fixed expenses items', () => {
+    //     cy.get('#id_itemDate')
+    //       .type('11/5/2020')
+    //       .should('have.value', '11/5/2020')
 
-    // users can add items to fixed expenses
-    it('users can add items to fixed expenses', () => {
-        
-    })
+    //     cy.get('#id_itemName')
+    //       .type('Piggybank')
+    //       .should('have.value', 'Piggybank')
 
-    // users can delete items in income
-    it('users can delete items in income', () => {
-        
-    })
+    //     cy.get('#id_itemAmount')
+    //       .type('200')
+    //       .should('have.value', '200')
+
+    //     cy.get('#id_itemAmount')
+    //       .type('{enter}')
+
+    //     cy.get("#deletefixed").click()
+    // })
+
+  
 
     // users can adjust where their additional spending goes
 

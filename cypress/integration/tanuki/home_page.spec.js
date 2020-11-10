@@ -42,27 +42,30 @@ context('Home Page', () => {
         Cypress.Cookies.preserveOnce('csrftoken', 'sessionid')
     })
     
-    
-    // Make sure the user can modify already added items
-    // Make sure the user only sees their own data
-    // Make sure the user can delete items
-    // Progress bars are correct
-    
-    
 
     // Make sure the dates are correct
     it('Ensure dates are correct', () => {
         cy.get('#week').should('contain', GetWeek())
     })
 
-    // Make sure when an item is added, it is added in the right place
-    // it('Items are added under correct date', () => {
-
-    // })
 
     // Progress bars are correct
-    // it ('Totals are calculated correctly', () => {
+    it ('Totals are calculated correctly', () => {
+        cy.get("#essSum").should('contain', "Essential $70.49/200.00")
+        cy.get("#leiSum").should('contain', "Leisure $3.50/100.00")
+        cy.get("#optSum").should('contain', "Optional $12.95/50.00")
+        cy.get("#unxSum").should('contain', "Unexpected $35.46/100.00")
+        cy.get("#totalSum").should('contain', 'Totals: $122.40/650.00')
 
+    })
+
+
+    // // Make sure the user can modify already added items
+    // it ('Item can be added, modified, and deleted', () => {
+    //     cy.get("#essentialadd").click()
+    //     cy.get("#id_itemName").type("Jack Boots", {force: true})
+    //     cy.get("id_itemPrice").type("550", {force:true})
+    //     //idk how to test datepicker 
     // })
 
     // Navigate between pages
@@ -84,6 +87,10 @@ context('Home Page', () => {
     })
 
     // Logout user
+    it('Logout', () => {
+        cy.visit('http://127.0.0.1:8000/logout/')    
+        cy.url().should('eq', 'http://127.0.0.1:8000')
+    })
 
 
 

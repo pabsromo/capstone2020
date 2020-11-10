@@ -83,32 +83,32 @@
         <div class="table-data">
             <div id="cat_totals">
                 <div id="ess_total">
-                    <h3 style="margin-left: 10px;">Essential ${{essSum}}/{{availableEss}}
+                    <h3 style="margin-left: 10px;" id="essSum">Essential ${{essSum}}/{{availableEss}}
                         <div>
                             <progress id="ess_out_tot" value= "{{ essProgress }}" max="100"> </progress>
                         </div>
                     </h3>
                 </div>
                 <div id="lei_total">
-                    <h3>Leisure ${{leiSum}}/{{availableLei}}
+                    <h3 id="leiSum">Leisure ${{leiSum}}/{{availableLei}}
                         <div>
                             <progress id="lei_out_tot" value="{{leiProgress}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="opt_total">
-                    <h3>Optional ${{optSum}}/{{availableOpt}}
+                    <h3 id="optSum">Optional ${{optSum}}/{{availableOpt}}
                         <div>
                             <progress id="opt_out_tot" value="{{optProgress}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="unx_total">
-                    <h3>Unexpected ${{unxSum}}/{{availableUnx}}
+                    <h3 id="unxSum">Unexpected ${{unxSum}}/{{availableUnx}}
                         <div>
                             <progress id="unx_out_tot" value="{{unxProgress}}" max="100"> </progress>
                         </div>
                 </div>
                 <div id="total">
-                    <h3>Totals: ${{totalSum}}/{{actualCash}}
+                    <h3 id="totalSum">Totals: ${{totalSum}}/{{actualCash}}
                         <div>
                             <progress id="prog_out_tot" value="{{totalProgress}}" max="100"> 32% </progress>
                         </div>
@@ -127,13 +127,13 @@
     <!--                                         WEEK                              -->
     <div class="week section">
         <div class="section-title" style="width: fit-content" id="selected">
-            <h1>Week of {% findWeek %}</h1>
+            <h1 id="week">Week of {% findWeek %}</h1>
         </div>
         <!--                                   ESSENTIAL                           -->
         <div class="essential category">
             <div style="display:flex; flex-direction:row">
                 <h2>Essential</h2>
-                <button onclick="showmodal('essential')"><i class="material-icons">note_add</i></button>
+                <button onclick="showmodal('essential')"><i class="material-icons" id = "essentialadd">note_add</i></button>
             </div>
             <div class="table-titles">
                 <div class="table-column">
@@ -391,7 +391,7 @@
         <div class="leisure category">
             <div style="display:flex; flex-direction:row">
                 <h2>Leisure</h2>
-                <button onclick="showmodal('leisure')"><i class="material-icons">note_add</i></button>
+                <button onclick="showmodal('leisure')"><i class="material-icons" id = "leisureadd">note_add</i></button>
             </div>
             <div class="table-titles">
                 <div class="table-column">
@@ -649,7 +649,7 @@
         <div class="optional category">
             <div style="display:flex; flex-direction:row">
                 <h2>Optional</h2>
-                <button onclick="showmodal('optional')"><i class="material-icons">note_add</i></button>
+                <button onclick="showmodal('optional')"><i class="material-icons" id = "optionaladd">note_add</i></button>
             </div>
             <div class="table-titles">
                 <div class="table-column">
@@ -907,7 +907,7 @@
         <div class="unexpected category">
             <div style="display:flex; flex-direction:row">
                 <h2>Unexpected</h2>
-                <button onclick="showmodal('unexpected')"><i class="material-icons">note_add</i></button>
+                <button onclick="showmodal('unexpected')"><i class="material-icons" id= unexpectedadd>note_add</i></button>
             </div>
             <div class="table-titles">
                 <div class="table-column">
