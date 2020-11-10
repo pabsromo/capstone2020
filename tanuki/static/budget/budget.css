@@ -5,8 +5,26 @@ body {
 }
 /* Style the navbar */
 
+nav {
+  z-index: 99999;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: #b3b6b7;
+  margin-right: 0.75rem;
+  font-size: small;
+  height: 1rem;
+}
+
+button:hover {
+  color: #979a9a;
+}
+
 .nav-wrapper {
-    overflow: hidden;
     background-color:#fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin: 0 auto;
@@ -16,7 +34,7 @@ body {
     justify-content: space-between;
 }
 
-#nav-desktop {
+.nav-desktop ul {
     display: flex;
     float: right;
     list-style-type: none;
@@ -24,14 +42,14 @@ body {
     padding-right: 14px;
 }
 
-#nav-desktop li{
+.nav-desktop li {
     float: right;
     color: #4e4e4e;
     text-align: center;
     text-decoration: none;
 }
 
-#nav-desktop a{
+.nav-desktop a {
     color: #4e4e4e;
     text-align: center;
     font-family: Gadugi;
@@ -39,8 +57,47 @@ body {
     text-decoration: none;
 }
 
-#nav-desktop a:hover {
+.nav-desktop a:hover {
     color: #97aed4;
+}
+
+.dropdown:hover .dropdown-content{
+  display: block;
+  color: #97aed4;
+  border-bottom: 1px solid rgb(245,245,245);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 10px;
+  background-color: #4e4e4e;
+  /* background-color: cornsilk; */
+  margin: 0;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content::before {
+  content: "";
+  width: 0; 
+  height: 0; 
+  position: absolute;
+  right: 25px;
+  top: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent; 
+  border-bottom: 5px solid #4e4e4e;
+}
+
+.dropdown-content a {
+  float: none;
+  display: contents;
+  color: #97aed4;
+}
+
+.dropdown-content li {
+  margin: 0.5rem;
 }
 
 .logo {
@@ -76,6 +133,14 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    font-family: Karla;
+    color:#4e4e4e;
+    font-size: 1.25rem;
+    font-weight: normal;
+    margin: 0;
+}
+
 h4 {
     font-family: Karla;
     color: #4e4e4e;
@@ -108,8 +173,8 @@ p {
     grid-auto-rows: minmax(min-content, max-content);
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: "mon mon mon mon mon mon mon mon mon"
-                         "inc inc inc inc sum sum sum sum sum"
-                         "fix fix fix sav sav sav inv inv inv"
+                         "sav sav sav sav sum sum sum sum sum"
+                         "inc inc inc fix fix fix inv inv inv"
                          "ftr ftr ftr ftr ftr ftr ftr ftr ftr";
     grid-column-gap: 2em;
     grid-row-gap: 2em;
@@ -146,8 +211,8 @@ p {
 .income {
   display: flex;
   grid-area: inc;
-  margin-left: 2em;
   flex-direction: column;
+  margin-left: 2em;
   background-color: #d0ece7;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
   grid-auto-rows: minmax(min-content, max-content);
@@ -253,7 +318,6 @@ p {
   display: flex;
   grid-area: fix;
   flex-direction: column;
-  margin-left: 2em;
   background-color:  #fadbd8;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
   grid-auto-rows: minmax(min-content, max-content);
@@ -273,18 +337,19 @@ p {
   display: flex;
   grid-area: sav;
   flex-direction: column;
+  margin-left: 2em;
   background-color: #fcf3cf;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr 2fr;
   grid-column-gap: 2em;
-  grid-template-areas: "title title title"
-                       "item amt progress"
-                       "itemdata amtdata progressdata";
+  grid-template-areas: "title title"
+                       "item amt"
+                       "itemdata amtdata";
 }
 
 .savings-table-column {
-  width: 33%;
+  width: 50%;
   flex-direction: column;
 }
 
@@ -333,7 +398,7 @@ p {
   flex-direction: row;
   margin-left: 0.5em;
   margin-right: 0.5em;
-  margin-bottom: 0em;
+  margin-bottom: 0.5em;
   margin-top: 0.25em;
   padding-left: 0.25em;
   padding-right: 0.25em;
@@ -346,6 +411,8 @@ p {
   border-bottom: 0.1em solid gray;
   padding-bottom: 0.25em;
   padding-top: 0.25em;
+  justify-content: space-between;
+  height: 1rem;
 }
 
 .elem.altincome {
@@ -394,7 +461,7 @@ p {
 }
 
 .flex-outer li {
-  width: 33%;
+  width: 75%;
 }
 
 form ul {

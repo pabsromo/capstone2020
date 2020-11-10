@@ -7,9 +7,31 @@ body {
 
 /* Style the navbar */
 
-.nav-wrapper {
+nav {
+    z-index: 99999;
+}
+
+/* I don't like this -dearest Pablo */
+i {
+    width: 24px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
     overflow: hidden;
-    background-color:#fff;
+    color: #b3b6b7;
+    width: fit-content;
+    align-self: center;
+}
+
+button:hover {
+    color: #979a9a;
+}
+
+.nav-wrapper {
+    background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin: 0 auto;
     padding: 0;
@@ -18,7 +40,7 @@ body {
     justify-content: space-between;
 }
 
-#nav-desktop {
+.nav-desktop ul {
     display: flex;
     float: right;
     list-style-type: none;
@@ -26,14 +48,14 @@ body {
     padding-right: 14px;
 }
 
-#nav-desktop li{
+.nav-desktop li {
     float: right;
     color: #4e4e4e;
     text-align: center;
     text-decoration: none;
 }
 
-#nav-desktop a{
+.nav-desktop a {
     color: #4e4e4e;
     text-align: center;
     font-family: Gadugi;
@@ -41,8 +63,47 @@ body {
     text-decoration: none;
 }
 
-#nav-desktop a:hover {
+.nav-desktop a:hover {
     color: #97aed4;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    color: #97aed4;
+    border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 10px;
+    background-color: #4e4e4e;
+    /* background-color: cornsilk; */
+    margin: 0;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.dropdown-content::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 25px;
+    top: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #4e4e4e;
+}
+
+.dropdown-content a {
+    float: none;
+    display: contents;
+    color: #97aed4;
+}
+
+.dropdown-content li {
+    margin: 0.5rem;
 }
 
 .logo {
@@ -73,8 +134,23 @@ body {
 
 h1 {
     font-family: Karla;
-    color:#4e4e4e;
-    font-size: large;
+    color: #4e4e4e;
+    font-size: 1.75em;
+    margin: 0;
+}
+
+h2 {
+    font-family: Karla;
+    color: #4e4e4e;
+    font-size: 1.5em;
+    margin: 0;
+    margin-left: 0.75rem;
+}
+
+h3 {
+    font-family: Karla;
+    color: #4e4e4e;
+    font-size: 1.1em;
     margin: 0;
 }
 
@@ -103,7 +179,8 @@ p {
     margin: 0;
 }
 
-.content-wrapper {
+
+/* .content-wrapper {
     display: grid;
     width: 100%;
     grid-auto-rows: minmax(min-content, max-content);
@@ -128,7 +205,228 @@ p {
 
     grid-column-gap: 10px;
     grid-row-gap: 2px;
+} */
+
+
+/* .content-wrapper {
+    display: flex;
+    flex-direction: column;
+} */
+
+.totals {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    background-color: #d5d8dc;
+    box-shadow: 1px 2px 0 rgba(0, 0, 0, .15);
+    grid-auto-rows: minmax(min-content, max-content);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 2em;
+    grid-template-areas: "title title title title title" "item amt category date receipt" "itemdata amtdata catdata datedata receiptdata";
 }
+
+
+/* Progress Bar */
+
+
+/* Source: https://css-tricks.com/html5-progress-element/ */
+
+progress::-moz-progress-bar {
+    border: 0;
+    background: #97aed4;
+    border-radius: 20px;
+}
+
+progress::-webkit-progress-bar {
+    border: 0;
+    border-radius: 20px;
+}
+
+progress::-webkit-progress-value {
+    border: 0;
+    background: #97aed4;
+    border-radius: 20px;
+}
+
+progress {
+    border: 0;
+    color: #97aed4;
+    border-radius: 5px;
+}
+
+.week {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    background-color: #d5d8dc ;
+    box-shadow: 1px 2px 0 rgba(0, 0, 0, .15);
+    grid-auto-rows: minmax(min-content, max-content);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 2em;
+    grid-template-areas: "title title title title title" "item amt category date receipt" "itemdata amtdata catdata datedata receiptdata";
+}
+
+.table-column {
+    width: 20%;
+}
+
+.essential {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #d0ece7;
+    border-radius: 1.5625rem;
+}
+
+.leisure {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #d6eaf8;
+    border-radius: 1.5625rem;
+}
+
+.optional {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #ebdef0;
+    border-radius: 1.5625rem;
+}
+
+.unexpected {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #f2d7d5;
+    border-radius: 1.5625rem;
+}
+
+.section {
+    border-radius: 1.5625rem;
+}
+
+.section-title {
+    display: flex;
+    justify-content: left;
+    margin: 1em;
+}
+
+.table-titles {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0.25em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.table-data {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0em;
+    margin-top: 0.25em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.elem {
+    display: flex;
+    flex-direction: row;
+    font-family: Karla;
+    color: #4e4e4e;
+    /* border: 0.1em solid gray; */
+    padding: 0.45em;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    justify-content: space-between;
+    /* padding-bottom: 0.25em;
+    padding-top: 0.25em; */
+}
+
+.color-essential {
+    background-color: #a2d9ce;
+}
+
+.color-leisure {
+    background-color: #aed6f1;
+}
+
+.color-optional {
+    background-color: #d7bde2;
+}
+
+.color-unexpected {
+    background-color: #e6b0aa;
+}
+
+.head-elem {
+    display: flex;
+    justify-content: space-between;
+    font-family: Karla;
+    font-size: 1.25em;
+    color: #4e4e4e;
+    border-bottom: 0.15em solid gray;
+    padding-left: 2px;
+    padding-right: 1.3rem;
+}
+
+.new-row {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    padding-top: 0.25em;
+}
+
+.altmain {
+    background-color: #a2d9ce;
+}
+
+.end-of-table {
+    margin: 0.5rem;
+}
+
+.form-dropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: darkblue;
+}
+
+.inside-elem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.edit-div {
+    display: flex;
+    justify-items: center;
+}
+
+/* Outdated things */
 
 .week_total {
     grid-area: wkt;
@@ -139,6 +437,44 @@ p {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 5px;
+}
+
+.edit-form input {
+    color: black;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal div, button {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.inside-modal {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
 }
 
 #week {
@@ -155,16 +491,18 @@ p {
     background-color: #4E4E4E;
     border-radius: 20px;
     height: 10px;
-    width: 300px;
+    width: 200px;
+    margin-right: 15px;
 }
 
-#prog_in_tot {
+
+/* #prog_in_tot {
     background-color: #97aed4;
     border-radius: 20px;
     height: 10px;
     width: 40%;
     color: rgba(0, 0, 0, 0)
-}
+} */
 
 #cat_totals {
     grid-area: cat;
@@ -182,13 +520,14 @@ p {
     margin-right: 15px;
 }
 
-#ess_in_tot {
+
+/* #ess_in_tot {
     background-color: #97aed4;
     border-radius: 20px;
     height: 10px;
     width: 40%;
     color: rgba(0, 0, 0, 0);
-}
+} */
 
 #lei_out_tot {
     background-color: #4E4E4E;
@@ -198,13 +537,14 @@ p {
     margin-right: 15px;
 }
 
-#lei_in_tot {
+
+/* #lei_in_tot {
     background-color: #97aed4;
     border-radius: 20px;
     height: 10px;
     width: 40%;
     color: rgba(0, 0, 0, 0)
-}
+} */
 
 #opt_out_tot {
     background-color: #4E4E4E;
@@ -214,30 +554,34 @@ p {
     margin-right: 15px;
 }
 
-#opt_in_tot {
+
+/* #opt_in_tot {
     background-color: #97aed4;
     border-radius: 20px;
     height: 10px;
     width: 40%;
     color: rgba(0, 0, 0, 0)
-}
+} */
 
 #unx_out_tot {
     background-color: #4E4E4E;
     border-radius: 20px;
     height: 10px;
     width: 200px;
+    margin-right: 15px;
 }
 
-#unx_in_tot {
+
+/* #unx_in_tot {
     background-color: #97aed4;
     border-radius: 20px;
     height: 10px;
     width: 40%;
     color: rgba(0, 0, 0, 0)
-}
+} */
 
-#ess1 {
+
+/* #ess1 {
     grid-area: ess1;
     background-color: transparent;
     display: grid;
@@ -517,7 +861,10 @@ p {
     margin-right: 10px;
     padding-right: 5px;
     padding-left: 5px;
-}
+} */
+
+
+/* Need to change this */
 
 #footer {
     grid-area: ftr;
@@ -577,10 +924,9 @@ p {
 }
 
 .add_item_form {
-    display: none;
+    display: block;
     border: 2px solid #4e4e4e;
     margin: 10px;
-
 }
 
 .add_item_form label {

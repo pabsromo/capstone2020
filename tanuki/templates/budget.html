@@ -352,7 +352,7 @@
 <!--                                     SAVINGS                             -->
       <div class="savings section">
         <div class="section-title" style="width: fit-content" id="selected">
-          <h1>How much are you Saving?</h1>
+          <h1>Adjust Saving and Category Amounts</h1>
         </div>
 <!--                                 savings titles                          -->
         <div class="table-titles">
@@ -364,6 +364,30 @@
           <div class="savings-table-column">
             <div class="head-elem">
               ${{ availableCash }}
+            </div>
+          </div>
+        </div>
+
+        <div class="table-titles">
+          <div class="savings-table-column">
+            <div class="head-elem">
+              Saving
+            </div>
+          </div>
+          <div class="savings-table-column">
+            <div class="head-elem">
+              <form class="" action="." method="POST"> {% csrf_token %}
+                <ul class="flex-outer">
+                  <li style="width: 0.8rem;">$</li>
+                  <li>
+                    {{ summaryForm.monthlySavings }}
+                  </li>
+                  <li style="visibility: hidden; width:0px;">
+                    <button type="submit" name='savings'>Submit</button>
+                  </li>
+                </ul>
+                <input type="text" name="editsavings" id="id_monthly_savings_input" style="display: none;">
+              </form>
             </div>
           </div>
         </div>
@@ -385,7 +409,7 @@
           <div class="savings-table-column" style="width: 5%">
 
           </div>
-          <div class="savings-table-column">
+          <div class="savings-table-column" style="width: 20%">
             <div class="elem">
               Essential
             </div>
@@ -400,9 +424,10 @@
             </div>
           </div>
           <div class="savings-table-column">
-            <div class="elem">
+            <div class="elem" style="width: 30%">
               <form id="ess_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
+                  <li style="width: 0.8rem;">$</li>
                   <li>
                     {{ summaryForm.essential }}
                   </li>
@@ -416,9 +441,10 @@
                 <input id="unx_in_ess" type="text" name="unexpected" value="" style="display: none;">
               </form>
             </div>
-            <div class="elem">
+            <div class="elem" style="width: 30%">
               <form id="lei_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
+                  <li style="width: 0.8rem;">$</li>
                   <li>
                     {{ summaryForm.leisure }}
                   </li>
@@ -432,9 +458,10 @@
                 <input id="unx_in_lei" type="text" name="unexpected" value="" style="display: none;">
               </form>
             </div>
-            <div class="elem">
+            <div class="elem" style="width: 30%">
               <form id="opt_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
+                  <li style="width: 0.8rem;">$</li>
                   <li>
                     {{ summaryForm.optional }}
                   </li>
@@ -448,9 +475,10 @@
                 <input id="unx_in_opt" type="text" name="unexpected" value="" style="display: none;">
               </form>
             </div>
-            <div class="elem">
+            <div class="elem" style="width: 30%">
               <form id="unx_cash_form" class="" action="." method="POST"> {% csrf_token %}
                 <ul class="flex-outer">
+                  <li style="width: 0.8rem;">$</li>
                   <li>
                     {{ summaryForm.unexpected }}
                   </li>
@@ -462,29 +490,6 @@
                 <input id="lei_in_unx" type="text" name="leisure" value="" style="display: none;">
                 <input id="opt_in_unx" type="text" name="optional" value="" style="display: none;">
                 <input id="unx_in_unx" type="text" value="" style="display: none;">
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="table-titles">
-          <div class="savings-table-column">
-            <div class="head-elem">
-              Saving
-            </div>
-          </div>
-          <div class="savings-table-column">
-            <div class="head-elem">
-              <form class="" action="." method="POST"> {% csrf_token %}
-                <ul class="flex-outer">
-                  <li>
-                    {{ summaryForm.monthlySavings }}
-                  </li>
-                  <li style="visibility: hidden; width:0px;">
-                    <button type="submit" name='savings'>Submit</button>
-                  </li>
-                </ul>
-                <input type="text" name="editsavings" id="id_monthly_savings_input" style="display: none;">
               </form>
             </div>
           </div>

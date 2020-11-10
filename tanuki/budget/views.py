@@ -27,9 +27,12 @@ def budget(request):
         if fexpensesForm.is_valid() and 'fixed' in request.POST:
             fixed = fexpensesForm.save(commit=False)
             fixed.user = request.user
+            fixed.itemName = fexpensesForm.cleaned_data['itemName']
+            fixed.itemAmount = fexpensesForm.cleaned_data['itemAmount']
+            fixed.itemDate = fexpensesForm.cleaned_data['itemDate']
             fixed.save()
-            itemName = fexpensesForm.cleaned_data['itemName']
-            itemAmount = fexpensesForm.cleaned_data['itemAmount']
+            # itemName = fexpensesForm.cleaned_data['itemName']
+            # itemAmount = fexpensesForm.cleaned_data['itemAmount']
             # itemDate = fexpensesForm.cleaned_data['itemDate']
             return redirect('budget:budget')
         if summaryForm.is_valid() and 'savings' in request.POST:

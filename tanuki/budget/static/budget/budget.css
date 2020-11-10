@@ -174,7 +174,7 @@ p {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: "mon mon mon mon mon mon mon mon mon"
                          "sav sav sav sav sum sum sum sum sum"
-                         "fix fix fix inc inc inc inv inv inv"
+                         "inc inc inc fix fix fix inv inv inv"
                          "ftr ftr ftr ftr ftr ftr ftr ftr ftr";
     grid-column-gap: 2em;
     grid-row-gap: 2em;
@@ -212,8 +212,10 @@ p {
   display: flex;
   grid-area: inc;
   flex-direction: column;
+  margin-left: 2em;
   background-color: #d0ece7;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  height: max-content;
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 2em;
@@ -234,6 +236,7 @@ p {
   margin-right: 2em;
   background-color: #d4e6f1;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  height: max-content;
 }
 
 .summary-title {
@@ -317,9 +320,9 @@ p {
   display: flex;
   grid-area: fix;
   flex-direction: column;
-  margin-left: 2em;
   background-color:  #fadbd8;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  height: max-content;
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 2em;
@@ -340,6 +343,7 @@ p {
   margin-left: 2em;
   background-color: #fcf3cf;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  height: max-content;
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr 2fr;
   grid-column-gap: 2em;
@@ -360,6 +364,7 @@ p {
   margin-right: 2em;
   background-color: #e8daef;
   box-shadow: 1px 2px 0 rgba(0,0,0,.15);
+  height: max-content;
   grid-auto-rows: minmax(min-content, max-content);
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 2em;

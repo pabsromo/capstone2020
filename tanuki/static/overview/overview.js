@@ -12,14 +12,145 @@ function myFunction() {
     }
 }
 
-var days = {
-    'monday': 1,
-    'tuesday': 2,
-    'wednesday': 3,
-    'thursday': 4,
-    'friday': 5,
-    'saturday': 6,
-    'sunday': 7,
+function handleForm(event) {
+    event.preventDefault();
+}
+
+function showPopup(e) {
+    document.getElementById(e).style.display = "flex";
+}
+
+function hidePopup(e) {
+    document.getElementById(e).style.display = "none";
+}
+
+function showAdd(e) {
+    var forms = document.getElementById(e + "_form");
+    document.getElementById(e).style.display = "flex";
+}
+
+function hideAdd(e) {
+    document.getElementById(e + "_div").style.display = "none";
+}
+
+function startEdit(e) {
+    document.getElementById(e + '-p').style.display = 'none';
+    document.getElementById(e + '-editable-form').style.display = 'flex';
+    document.getElementById(e + '-btn').style.display = 'none';
+}
+
+function cancelEdit(e) {
+    e = e.toString();
+    if(e.includes('modal')) {
+        document.getElementById(e + '-form').style.display = 'none';
+        document.querySelector('.modal').style.display = 'none';
+        document.getElementById(e.split('-')[0] + '-inside-modal').style.display = 'none';
+    }
+    else {
+        document.getElementById(e + '-p').style.display = 'flex';
+        document.getElementById(e + '-editable-form').style.display = 'none';
+        document.getElementById(e + '-btn').style.display = 'flex';
+    }
+}
+
+function deleteItem(e) {
+    // Gets the input tag with name='action' and sets to delete then submits the form
+    document.getElementById(e + '-action').setAttribute('value','delete');
+    submitform(e);
+}
+
+function showmodal(e) {
+    document.querySelector('.modal').style.display = 'block';
+    document.getElementById(e + '-modal-form').style.display = 'flex';
+    document.getElementById(e + '-inside-modal').style.display = 'block';
+}
+
+function submitform(e) {
+    document.getElementById(e+'-form').submit();
+}
+
+// OUTDATED FUNCTIONS
+
+function addnewItem(e) {
+    var forms = document.getElementById(e + "_form");
+    var divs = document.getElementById(e + "_div");
+
+    forms.addEventListener('submit', handleForm);
+
+    var item_name = forms.elements["item_name"].value;
+    var item_price = forms.elements["item_price"].value;
+    var item_day = forms.elements["item_day"].value;
+
+    switch (e) {
+        case "essential":
+            var short_e = "ess";
+            break;
+        case "leisure":
+            var short_e = "lei";
+            break;
+        case "optional":
+            var short_e = "opt";
+            break;
+        case "unexpected":
+            var short_e = "unx";
+            break;
+        default:
+            break;
+    }
+
+    var col = document.getElementById(short_e + days[item_day]);
+    var row = col.childElementCount - 1;
+    var row_id = short_e + "_item_" + row;
+
+    // Making the item
+    var item = document.createElement("div");
+    item.classList.add("item");
+    var title = document.createElement("p");
+    title.innerHTML = item_name + " $" + item_price;
+    var item_btn = document.createElement("button");
+    item_btn.setAttribute("type", "button");
+    item_btn.setAttribute("onclick", "showPopup('" + row_id + "')");
+    item_btn.innerHTML = "<i class='material-icons'>subject</i>";
+    var popup = document.createElement("div");
+    popup.classList.add("popup");
+    popup.id = row_id;
+    var innerpopup = document.createElement("div");
+    innerpopup.classList.add("innerpopup");
+    var des = document.createElement("p");
+    des.innerHTML = item_name + " $" + item_price;
+    innerpopup.appendChild(des);
+    var popbtn = document.createElement("button");
+    popbtn.setAttribute("type", "button");
+    popbtn.setAttribute("onclick", "hidePopup('" + row_id + "')");
+    popbtn.innerHTML = "<i class='tiny material-icons'>clear</i>";
+    innerpopup.appendChild(popbtn);
+    popup.appendChild(innerpopup);
+    item.appendChild(title);
+    item.appendChild(item_btn);
+    item.appendChild(popup);
+
+    // Making the add_item button
+    var add_item = document.createElement("div");
+    add_item.classList.add("add_item")
+    var b = document.createElement("button");
+    b.innerHTML = "<i class='material-icons'>add</i>";
+    b.setAttribute("onclick", "showAdd('" + e + "_div')");
+    add_item.appendChild(b);
+
+
+    console.log('got to before insertion');
+
+    // Find the second to last spot in the div and insert the new item
+    col.removeChild(col.lastElementChild);
+    col.appendChild(item);
+    col.appendChild(add_item);
+
+    divs.style.display = "none";
+
+    // Erase the form
+    forms.elements["item_name"].value = null;
+    forms.elements["item_price"].value = null;
+    forms.elements["item_day"].value = null;
 }
 
 function colorOn() {
@@ -109,106 +240,12 @@ function colorOff() {
     document.getElementById("cat_totals").style.backgroundColor = "transparent";
 }
 
-function handleForm(event) {
-    event.preventDefault();
-}
-
-function showPopup(e) {
-    document.getElementById(e).style.display = "flex";
-}
-
-function hidePopup(e) {
-    document.getElementById(e).style.display = "none";
-}
-
-function showAdd(e) {
-    var forms = document.getElementById(e + "_form");
-    //forms.elements["item_day"] = 
-    document.getElementById(e).style.display = "flex";
-}
-
-function hideAdd(e) {
-    document.getElementById(e + "_div").style.display = "none";
-}
-
-function addnewItem(e) {
-    var forms = document.getElementById(e + "_form");
-    var divs = document.getElementById(e + "_div");
-
-    forms.addEventListener('submit', handleForm);
-
-    var item_name = forms.elements["item_name"].value;
-    var item_price = forms.elements["item_price"].value;
-    var item_day = forms.elements["item_day"].value;
-
-    switch (e) {
-        case "essential":
-            var short_e = "ess";
-            break;
-        case "leisure":
-            var short_e = "lei";
-            break;
-        case "optional":
-            var short_e = "opt";
-            break;
-        case "unexpected":
-            var short_e = "unx";
-            break;
-        default:
-            break;
-    }
-
-    var col = document.getElementById(short_e + days[item_day]);
-    var row = col.childElementCount - 1;
-    var row_id = short_e + "_item_" + row;
-
-    // Making the item
-    var item = document.createElement("div");
-    item.classList.add("item");
-    var title = document.createElement("p");
-    title.innerHTML = item_name + " $" + item_price;
-    var item_btn = document.createElement("button");
-    item_btn.setAttribute("type", "button");
-    item_btn.setAttribute("onclick", "showPopup('" + row_id + "')");
-    item_btn.innerHTML = "<i class='material-icons'>subject</i>";
-    var popup = document.createElement("div");
-    popup.classList.add("popup");
-    popup.id = row_id;
-    var innerpopup = document.createElement("div");
-    innerpopup.classList.add("innerpopup");
-    var des = document.createElement("p");
-    des.innerHTML = item_name + " $" + item_price;
-    innerpopup.appendChild(des);
-    var popbtn = document.createElement("button");
-    popbtn.setAttribute("type", "button");
-    popbtn.setAttribute("onclick", "hidePopup('" + row_id + "')");
-    popbtn.innerHTML = "<i class='tiny material-icons'>clear</i>";
-    innerpopup.appendChild(popbtn);
-    popup.appendChild(innerpopup);
-    item.appendChild(title);
-    item.appendChild(item_btn);
-    item.appendChild(popup);
-
-    // Making the add_item button
-    var add_item = document.createElement("div");
-    add_item.classList.add("add_item")
-    var b = document.createElement("button");
-    b.innerHTML = "<i class='material-icons'>add</i>";
-    b.setAttribute("onclick", "showAdd('" + e + "_div')");
-    add_item.appendChild(b);
-
-
-    console.log('got to before insertion');
-
-    // Find the second to last spot in the div and insert the new item
-    col.removeChild(col.lastElementChild);
-    col.appendChild(item);
-    col.appendChild(add_item);
-
-    divs.style.display = "none";
-
-    // Erase the form
-    forms.elements["item_name"].value = null;
-    forms.elements["item_price"].value = null;
-    forms.elements["item_day"].value = null;
+var days = {
+    'monday': 1,
+    'tuesday': 2,
+    'wednesday': 3,
+    'thursday': 4,
+    'friday': 5,
+    'saturday': 6,
+    'sunday': 7,
 }
