@@ -55,18 +55,20 @@ context('Home Page', () => {
         cy.get("#leiSum").should('contain', "Leisure $3.50/100.00")
         cy.get("#optSum").should('contain', "Optional $12.95/50.00")
         cy.get("#unxSum").should('contain', "Unexpected $35.46/100.00")
-        cy.get("#totalSum").should('contain', 'Totals: $122.40/650.00')
+        cy.get("#totalSum").should('contain', 'Totals: $122.40/700.00')
 
     })
 
 
-    // // Make sure the user can modify already added items
-    // it ('Item can be added, modified, and deleted', () => {
-    //     cy.get("#essentialadd").click()
-    //     cy.get("#id_itemName").type("Jack Boots", {force: true})
-    //     cy.get("id_itemPrice").type("550", {force:true})
-    //     //idk how to test datepicker 
-    // })
+    // Make sure the user can modify already added items
+    it ('Item can be added, modified, and deleted', () => {
+        cy.get("#essentialadd").click()
+        cy.get("#essential-modal-form > input").first().next().type("Jack Boots")
+        cy.get("#essential-modal-form > input").first().next().next().type("550.78")
+        cy.get("#essential-modal-form > input").first().next().next().next().type("2020-11-11")
+        cy.get("#essential-inside-modal > button").first().click()
+
+    })
 
     // Navigate between pages
     it('Navigate to other pages (Home, Budget, History) as authenticated user', () => {

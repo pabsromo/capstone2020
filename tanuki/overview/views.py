@@ -50,7 +50,7 @@ def home(request):
             unxSum = AddItem.objects.filter(user=request.user, itemType="unexpected", dateDisplayed__range=[
                                             startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
             totalSum = AddItem.objects.filter(user=request.user, dateDisplayed__range=[
-                                                startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
+                                            startdate, enddate]).aggregate(sum=Sum('itemPrice'))['sum'] or 0
             # form = AddItemForm(label_suffix=' ')
 
             # only show objects for authenticated user
@@ -58,11 +58,43 @@ def home(request):
             leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=[startdate, enddate])
             optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
             unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
-            actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
-            availableEss = Summary.objects.filter(user=request.user.id)[0].essential
-            availableLei = Summary.objects.filter(user=request.user.id)[0].leisure
-            availableOpt = Summary.objects.filter(user=request.user.id)[0].optional
-            availableUnx = Summary.objects.filter(user=request.user.id)[0].unexpected
+            if (Summary.objects.filter(user=request.user.id).first() is None):
+                actualCash = 0
+                availableEss = 0
+                availableLei = 0
+                availableOpt = 0
+                availableUnx = 0
+            else:
+                actualCash = Summary.objects.filter(
+                    user=request.user.id)[0].actualCash
+                availableEss = Summary.objects.filter(
+                    user=request.user.id)[0].essential
+                availableLei = Summary.objects.filter(
+                    user=request.user.id)[0].leisure
+                availableOpt = Summary.objects.filter(
+                    user=request.user.id)[0].optional
+                availableUnx = Summary.objects.filter(
+                    user=request.user.id)[0].unexpected
+            try:
+                essProgress = (essSum / availableEss) * 100
+            except:
+                essProgress = 0
+            try:
+                leiProgress = (leiSum / availableLei) * 100
+            except:
+                leiProgress = 0
+            try:
+                optProgress = (optSum / availableOpt) * 100
+            except:
+                optProgress = 0
+            try:
+                unxProgress = (unxSum / availableUnx) * 100
+            except:
+                unxProgress = 0
+            try:
+                totalProgress = (totalSum / actualCash) * 100
+            except:
+                totalProgress = 0
 
             # Forms
             essForms = {}
@@ -101,6 +133,11 @@ def home(request):
                 'availableLei': availableLei,
                 'availableOpt': availableOpt,
                 'availableUnx': availableUnx,
+                'essProgress': essProgress,
+                'leiProgress': leiProgress,
+                'optProgress': optProgress,
+                'unxProgress': unxProgress,
+                'totalProgress': totalProgress,
                 'essential_items': essential_items,
                 'leisure_items': leisure_items,
                 'optional_items': optional_items,
@@ -122,11 +159,18 @@ def home(request):
         leisure_items = AddItem.objects.filter(user=request.user, itemType='leisure', dateDisplayed__range=[startdate, enddate])
         optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
         unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
-        actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
-        availableEss = Summary.objects.filter(user=request.user.id)[0].essential
-        availableLei = Summary.objects.filter(user=request.user.id)[0].leisure
-        availableOpt = Summary.objects.filter(user=request.user.id)[0].optional
-        availableUnx = Summary.objects.filter(user=request.user.id)[0].unexpected
+        if (Summary.objects.filter(user=request.user.id).first() is None):
+            actualCash = 0;
+            availableEss = 0;
+            availableLei = 0;
+            availableOpt = 0;
+            availableUnx = 0;
+        else:
+            actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
+            availableEss = Summary.objects.filter(user=request.user.id)[0].essential
+            availableLei = Summary.objects.filter(user=request.user.id)[0].leisure
+            availableOpt = Summary.objects.filter(user=request.user.id)[0].optional
+            availableUnx = Summary.objects.filter(user=request.user.id)[0].unexpected
         try:
             essProgress = (essSum / availableEss) * 100 
         except:
