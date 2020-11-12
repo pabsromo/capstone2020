@@ -30,24 +30,26 @@ def history(request):
         items = AddItem.objects.filter(user=request.user)
         form = AddItemForm(label_suffix=' ')
         temp = []
+        if items.first() is None:
+            form = [] 
+            items = [] 
+            items_json = []  
+        else:
+            print(items[0].itemName)
+            for item in items:
+                t = []
+                t.append(int(str(item.user.id)))
+                t.append(str(item.user))
+                t.append(item.itemName)
+                t.append(float(item.itemPrice))
+                t.append(item.itemType)
+                # t.append(item.dateAdded)
+                t.append(item.dateDisplayed.strftime('%m/%d/%Y'))
+                temp.append(t)
+            print(temp)
 
-        print(items[0].itemName)
-
-        for item in items:
-            t = []
-            t.append(int(str(item.user.id)))
-            t.append(str(item.user))
-            t.append(item.itemName)
-            t.append(float(item.itemPrice))
-            t.append(item.itemType)
-            # t.append(item.dateAdded)
-            t.append(item.dateDisplayed.strftime('%m/%d/%Y'))
-            temp.append(t)
-
-        print(temp)
-
-        # items_json = json.dumps(temp, cls=DjangoJSONEncoder)
-        items_json = json.dumps(temp)
+            # items_json = json.dumps(temp, cls=DjangoJSONEncoder)
+            items_json = json.dumps(temp)
 
         context = {
             'form': form, 
