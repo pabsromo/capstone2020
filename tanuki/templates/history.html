@@ -65,8 +65,35 @@
 
     <!--                                     MAIN                              -->
     <div class="main section">
-        <div class="section-title" style="width: fit-content" id="selected">
+        <div class="section-title" style="width: fit-content; justify-content:space-between;" id="selected">
           <h1>All History</h1>
+          <div id='pagination'>
+            <div id='results' class='inside-pagination'>
+              results
+            </div>
+            <div id='show-results' class='inside-pagination'>
+              Show
+              <div class='show-dropdown'>
+                <button onclick="showDropdown()" class="show-dropbtn">25<i class="material-icons" style="height:15px; font-size:18px;">keyboard_arrow_down</i></button>
+                <div id='display-numbers' class="show-dropdown-content">
+                  <a href="javascript:changeNumDisplayed(10)">10</a>
+                  <a href="javascript:changeNumDisplayed(15)">15</a>
+                  <a href="javascript:changeNumDisplayed(20)">20</a>
+                  <a href="javascript:changeNumDisplayed(25)">25</a>
+                  <a href="javascript:changeNumDisplayed(30)">30</a>
+                  <a href="javascript:changeNumDisplayed(35)">35</a>
+                  <a href="javascript:changeNumDisplayed(40)">40</a>
+                  <a href="javascript:changeNumDisplayed(45)">45</a>
+                  <a href="javascript:changeNumDisplayed(50)">50</a>
+                </div>
+              </div>
+            </div>
+            <div id='list-pages' class='inside-pagination'>
+              <div class="pages">
+                <!-- don't worry, be happy :) -->
+              </div>
+            </div>
+          </div>
         </div>
     <!--                                  main titles                          -->
         <div class="table-titles">
@@ -90,15 +117,11 @@
               Date
             </div>
           </div>
-          <div class="main-table-column">
-            <div class="head-elem">
-              Receipt
-            </div>
-          </div>
         </div>
     <!--                                 main data                             -->
         <div class="table-data">
           <div class="main-table-column">
+            {% comment %}
             {% for item in items %}
               {% if forloop.counter|modulo:2 == 0 %}
               <div class="elem">
@@ -110,8 +133,10 @@
               </div>
               {% endif %}
             {% endfor %}
+            {% endcomment %}
           </div>
           <div class="main-table-column">
+            {% comment %}
             {% for item in items %}
               {% if forloop.counter|modulo:2 == 0 %}
                 <div class="elem">
@@ -123,8 +148,10 @@
                 </div>
               {% endif %}
             {% endfor %}
+            {% endcomment %}
           </div>
           <div class="main-table-column">
+            {% comment %}
             {% for item in items %}
               {% if forloop.counter|modulo:2 == 0 %}
                 <div class="elem">
@@ -136,8 +163,10 @@
                 </div>
               {% endif %}
             {% endfor %}
+            {% endcomment %}
           </div>
           <div class="main-table-column">
+            {% comment %}
             {% for item in items %}
               {% if forloop.counter|modulo:2 == 0 %}
                 <div class="elem">
@@ -149,19 +178,7 @@
                 </div>
               {% endif %}
             {% endfor %}
-          </div>
-          <div class="main-table-column">
-            {% for item in items %}
-              {% if forloop.counter|modulo:2 == 0 %}
-                <div class="elem">
-                  nothing
-                </div>
-              {% else %}
-                <div class="elem altmain">
-                  nothing
-                </div>
-              {% endif %}
-            {% endfor %}
+            {% endcomment %}
           </div>
         </div>
 
@@ -171,14 +188,14 @@
 
       </div>
 
-      <!--                              WEEK AT A GLAnCE                        -->
-    <div class="week section">
+    <!--                              WEEK AT A GLAnCE                        -->
+     <!-- <div class="week section">
         <div class="section-title" style="width: fit-content" id="selected">
           <h1>Week at a Glance: Week of {%findWeek%}
           </h1>
-        </div>
+        </div> -->
     <!--                             Week at a glance titles                    -->
-        <div class="table-titles">
+        <!-- <div class="table-titles">
           <div class="week-table-column">
             <div class="head-elem">
               Monday
@@ -214,9 +231,9 @@
               Sunday
             </div>
           </div>
-        </div>
+        </div> -->
     <!--                                 week data                             -->
-        <div class="table-data">
+        <!-- <div class="table-data">
           <div class="main-table-column">
             <div class="elem altmain">
               item data
@@ -279,12 +296,18 @@
 
         </div>
 
-      </div>
+      </div> -->
 
       <div id="footer">
           <h3>Tanuki</h3>
       </div>
     </div>
+
+    <script>
+      var items = {{ items_json|safe }};
+      // var json_string = unescape({{items_json | safe | escapejs}});
+      // var json_data = JSON.parse(json_string);
+    </script>
 
     <script src="{% static 'history/history.js' %}"></script>
 
