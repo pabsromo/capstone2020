@@ -67,26 +67,26 @@ context('Home Page', () => {
         cy.get("#deleteincome").click()
     })
 
-    //have to change id's then should work 
+
     // users can add and delete items to fixed expenses
-    // it('Users can add and delete fixed expenses items', () => {
-    //     cy.get('#id_itemDate')
-    //       .type('11/5/2020')
-    //       .should('have.value', '11/5/2020')
+    it('Users can add and delete fixed expenses items', () => {
+        cy.get('#id_itemDate')[1]
+          .type('11/5/2020')
+          .should('have.value', '11/5/2020')
 
-    //     cy.get('#id_itemName')
-    //       .type('Piggybank')
-    //       .should('have.value', 'Piggybank')
+        cy.get('#id_itemName')
+          .type('Piggybank')
+          .should('have.value', 'Piggybank')
 
-    //     cy.get('#id_itemAmount')
-    //       .type('200')
-    //       .should('have.value', '200')
+        cy.get('#id_itemAmount')
+          .type('200')
+          .should('have.value', '200')
 
-    //     cy.get('#id_itemAmount')
-    //       .type('{enter}')
+        cy.get('#id_itemAmount')
+          .type('{enter}')
 
-    //     cy.get("#deletefixed").click()
-    // })
+        cy.get("#deletefixed").click()
+    })
 
   
 
