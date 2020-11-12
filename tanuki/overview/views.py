@@ -8,7 +8,7 @@ import datetime
 
 from .forms import AddItemForm
 from .models import AddItem
-from budget.models import Summary
+from budget.models import Summary, Income, FixedExpenses, Investing
 
 
 @login_required(login_url='login:index')   #redirect to login if user has not been authenticated
@@ -160,11 +160,20 @@ def home(request):
         optional_items = AddItem.objects.filter(user=request.user, itemType='optional', dateDisplayed__range=[startdate, enddate])
         unexpected_items = AddItem.objects.filter(user=request.user, itemType='unexpected', dateDisplayed__range=[startdate, enddate])
         if (Summary.objects.filter(user=request.user.id).first() is None):
-            actualCash = 0;
-            availableEss = 0;
-            availableLei = 0;
-            availableOpt = 0;
-            availableUnx = 0;
+            actualCash = 0
+            availableEss = 0
+            availableLei = 0
+            availableOpt = 0
+            availableUnx = 0
+            # Create a row in the database
+            newSum = Summary(user_id=request.user.id)
+            newInc = Income(user_id=request.user.id)
+            newFix = FixedExpenses(user_id=request.user.id)
+            newInv = Investing(user_id=request.user.id)
+            newSum.save()
+            newInc.save()
+            newFix.save()
+            newInv.save()
         else:
             actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
             availableEss = Summary.objects.filter(user=request.user.id)[0].essential
