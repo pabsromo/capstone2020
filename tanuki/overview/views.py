@@ -27,8 +27,8 @@ def home(request):
             data.itemPrice = request.POST.get('itemPrice')
             data.itemType = request.POST.get('itemType')
             data.dateDisplayed = request.POST.get('dateDisplayed')
-            data.save()    
-            return redirect('overview:home')  
+            data.save()
+            return redirect('overview:home')
         elif form.is_valid() and request.POST.get('action')=='new':
             addItem = form.save(commit=False)
             addItem.itemType = form.cleaned_data['itemType']
