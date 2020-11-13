@@ -92,8 +92,4 @@ context('Home Page', () => {
         cy.url().should('eq', 'http://127.0.0.1:8000/')
     })
 
-
-
-
-
 })

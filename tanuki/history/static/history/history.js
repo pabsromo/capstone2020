@@ -122,7 +122,7 @@ function setPagination(amt) {
         pages.appendChild(elem);
     }
 
-    pages.childNodes()[0].setAttribute('class', 'selected');
+    pages.childNodes[0].setAttribute('class', 'pages-inside currentpage');
 }
 
 function gotoPage(p) {
@@ -139,7 +139,9 @@ function gotoPage(p) {
     insertData(start + page_length, start);
 
     // Change the selected page
-
+    document.querySelector('.currentpage').setAttribute('class', 'pages-inside');
+    var pages = document.querySelector('.pages');
+    pages.childNodes[p-1].setAttribute('class', 'pages-inside currentpage');
 }
 
 // Let user change the amount of results they want to show
