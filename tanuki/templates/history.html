@@ -65,7 +65,7 @@
 
     <!--                                     MAIN                              -->
     <div class="main section">
-        <div class="section-title" style="justify-content:space-between;" id="selected">
+        <div class="section-title" style="justify-content:space-between;">
           <h1>All History</h1>
           <div id='pagination'>
             <div id='results' class='inside-pagination'>
@@ -188,116 +188,6 @@
 
       </div>
 
-    <!--                              WEEK AT A GLAnCE                        -->
-     <!-- <div class="week section">
-        <div class="section-title" style="width: fit-content" id="selected">
-          <h1>Week at a Glance: Week of {%findWeek%}
-          </h1>
-        </div> -->
-    <!--                             Week at a glance titles                    -->
-        <!-- <div class="table-titles">
-          <div class="week-table-column">
-            <div class="head-elem">
-              Monday
-            </div>
-          </div>
-          <div class="week-table-column">
-            <div class="head-elem">
-              Tuesday
-            </div>
-          </div>
-          <div class="week-table-column">
-            <div class="head-elem">
-              Wednesday
-            </div>
-          </div>
-          <div class="week-table-column">
-            <div class="head-elem">
-              Thursday
-            </div>
-          </div>
-          <div class="week-table-column">
-            <div class="head-elem">
-              Friday
-            </div>
-          </div>
-          <div class="week-table-column">
-            <div class="head-elem">
-              Saturday
-            </div>
-          </div>
-          <div class="week-table-column">
-            <div class="head-elem">
-              Sunday
-            </div>
-          </div>
-        </div> -->
-    <!--                                 week data                             -->
-        <!-- <div class="table-data">
-          <div class="main-table-column">
-            <div class="elem altmain">
-              item data
-            </div>
-            <div class="elem">
-              item data
-            </div>
-          </div>
-          <div class="main-table-column">
-            <div class="elem altmain">
-              amount data
-            </div>
-            <div class="elem">
-              amount data
-            </div>
-          </div>
-          <div class="main-table-column">
-            <div class="elem altmain">
-              category data
-            </div>
-            <div class="elem">
-              category data
-            </div>
-          </div>
-          <div class="main-table-column">
-            <div class="elem altmain">
-              date data
-            </div>
-            <div class="elem">
-              date data
-            </div>
-          </div>
-          <div class="main-table-column">
-            <div class="elem altmain">
-              receipt data
-            </div>
-            <div class="elem">
-              receipt data
-            </div>
-          </div>
-          <div class="main-table-column">
-            <div class="elem altmain">
-              item data
-            </div>
-            <div class="elem">
-              item data
-            </div>
-          </div>
-          <div class="main-table-column">
-            <div class="elem altmain">
-              item data
-            </div>
-            <div class="elem">
-              item data
-            </div>
-          </div>
-        </div>
-
-        <div class="end-of-table">
-
-        </div>
-
-      </div> -->
-
       <div id="footer">
           <h3>Tanuki</h3>
       </div>
@@ -305,8 +195,6 @@
 
     <script>
       var items = {{ items_json|safe }};
-      // var json_string = unescape({{items_json | safe | escapejs}});
-      // var json_data = JSON.parse(json_string);
     </script>
 
     <script src="{% static 'history/history.js' %}"></script>

@@ -184,6 +184,11 @@ nav {
   box-shadow: 0 2px 0 #4e4e4e;
 }
 
+.currentpage a {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
 /* Page content */
 
 h1 {
