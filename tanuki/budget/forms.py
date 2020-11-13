@@ -2,6 +2,10 @@ from django import forms
 
 from .models import Summary, Income, FixedExpenses, Investing
 
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class SummaryForm(forms.ModelForm):
     monthlySavings = forms.DecimalField(
         max_digits = 7,
@@ -46,15 +50,17 @@ class IncomeForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'new amount'})
     )
 
-    itemDate = forms.DateTimeField(
-        required=False,
-        input_formats=['%d/%m/%Y'],
-        widget=forms.DateInput(attrs={'placeholder': 'new date'}),
-        )
+    # itemDate = forms.DateTimeField(
+    #     required=False,
+    #     input_formats=['%m/%d/%Y'],
+    #     )
 
     class Meta:
         model = Income
-        fields = ('itemName', 'itemAmount')
+        fields = ('itemName', 'itemAmount', 'itemDate')
+        widgets = {
+            'itemDate': DateInput()
+        }
 
 
 class FixedExpensesForm(forms.ModelForm):
@@ -71,15 +77,18 @@ class FixedExpensesForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'new amount'})
     )
 
-    itemDate = forms.DateField(
-        required=False,
-        input_formats=['%d/%m/%Y'],
-        widget=forms.DateInput(attrs={'placeholder': 'new date'}),
-    ) 
+    # itemDate = forms.DateField(
+    #     required=False,
+    #     input_formats=['%m/%d/%Y'],
+    #     widget=forms.DateInput(attrs={'placeholder': 'new date'}),
+    # ) 
 
     class Meta:
         model = FixedExpenses
-        fields = ('itemName', 'itemAmount')
+        fields = ('itemName', 'itemAmount', 'itemDate')
+        widgets = {
+            'itemDate': DateInput()
+        }
 
 class InvestingForm(forms.ModelForm):
     itemName = forms.CharField(

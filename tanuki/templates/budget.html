@@ -322,7 +322,7 @@
               <div class="elem altfixed">
                 {{ item.itemAmount }}
                 <form action="." method="POST"> {% csrf_token %}
-                  <button type="submit" name="deletefixed" value="{{ item.id }}" id="deletefixed" ><i class="material-icons">delete</i></button>
+                  <button id = "deletefixed" type="submit" name="deletefixed" value="{{ item.id }}" id="deletefixed" ><i class="material-icons">delete</i></button>
                 </form>
               </div>
               {% endif %}
