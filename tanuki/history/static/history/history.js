@@ -131,9 +131,9 @@ function gotoPage(p) {
     var page_length = Number(document.querySelector('.show-dropbtn').innerHTML.split("<")[0]); //amount on page
     var start = page_length * (p-1);// the start of the data in row
 
-    console.log('start ' + start);
+    // console.log('start ' + start);
     var t = (Number(start) + page_length);
-    console.log('end ' + t)
+    // console.log('end ' + t);
     
     // Put page info
     insertData(start + page_length, start);

@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+// const { first } = require("cypress/types/lodash");
+
 const col = (arr, n) => arr.map(x => x[n]);
 
 var test_items = [
@@ -71,11 +73,23 @@ context('Home Page', () => {
               cy.log(el.text() == test_items_1d[index])
               cy.log(el.text())
         })
+        // cy.log(cy.get('.table-data > .main-table-column')
+        //   .children())
     })
 
     // Pagination shows correct information
     it('Pagination shows correct information', () => {
-        
+        cy.get('#results').should('contain', '23')
+
+        // Starting length
+        cy.get('.pages').children().should('have.length', 1)
+
+        // Going through all possible page lengths
+        cy.get('.show-dropbtn').then($el => {
+            cy.wrap($el).invoke('show')
+            cy.wrap($el).click()
+        })
+        cy.get('.show-dropdown-content').children().first().click()
     })
 
     // Pagination flips through pages correctly
