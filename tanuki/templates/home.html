@@ -253,7 +253,7 @@
                                 <input id='{{item.id}}-item_id' style='display:none;' type="text" name='item_id' value="{{item.id}}">
                                 <input id='{{item.id}}-itemType' style='display:none;' type="text" name='itemType' value="essential">
                             </form>
-                            <button onclick='deleteItem({{item.id}})'><i class="material-icons">delete</i></button>
+                            <button id="delete" onclick='deleteItem({{item.id}})'><i class="material-icons">delete</i></button>
                             <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
                             <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
                         </div>
@@ -313,7 +313,7 @@
                                 <input id='{{item.id}}-item_id' style='display:none;' type="text" name='item_id' value="{{item.id}}">
                                 <input id='{{item.id}}-itemType' style='display:none;' type="text" name='itemType' value="essential">
                             </form>
-                            <button onclick='deleteItem({{item.id}})'><i class="material-icons">delete</i></button>
+                            <button id = "delete" onclick='deleteItem({{item.id}})'><i class="material-icons">delete</i></button>
                             <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
                             <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
                         </div>
@@ -1027,7 +1027,7 @@
                                 <input id='{{item.id}}-item_id' style='display:none;' type="text" name='item_id' value="{{item.id}}">
                                 <input id='{{item.id}}-itemType' style='display:none;' type="text" name='itemType' value="unexpected">
                             </form>
-                            <button onclick='deleteItem({{item.id}})'><i class="material-icons">delete</i></button>
+                            <button id="delete" onclick='deleteItem({{item.id}})'><i class="material-icons">delete</i></button>
                             <button onclick='cancelEdit({{item.id}})'><i class="material-icons">cancel</i></button>
                             <button type="submit" onclick='submitform({{item.id}})'><i class="material-icons">checkmark</i></button>
                         </div>
@@ -1162,7 +1162,7 @@
 
     </div>
 
-    <div class="modal" id='essential-inside-modal'>
+    <div class="modal">
         <div class='modal-content'>
             <div id='essential-inside-modal' style='display: none;'>
                 <h1>New Essential Item</h1>
@@ -1174,8 +1174,8 @@
                     <input style='display:none;' type="text" name='itemType' value="essential">
                 </form>
                 <div>
-                    <button onclick="cancelEdit('essential-modal')"><i class="material-icons">cancel</i></button>
-                    <button type="submit" onclick="submitform('essential-modal')"><i class="material-icons">checkmark</i></button>
+                    <button id ="cancel" onclick="cancelEdit('essential-modal')"><i class="material-icons">cancel</i></button>
+                    <button id = "submit" type="submit" onclick="submitform('essential-modal')"><i class="material-icons">checkmark</i></button>
                 </div>
             </div>
             <div id='leisure-inside-modal' style='display: none;'>

@@ -70,7 +70,7 @@ context('Home Page', () => {
 
     // users can add and delete items to fixed expenses
     it('Users can add and delete fixed expenses items', () => {
-        cy.get('#id_itemDate')[1]
+        cy.get('.fixed-expenses-table-column').get("#id_itemDate")
           .type('11/5/2020')
           .should('have.value', '11/5/2020')
 

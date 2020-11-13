@@ -97,22 +97,22 @@ def budget(request):
                 optional = Summary.objects.filter(user=request.user.id)[0].optional
                 unexpected = Summary.objects.filter(user=request.user.id)[0].unexpected
 
-            # Get sums
-            incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
-            fixedSum = fexpensesItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
-            investingSum = investingItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+                # Get sums
+                incomeSum = incomeItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+                fixedSum = fexpensesItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
+                investingSum = investingItems.aggregate(sum=Sum('itemAmount'))['sum'] or 0
 
-            # Available Cash
-            availableCash = incomeSum - fixedSum - investingSum - savings
-            data = Summary.objects.filter(user=request.user.id)[0]
-            data.availableCash = availableCash 
-            data.save()
+                # Available Cash
+                availableCash = incomeSum - fixedSum - investingSum - savings
+                data = Summary.objects.filter(user=request.user.id)[0]
+                data.availableCash = availableCash 
+                data.save()
 
-            # Actual Cash 
-            actualCash = incomeSum - fixedSum
-            data = Summary.objects.filter(user=request.user.id)[0]
-            data.actualCash = actualCash
-            data.save()
+                # Actual Cash 
+                actualCash = incomeSum - fixedSum
+                data = Summary.objects.filter(user=request.user.id)[0]
+                data.actualCash = actualCash
+                data.save()
 
             
             context = {
@@ -141,9 +141,16 @@ def budget(request):
         entry.delete()
         return redirect('budget:budget')
     elif request.method == 'POST' and 'editsavings' in request.POST:
-        data = Summary.objects.get(user_id=request.user.id)
-        data.monthlySavings = request.POST.get('monthlySavings')
-        data.save()    
+        if Summary.objects.get(user_id=request.user.id).first() is None:
+            summary = summaryForm.save(commit=False)
+            summary.user = request.user
+            monthlySavings = summaryForm.cleaned_data['monthlySavings']
+
+            summary.save()
+        else:
+            data = Summary.objects.get(user_id=request.user.id)
+            data.monthlySavings = request.POST.get('monthlySavings')
+            data.save()    
         return redirect('budget:budget') 
     else: # pulling data
         # Getting forms
@@ -204,7 +211,7 @@ def budget(request):
             data.save()
 
             # Actual Cash
-            actualCash = incomeSum - fixedSum
+            actualCash = incomeSum - fixedSum - savings
             data = Summary.objects.filter(user=request.user.id)[0]
             data.actualCash = actualCash
             data.save()

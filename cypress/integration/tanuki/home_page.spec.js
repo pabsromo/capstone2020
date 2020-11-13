@@ -55,8 +55,7 @@ context('Home Page', () => {
         cy.get("#leiSum").should('contain', "Leisure $3.50/100.00")
         cy.get("#optSum").should('contain', "Optional $12.95/50.00")
         cy.get("#unxSum").should('contain', "Unexpected $35.46/100.00")
-        cy.get("#totalSum").should('contain', 'Totals: $122.40/700.00')
-
+        cy.get("#totalSum").should('contain', 'Totals: $122.40/640.00')
     })
 
 
@@ -65,9 +64,8 @@ context('Home Page', () => {
         cy.get("#essentialadd").click()
         cy.get("#essential-modal-form > input").first().next().type("Jack Boots")
         cy.get("#essential-modal-form > input").first().next().next().type("550.78")
-        cy.get("#essential-modal-form > input").first().next().next().next().type("2020-11-11")
-        cy.get("#essential-inside-modal > button").first().click()
-
+        cy.get("#essential-modal-form > input").first().next().next().next().type("2020-11-13")
+        cy.get("#submit").click()
     })
 
     // Navigate between pages
@@ -91,7 +89,7 @@ context('Home Page', () => {
     // Logout user
     it('Logout', () => {
         cy.visit('http://127.0.0.1:8000/logout/')    
-        cy.url().should('eq', 'http://127.0.0.1:8000')
+        cy.url().should('eq', 'http://127.0.0.1:8000/')
     })
 
 
