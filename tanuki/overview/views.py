@@ -165,6 +165,7 @@ def home(request):
             availableLei = 0
             availableOpt = 0
             availableUnx = 0
+            
             # Create a row in the database
             newSum = Summary(user_id=request.user.id)
             newInc = Income(user_id=request.user.id)

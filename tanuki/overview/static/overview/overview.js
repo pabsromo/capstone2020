@@ -1,16 +1,16 @@
 // When the user scrolls the page, execute myFunction
-window.onscroll = function () { myFunction() };
+// window.onscroll = function () { myFunction() };
 
 // Get the navbar
 var navbar = document.getElementById("navbar");
 
-function myFunction() {
-    if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-    } else {
-        navbar.classList.remove("sticky");
-    }
-}
+// function myFunction() {
+//     if (window.pageYOffset >= sticky) {
+//         navbar.classList.add("sticky")
+//     } else {
+//         navbar.classList.remove("sticky");
+//     }
+// }
 
 function handleForm(event) {
     event.preventDefault();
