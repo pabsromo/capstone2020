@@ -12,10 +12,11 @@ def budget(request):
     print(request.user.id)
     print('user: ', request.user)
     print('this is the request:', request.POST.values)
-    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' not in request.POST and 'editsavings' not in request.POST:
+    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' and 'deleteinvest' not in request.POST and 'editsavings' not in request.POST:
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
         fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
         summaryForm = SummaryForm(request.POST, label_suffix=' ')
+        investingForm = InvestingForm(request.POST, label_suffix='')
         if incomeForm.is_valid() and 'income' in request.POST:
             income = incomeForm.save(commit=False)
             income.user = request.user
@@ -55,12 +56,20 @@ def budget(request):
             data.unexpected = request.POST.get('unexpected')
             data.save()
             return redirect('budget:budget')
+        if investingForm.is_valid() and 'invest' in request.POST:
+            invest = investingForm.save(commit=False)
+            invest.user = request.user
+            invest.save()  # save form after the user and itemType have been determined
+            invest.itemName = investingForm.cleaned_data['itemName']
+            invest.itemAmount = investingForm.cleaned_data['itemAmount']
+            # itemDate = incomeForm.cleaned_data['itemDate']
+            return redirect('budget:budget')
         else:
             # Getting forms
             summaryForm = SummaryForm(label_suffix=' ')
             incomeForm = IncomeForm(label_suffix=' ')
             fexpensesForm = FixedExpensesForm(label_suffix=' ')
-            # investingForm = InvestingForm(label_suffix=' ')
+            investingForm = InvestingForm(label_suffix=' ')
 
             # need to filter for user info only
             summaryItems = Summary.objects.filter(user=request.user)
@@ -121,6 +130,8 @@ def budget(request):
                 'incomeItems': incomeItems,
                 'fexpensesForm': fexpensesForm,
                 'fexpensesItems': fexpensesItems,
+                'investingForm': investingForm,
+                'investingItems': investingItems,
                 'incomeSum': incomeSum,
                 'fixedSum': fixedSum,
                 'investingSum': investingSum,
@@ -131,13 +142,14 @@ def budget(request):
                 'leisure': leisure,
                 'optional': optional,
                 'unexpected': unexpected,
-                # 'investingForm': investingForm,
             }
-    elif request.method == 'POST' and ('deleteincome' in request.POST or 'deletefixed' in request.POST):
+    elif request.method == 'POST' and ('deleteincome' in request.POST or 'deletefixed' in request.POST or 'deleteinvest' in request.POST):
         if 'deleteincome' in request.POST:
             entry = Income.objects.get(id=request.POST['deleteincome'])
         elif 'deletefixed' in request.POST:
             entry = FixedExpenses.objects.get(id=request.POST['deletefixed'])
+        elif 'deleteinvest' in request.POST:
+            entry = Investing.objects.get(id=request.POST['deleteinvest'])
         entry.delete()
         return redirect('budget:budget')
     elif request.method == 'POST' and 'editsavings' in request.POST:
@@ -157,7 +169,7 @@ def budget(request):
         summaryForm = SummaryForm(label_suffix=' ')
         incomeForm = IncomeForm(label_suffix=' ')
         fexpensesForm = FixedExpensesForm(label_suffix=' ')
-        # investingForm = InvestingForm(label_suffix=' ')
+        investingForm = InvestingForm(label_suffix=' ')
 
         # need to filter for user info only
         summaryItems = Summary.objects.filter(user=request.user)
@@ -222,6 +234,8 @@ def budget(request):
             'incomeItems': incomeItems,
             'fexpensesForm': fexpensesForm,
             'fexpensesItems': fexpensesItems,
+            'investingForm' : investingForm, 
+            'investingItems': investingItems,
             'incomeSum': incomeSum,
             'fixedSum': fixedSum,
             'investingSum': investingSum,
@@ -232,6 +246,5 @@ def budget(request):
             'leisure': leisure,
             'optional': optional,
             'unexpected': unexpected,
-            # 'investingForm': investingForm,
         }
     return render(request, 'budget.html', context)

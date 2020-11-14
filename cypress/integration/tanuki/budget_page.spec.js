@@ -27,10 +27,11 @@ context('Home Page', () => {
     Cypress.Cookies.preserveOnce('csrftoken', 'sessionid')
   })
 
-  it('testing datepicker', () => {
-    cy.get('#id_itemDate')
-      .type('2020-11-05')
-  })
+  // it('testing datepicker', () => {
+  //   cy.get('#id_itemDate')
+  //     .type('2020-11-05')
+  // })
+
 
   // Users can add and delete items to income
   it('Users can add and delete income items', () => {
@@ -41,12 +42,12 @@ context('Home Page', () => {
       .should('have.value', '2020-11-05')
       
     cy.get('#id_itemName')
-      .type('Piggybank')
-      .should('have.value', 'Piggybank')
+      .type('Job')
+      .should('have.value', 'Job')
 
     cy.get('#id_itemAmount')
-      .type('200')
-      .should('have.value', '200')
+      .type('400')
+      .should('have.value', '400')
 
     cy.get('#id_itemAmount')
       .type('{enter}')
@@ -54,7 +55,7 @@ context('Home Page', () => {
     // Check that item was entered correctly
     
     // Delete the item
-    cy.get("#deleteincome").click()
+    cy.get("#deleteincome").last().click()
 
     // Check that item was deleted correctly
   })
@@ -64,25 +65,23 @@ context('Home Page', () => {
   it('Users can add and delete fixed expenses items', () => {
     
     // Add new fixed expenses item
-    cy.get('.fixed-expenses-table-column').get("#id_itemDate")
-      .type('2020-11-05')
-      .should('have.value', '2020-11-05')
+    cy.get(".new-fixed-expenses .flex-outer > li").first()
+      .type('2020-11-11')
+      //.should('have.value', '2020-11-11')
 
-    cy.get('#id_itemName')
-      .type('Piggybank')
-      .should('have.value', 'Piggybank')
+    cy.get(".new-fixed-expenses .flex-outer > li").first().next()
+      .type('Spotify')
+      //.should('have.value', 'Spotify')
 
-    cy.get('#id_itemAmount')
-      .type('200')
-      .should('have.value', '200')
-
-    cy.get('#id_itemAmount')
+    cy.get(".new-fixed-expenses .flex-outer > li").first().next().next()
+      .type('5.99')
+      //.should('have.value', '5.99')
       .type('{enter}')
 
     // Check that item was entered correctly
 
     // Delete the item
-    cy.get("#deletefixed").click()
+    cy.get(".fixed-expenses-table-column .altfixed #deletefixed").last().click()
 
     // Check that the item was deleted correctly
   })

@@ -168,13 +168,13 @@ def home(request):
             
             # Create a row in the database
             newSum = Summary(user_id=request.user.id)
-            newInc = Income(user_id=request.user.id)
-            newFix = FixedExpenses(user_id=request.user.id)
-            newInv = Investing(user_id=request.user.id)
+            # newInc = Income(user_id=request.user.id)
+            # newFix = FixedExpenses(user_id=request.user.id)
+            # newInv = Investing(user_id=request.user.id)
             newSum.save()
-            newInc.save()
-            newFix.save()
-            newInv.save()
+            # newInc.save()
+            # newFix.save()
+            # newInv.save()
         else:
             actualCash = Summary.objects.filter(user=request.user.id)[0].actualCash
             availableEss = Summary.objects.filter(user=request.user.id)[0].essential
