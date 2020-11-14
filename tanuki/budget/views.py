@@ -12,7 +12,7 @@ def budget(request):
     print(request.user.id)
     print('user: ', request.user)
     print('this is the request:', request.POST.values)
-    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' and 'deleteinvest' not in request.POST and 'editsavings' not in request.POST:
+    if request.method == 'POST' and 'deleteincome' not in request.POST and 'deletefixed' not in request.POST and 'deleteinvest' not in request.POST and 'editsavings' not in request.POST:
         incomeForm = IncomeForm(request.POST, label_suffix =' ')
         fexpensesForm = FixedExpensesForm(request.POST, label_suffix=' ')
         summaryForm = SummaryForm(request.POST, label_suffix=' ')
@@ -153,11 +153,10 @@ def budget(request):
         entry.delete()
         return redirect('budget:budget')
     elif request.method == 'POST' and 'editsavings' in request.POST:
-        if Summary.objects.get(user_id=request.user.id).first() is None:
+        if Summary.objects.filter(user_id=request.user.id).first() is None:
             summary = summaryForm.save(commit=False)
             summary.user = request.user
             monthlySavings = summaryForm.cleaned_data['monthlySavings']
-
             summary.save()
         else:
             data = Summary.objects.get(user_id=request.user.id)
