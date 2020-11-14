@@ -27,15 +27,20 @@ var test_items = [
     [5, 'test', 'Laundry', '$5', 'essential', '11/11/2020'],
     [5, 'test', 'switch', '$399', 'optional', '09/23/2020'],
     [5, 'test', 'textbook', '$150', 'optional', '09/23/2020'],
+    [5, 'test', 'Apple', '$3', 'essential', '10/15/2020'],
 ]
 
+// 1d arrays of the test_items
 var test_items_1d = col(test_items,2).concat(col(test_items,3).concat(col(test_items,4).concat(col(test_items,5))));
+var first_ten = col(test_items,2).slice(0,10).concat(col(test_items,3).slice(0,10).concat(col(test_items,4).slice(0,10).concat(col(test_items,5).slice(0,10))));
+var second_ten = col(test_items,2).slice(10,20).concat(col(test_items,3).slice(10,20).concat(col(test_items,4).slice(10,20).concat(col(test_items,5).slice(10,20))));
+var third_ten = col(test_items,2).slice(20).concat(col(test_items,3).slice(20).concat(col(test_items,4).slice(20).concat(col(test_items,5).slice(20))));
 
 Cypress.Cookies.defaults({
     preserve: "csrftoken"
 })
 
-context('Home Page', () => {
+context('History Page Tests', () => {
     before('Login', () => {
         // log in only once before any of the tests run.
         cy.visit('http://127.0.0.1:8000/')
@@ -69,32 +74,122 @@ context('Home Page', () => {
         cy.get('.table-data > .main-table-column')
           .children()
           .each((el, index) => {
-            //   expect(el.text() == test_items_1d[index]).to.be.true
               cy.log(el.text() == test_items_1d[index])
               cy.log(el.text())
+              expect(el.text() == test_items_1d[index]).to.be.true
         })
-        // cy.log(cy.get('.table-data > .main-table-column')
-        //   .children())
     })
 
     // Pagination shows correct information
-    it('Pagination shows correct information', () => {
+    it('Pagination shows correct initial information', () => {
         cy.get('#results').should('contain', '23')
 
         // Starting length
         cy.get('.pages').children().should('have.length', 1)
-
-        // Going through all possible page lengths
-        cy.get('.show-dropbtn').then($el => {
-            cy.wrap($el).invoke('show')
-            cy.wrap($el).click()
-        })
-        cy.get('.show-dropdown-content').children().first().click()
     })
 
     // Pagination flips through pages correctly
+    it('Pagination flips through pages correctly', () => {
+        // Show 10 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            $el.css('display', 'flex')
+            cy.wrap($el.children()[0]).click()
+        })
+
+        // Check results for first page
+        cy.get('.table-data > .main-table-column')
+          .children()
+          .each((el, index) => {
+              expect(el.text() == first_ten[index]).to.be.true
+          })
+
+        // Change to second page
+        cy.get('.pages').children().first().next().click()
+
+        // Check results for second page
+        cy.get('.table-data > .main-table-column')
+          .children()
+          .each((el, index) => {
+              expect(el.text() == second_ten[index]).to.be.true
+          })
+
+        // Change to third page
+        cy.get('.pages').children().first().next().next().click()
+
+        // Check results for third page
+        cy.get('.table-data > .main-table-column')
+          .children()
+          .each((el, index) => {
+              expect(el.text() == third_ten[index]).to.be.true
+          })
+    })
 
     // Pagination Yields correct number of pages given a certain amount of data to display on one page
+    it('Pagination changes amt of pages correctly given size of page', () => {
+        // Show 10 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            $el.css('display', 'flex')
+            cy.wrap($el.children()[0]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 10)
+        cy.get('.pages').children().should('have.length', 3)
+
+        // Show 15 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[1]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 15)
+        cy.get('.pages').children().should('have.length', 2)
+
+        // Show 20 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[2]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 20)
+        cy.get('.pages').children().should('have.length', 2)
+
+        // Show 25 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[3]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 25)
+        cy.get('.pages').children().should('have.length', 1)
+
+        // Show 30 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[4]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 30)
+        cy.get('.pages').children().should('have.length', 1)
+
+        // Show 35 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[5]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 35)
+        cy.get('.pages').children().should('have.length', 1)
+
+        // Show 40 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[6]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 40)
+        cy.get('.pages').children().should('have.length', 1)
+
+        // Show 45 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[7]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 45)
+        cy.get('.pages').children().should('have.length', 1)
+
+        // Show 50 results per page
+        cy.get('.show-dropdown-content').then($el => {
+            cy.wrap($el.children()[8]).click()
+        })
+        cy.get('.show-dropbtn').should('contain', 50)
+        cy.get('.pages').children().should('have.length', 1)
+    })
 
     // Navigate between pages
     it('Navigate to other pages (Home, Budget, History) as authenticated user', () => {
@@ -120,9 +215,3 @@ context('Home Page', () => {
         cy.url().should('eq', 'http://127.0.0.1:8000/')
     })
 })
-
-// Data for logged in user is only displayed
-// Data can be sorted
-// maybe later let them edit the items
-
-// users should be able to navigate to other pages and logout
