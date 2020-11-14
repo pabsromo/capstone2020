@@ -103,3 +103,7 @@ class InvestingForm(forms.ModelForm):
         decimal_places=2,
         widget=forms.TextInput(attrs={'placeholder': 'New Amount'})
     )
+
+    class Meta:
+        model = Investing
+        fields = ('itemName', 'itemAmount')

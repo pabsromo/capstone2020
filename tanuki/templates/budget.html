@@ -315,7 +315,7 @@
               <div class="elem">
                 {{ item.itemAmount }}
                 <form action="." method="POST"> {% csrf_token %}
-                  <button type="submit" name="deletefixed" value="{{ item.id }}" id="deletefixed" ><i class="material-icons">delete</i></button>
+                  <button id="deletefixed" type="submit" name="deletefixed" value="{{ item.id }}" id="deletefixed" ><i class="material-icons">delete</i></button>
                 </form>
               </div>
               {% else %}
@@ -499,56 +499,81 @@
 
       </div>
 <!--                                   INVESTING                             -->
-      <div class="investing section">
-        <div class="section-title" style="width: fit-content" id="selected">
-          <h1>Investing</h1>
-        </div>
-<!--                               investing titles                          -->
-        <div class="table-titles">
-          <div class="investing-table-column">
-            <div class="head-elem">
-              account
+        <div class="investing section">
+          <div class="section-title" style="width: fit-content" id="selected">
+            <h1>Investing</h1>
+          </div>
+          <!--                              investing titles                      -->
+          <div class="table-titles">
+            <div class="investing-table-column">
+              <div class="head-elem">
+                item
+              </div>
+            </div>
+            <div class="investing-table-column">
+              <div class="head-elem">
+                amount
+              </div>
             </div>
           </div>
-          <div class="investing-table-column">
-            <div class="head-elem">
-              amount
+          <!--                               investing data                       -->
+          <div class="table-data">
+            <div class="investing-table-column">
+              {% for item in investingItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemName }}
+              </div>
+              {% else %}
+              <div class="elem altinvest">
+                {{ item.itemName }}
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            <div class="investing-table-column">
+              {% for item in investingItems %}
+              {% if forloop.counter|modulo:2 == 0 %}
+              <div class="elem">
+                {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button id="deleteinvest" type="submit" name="deleteinvest" value="{{ item.id }}"><i
+                      class="material-icons">delete</i></button>
+                </form>
+              </div>
+              {% else %}
+              <div class="elem altinvest">
+                {{ item.itemAmount }}
+                <form action="." method="POST"> {% csrf_token %}
+                  <button id="deleteinvest" type="submit" name="deleteinvest" value="{{ item.id }}"><i
+                      class="material-icons">delete</i></button>
+                </form>
+              </div>
+              {% endif %}
+              {% endfor %}
             </div>
           </div>
-        </div>
-<!--                               investing data                            -->
-        <div class="table-data">
-          <div class="investing-table-column">
-            <div class="elem altinvest">
-              first account
-            </div>
+        
+          <div class="new-row new-investing">
+            <form class="" action="." method="POST"> {% csrf_token %}
+              <ul class="flex-outer">
+                <li>
+                  {{ investingForm.itemName }}
+                </li>
+                <li>
+                  {{ investingForm.itemAmount }}
+                </li>
+                <li style="visibility: hidden; width:0px;">
+                  <button type="submit" name='invest'>Submit</button>
+                </li>
+              </ul>
+            </form>
           </div>
-          <div class="investing-table-column">
-            <div class="elem altinvest">
-              first amount
-            </div>
-          </div>
         </div>
-
-        <div class="new-row new-investing">
-          <form class="" action="index.html" method="post">
-            <ul class="flex-outer">
-              <li style="width: 49%">
-                <input type="text" name="" value="" placeholder="new account">
-              </li>
-              <li style="width: 49%">
-                <input type="text" name="" value="" placeholder="new amount">
-              </li>
-            </ul>
-          </form>
-        </div>
-
-      </div>
 
       <div id="footer">
           <h3>Tanuki</h3>
       </div>
-    </div>
 
     <script>
       $(function () {
