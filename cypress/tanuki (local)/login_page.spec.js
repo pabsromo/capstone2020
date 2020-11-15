@@ -6,32 +6,32 @@ Cypress.Cookies.defaults({
 context('Login Page', () => {
     
     it('Visit Login Page', () => {
-      cy.visit('https://tanuki-58.uc.r.appspot.com/')
+        cy.visit('http://127.0.0.1:8000/')
     })
 
     // Test to make sure the user can get to signup and get back to login
     it('Navigate to Signup Page and back to Login Page', () =>{
       cy.get('.signup').click()
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/signup/')
+      cy.url().should('eq', 'http://127.0.0.1:8000/signup/')
 
       cy.get('#login').click()
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/')
+      cy.url().should('eq', 'http://127.0.0.1:8000/')
 
     })
 
     // Test to make sure you can't access the webpages without logging in
     it('Navigate to other pages (Home, Budget, History, Logout) as unauthenticated user', () => {
-      cy.visit('https://tanuki-58.uc.r.appspot.com/home')
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/?next=/home/')
+      cy.visit('http://127.0.0.1:8000/home')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/home/')
 
-      cy.visit('https://tanuki-58.uc.r.appspot.com/budget')
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/?next=/budget/')
+      cy.visit('http://127.0.0.1:8000/budget')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/budget/')
 
-      cy.visit('https://tanuki-58.uc.r.appspot.com/history')
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/?next=/history/')
+      cy.visit('http://127.0.0.1:8000/history')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/history/')
 
-      cy.visit('https://tanuki-58.uc.r.appspot.com/logout')
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/?next=/logout/')
+      cy.visit('http://127.0.0.1:8000/logout')
+      cy.url().should('eq', 'http://127.0.0.1:8000/?next=/logout/')
 
     })
 
@@ -85,7 +85,7 @@ context('Login Page', () => {
 
     // Logged in user is sent to homepage
     it('Check that authenticated user is sent to home page', () => {
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/home/')
+        cy.url().should('eq', 'http://127.0.0.1:8000/home/')
     })
 
 })

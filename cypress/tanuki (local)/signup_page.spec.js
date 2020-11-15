@@ -7,7 +7,7 @@ Cypress.Cookies.defaults({
 context('Login Page', () => {
     
     it('visit the page', () => {
-      cy.visit('https://tanuki-58.uc.r.appspot.com/signup/)
+        cy.visit('http://127.0.0.1:8000/signup')
     })
 
     // Existing users cannot be signed up for various reasons
@@ -170,7 +170,7 @@ context('Login Page', () => {
 
     // User is logged in and sent to home page
     it('User is sent to home page', () => {
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/home/')
+        cy.url().should('eq', 'http://127.0.0.1:8000/home/')
     })
 
 })

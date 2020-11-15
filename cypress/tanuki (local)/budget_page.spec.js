@@ -2,7 +2,7 @@ context('Home Page', () => {
 
   before('Login', () => {
     // log in only once before any of the tests run.
-    cy.visit('https://tanuki-58.uc.r.appspot.com')
+    cy.visit('http://127.0.0.1:8000/')
 
     cy.get('#username')
       .type('test', { delay: 100 })
@@ -15,9 +15,9 @@ context('Home Page', () => {
     cy.get('.userinfo')
       .find('form').submit()
 
-    cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/home/')
+    cy.url().should('eq', 'http://127.0.0.1:8000/home/')
     cy.get('#budget1').click()
-    cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/budget/')
+    cy.url().should('eq', 'http://127.0.0.1:8000/budget/')
   })
 
   beforeEach(() => {
@@ -114,14 +114,14 @@ context('Home Page', () => {
       cy.get('#id_optional').clear().type('35').should('have.value', '35')
       cy.get('#id_unexpected').clear().type('250').should('have.value', '250').type('{enter}')
       cy.get('#home1').click()
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/home/')
+      cy.url().should('eq', 'http://127.0.0.1:8000/home/')
       cy.get("#essSum").should('contain', "Essential $70.49/100.00")
       cy.get("#leiSum").should('contain', "Leisure $3.50/20.00")
       cy.get("#optSum").should('contain', "Optional $12.95/35.00")
       cy.get("#unxSum").should('contain', "Unexpected $35.46/250.00")
       cy.get("#totalSum").should('contain', 'Totals: $122.40/620.00')
       cy.get('#budget1').click()
-      cy.url().should('equal', 'https://tanuki-58.uc.r.appspot.com/budget/')
+      cy.url().should('equal', 'http://127.0.0.1:8000/budget/')
 
       //reset so other values dont get messed up ;)
       cy.get('#id_monthlySavings').clear().type('60').should('have.value', '60').type('{enter}')
@@ -141,24 +141,24 @@ context('Home Page', () => {
     // Navigate between pages
     it('Navigate to other pages (Home, Budget, History) as authenticated user', () => {
       cy.get('#budget1').click()
-      cy.url().should('equal', 'https://tanuki-58.uc.r.appspot.com/budget/')
+      cy.url().should('equal', 'http://127.0.0.1:8000/budget/')
 
       cy.get('#home1').click()
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/home/')
+      cy.url().should('eq', 'http://127.0.0.1:8000/home/')
       
       cy.get('#budget1').click()
-      cy.url().should('equal', 'https://tanuki-58.uc.r.appspot.com/budget/')
+      cy.url().should('equal', 'http://127.0.0.1:8000/budget/')
 
       cy.get('#history1').click()
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/history/')
+      cy.url().should('eq', 'http://127.0.0.1:8000/history/')
 
       cy.get('#budget1').click()
-      cy.url().should('equal', 'https://tanuki-58.uc.r.appspot.com/budget/')
+      cy.url().should('equal', 'http://127.0.0.1:8000/budget/')
     })
 
     // Logout user
     it('Logout', () => {
-      cy.visit('https://tanuki-58.uc.r.appspot.com/logout/')    
-      cy.url().should('eq', 'https://tanuki-58.uc.r.appspot.com/')
+        cy.visit('http://127.0.0.1:8000/logout/')    
+        cy.url().should('eq', 'http://127.0.0.1:8000/')
     })
 })

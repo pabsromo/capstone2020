@@ -477,12 +477,6 @@ progress {
     justify-items: center;
 }
 
-#week {
-    background-color: transparent;
-    text-decoration: underline;
-    text-decoration-color: #4e4e4e;
-}
-
 #total {
     background-color: transparent;
 }
