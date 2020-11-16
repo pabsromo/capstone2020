@@ -11,13 +11,10 @@ function GetWeek() {
   var day1 = monday.toLocaleString('default', { day: 'numeric' })
   var day2 = sunday.toLocaleString('default', { day: 'numeric' })
 
-  var string = "Week of " + month1 + " " + day1 + " - " + month2 + " " + day2
+  var string = "Week of " + month1 + " 0" + day1 + " - " + month2 + " " + day2
   return string
 
 }
-
-var new_item_id = 0;
-
 
 context('Home Page', () => {
 
@@ -46,70 +43,70 @@ context('Home Page', () => {
   })
 
   // Make sure the user can modify already added items
-    // Item can be added, modified, and deleted
-    it('Manipulating items in Essential', () => {
+  // Item can be added, modified, and deleted
+  it('Manipulating items in Essential', () => {
+      
+    // Add new essential item
+    cy.get("#essentialadd").click()
+    cy.get("#essential-modal-form > input").first().next().type("Jack Boots")
+    cy.get("#essential-modal-form > input").first().next().next().type("550.78")
+    cy.get("#essential-modal-form > input").first().next().next().next().type("2020-11-14")
+    cy.get("#essential-modal-buttons > button:last").click()
+
+    // Checking for the new item
+    cy.get('.essential').children()
+      .first().next().next().children()
+      .first().next().next().next().next().next().children()
+      .should('have.length', 1)
+    cy.get('.essential').children()
+      .first().next().next().children()
+      .first().next().next().next().next().next().children()
+      .first().children()
+      .first().children().then($el => {
+          expect($el[0].textContent == 'Jack Boots').to.be.true
+          expect($el[1].textContent == '$550.78').to.be.true
+      })
+
+    // Editing and deleting
+    cy.get('.essential').children()
+      .first().next().next().children()
+      .first().next().next().next().next().next().children()
+      .first().children()
+      .first().then($el => {
+        // Get id of newly added item
+        cy.log($el.attr('id').split('-')[0])
+        var new_item_id = $el.attr('id').split('-')[0]
+
+        // Edit the item
+        cy.get('#' + new_item_id + '-btn').click()
+        cy.get('#' + new_item_id + '-form').children()
+        .first().next().type('Yogurt')
+        cy.get('#' + new_item_id + '-form').children()
+        .first().next().next().type('7')
+        cy.get('#' + new_item_id + '-form').children()
+        .first().next().next().next().type('2020-11-14')
+        cy.get('#' + new_item_id + '-editable-form > button:last').scrollIntoView()
+        .should('be.visible')
+        cy.get('#' + new_item_id + '-editable-form > button:last').click({force: true})
+
+        var new_items = ['Yogurt', '$7.00'];
+
+        // Check that edit worked
+        cy.get('#' + new_item_id + '-p > p').each(($el2,index) => {
+            expect($el2.text() == new_items[index]).to.be.true
+        })
+
+        // Delete item
+        cy.get('#' + new_item_id + '-btn').click()
+        cy.get("#" + new_item_id + '-editable-form > button:first')
+        .click()
         
-      // Add new essential item
-      cy.get("#essentialadd").click()
-      cy.get("#essential-modal-form > input").first().next().type("Jack Boots")
-      cy.get("#essential-modal-form > input").first().next().next().type("550.78")
-      cy.get("#essential-modal-form > input").first().next().next().next().type("2020-11-14")
-      cy.get("#essential-modal-buttons > button:last").click()
-
-      // Checking for the new item
-      cy.get('.essential').children()
-        .first().next().next().children()
-        .first().next().next().next().next().next().children()
-        .should('have.length', 1)
-      cy.get('.essential').children()
-        .first().next().next().children()
-        .first().next().next().next().next().next().children()
-        .first().children()
-        .first().children().then($el => {
-            expect($el[0].textContent == 'Jack Boots').to.be.true
-            expect($el[1].textContent == '$550.78').to.be.true
-        })
-
-      // Editing and deleting
-      cy.get('.essential').children()
-        .first().next().next().children()
-        .first().next().next().next().next().next().children()
-        .first().children()
-        .first().then($el => {
-          // Get id of newly added item
-          cy.log($el.attr('id').split('-')[0])
-          var new_item_id = $el.attr('id').split('-')[0]
-
-          // Edit the item
-          cy.get('#' + new_item_id + '-btn').click()
-          cy.get('#' + new_item_id + '-form').children()
-          .first().next().type('Yogurt')
-          cy.get('#' + new_item_id + '-form').children()
-          .first().next().next().type('7')
-          cy.get('#' + new_item_id + '-form').children()
-          .first().next().next().next().type('2020-11-14')
-          cy.get('#' + new_item_id + '-editable-form > button:last').scrollIntoView()
-          .should('be.visible')
-          cy.get('#' + new_item_id + '-editable-form > button:last').click({force: true})
-
-          var new_items = ['Yogurt', '$7.00'];
-
-          // Check that edit worked
-          cy.get('#' + new_item_id + '-p > p').each(($el2,index) => {
-              expect($el2.text() == new_items[index]).to.be.true
-          })
-
-          // Delete item
-          cy.get('#' + new_item_id + '-btn').click()
-          cy.get("#" + new_item_id + '-editable-form > button:first')
-          .click()
-          
-          // Check that item is deleted
-          cy.get('.essential').children()
-            .first().next().next().children()
-            .first().next().next().next().next().next().children()
-            .should('have.length', 0)
-        })
+        // Check that item is deleted
+        cy.get('.essential').children()
+          .first().next().next().children()
+          .first().next().next().next().next().next().children()
+          .should('have.length', 0)
+      })
   })
 
   it('Moving an item around in Essential', () => {

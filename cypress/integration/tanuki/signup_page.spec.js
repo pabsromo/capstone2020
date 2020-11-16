@@ -7,7 +7,7 @@ Cypress.Cookies.defaults({
 context('Login Page', () => {
     
     it('visit the page', () => {
-      cy.visit('https://tanuki-58.uc.r.appspot.com/signup/)
+      cy.visit('https://tanuki-58.uc.r.appspot.com/signup/')
     })
 
     // Existing users cannot be signed up for various reasons
